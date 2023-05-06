@@ -1,0 +1,78 @@
+# API Providers
+
+`promptfoo` supports OpenAI API models out of the box. To use a custom API provider, create a custom module that implements the `ApiProvider` interface and pass the path to the module as the `provider` option.
+
+### OpenAI API
+
+To use the OpenAI API, set the `OPENAI_API_KEY` environment variable or pass the API key as an argument to the constructor.
+
+Example:
+
+```bash
+export OPENAI_API_KEY=your_api_key_here
+```
+
+Other OpenAI-related environment variables are supported:
+
+- `OPENAI_TEMPERATURE` - temperature model parameter, defaults to 0
+- `OPENAI_MAX_TOKENS` - max_tokens model parameter, defaults to 1024
+
+The OpenAI provider supports the following model formats:
+
+- `openai:chat` - defaults to gpt-3.5-turbo
+- `openai:completion` - defaults to `text-davinci-003`
+- `openai:<model name>` - uses a specific model name (mapped automatically to chat or completion endpoint)
+- `openai:chat:<model name>` - uses any model name against the chat endpoint
+- `openai:completion:<model name>` - uses any model name against the completion endpoint
+
+The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new model, or if you have a custom model. For example, if OpenAI releases gpt-5 chat completion, you could begin using it immediately with `openai:chat:gpt-5`.
+
+### Custom API Provider
+
+To create a custom API provider, implement the `ApiProvider` interface in a separate module. Here is the interface:
+
+```javascript
+export interface ApiProvider {
+  id: () => string;
+  callApi: (prompt: string) => Promise<ProviderResult>;
+}
+```
+
+Below is an example of a custom API provider that returns a predefined output and token usage:
+
+```javascript
+// customApiProvider.js
+import fetch from 'node-fetch';
+
+class CustomApiProvider {
+  id() {
+    return 'my-custom-api';
+  }
+
+  async callApi(prompt) {
+    // Add your custom API logic here
+
+    return {
+      // Required
+      output: 'Model output',
+
+      // Optional
+      tokenUsage: {
+        total: 10,
+        prompt: 5,
+        completion: 5,
+      },
+    };
+  }
+}
+
+export default CustomApiProvider;
+```
+
+To use the custom API provider with `promptfoo`, pass the path to the module as the `provider` option in the CLI invocation:
+
+```bash
+promptfoo eval -p prompt1.txt prompt2.txt -o results.csv  -v vars.csv -r ./customApiProvider.js
+```
+
+This command will evaluate the prompts using the custom API provider and save the results to the specified CSV file.
