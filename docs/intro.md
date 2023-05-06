@@ -26,3 +26,15 @@ The goal: informed, data-driven decisions for prompt tuning. At a high level, he
 2. **Configure your evaluation**: Set up your evaluation by specifying the prompts, test cases, and API providers you want to use. You can customize the evaluation process by configuring the input and output formats, the level of concurrency, and other options.
 3. **Run the evaluation**: Execute the evaluation using the command-line tool or library. Promptfoo will evaluate your prompts against the specified API providers, generating side-by-side comparisons of their outputs.
 4. **Analyze the results**: Review results in a structured format, such as CSV, JSON, YAML, or HTML, to make informed decisions about the best model and prompt choices for your application.
+
+### Example
+
+Below, we've used promptfoo to test out 3 different prompts that describe the impact of a given technology on an industry.
+
+By substituting a handful of example (technology, industry) pairs, we've generated a matrix of outputs that we can evaluate side-by-side - either by human or automatically.
+
+Each output is graded according to our expectations. Now, we can say that Prompt #3 satisfies 80% of requirements, whereas Prompts #1 and #2 only meet 40%.
+
+We can use this technique repeatedly to ensure that we are iteratively improving prompt quality across the board.
+
+![Evaluating prompts as a matrix](./assets/prompt-evaluation-matrix.png)
