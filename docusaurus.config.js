@@ -101,11 +101,11 @@ const config = {
               },
               {
                 label: 'Command line',
-                to: '/docs/usage/command-line',
+                to: '/docs/getting-started',
               },
               {
-                label: 'Library',
-                to: '/docs/usage/library',
+                label: 'Node package',
+                to: '/docs/node-package',
               },
             ],
           },
