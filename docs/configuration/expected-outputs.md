@@ -4,17 +4,24 @@ sidebar_position: 10
 
 # Expected outputs
 
-You can specify an expected value for each test case to evaluate the success or failure of the model's output.
+You can automatically assess model outputs by setting an "expectation" for each test case.  Model outputs are tagged PASS or FAIL based on this expectation.
 
 To do this, add a special field called `__expected` in the `vars` file.
 
-## Types of evaluation
+## Types of expectations
 
 The `__expected` field supports these types of value comparisons:
 
 1. **String equality**: By default, promptfoo attempts an exact string match comparison between the expected value and the model's output.
 
-1. **Code evaluation**: If the expected value starts with `eval:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
+1. **Code evaluation**: If the expected value starts with `eval:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { return <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
+
+  For example:
+  ```
+  eval:output.toLowerCase().includes('ahoy')
+  ```
+
+  This will mark an output as failed if it does not include the string "ahoy".
 
   [Example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/simple-test)
 

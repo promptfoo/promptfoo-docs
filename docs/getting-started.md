@@ -84,3 +84,9 @@ Produces this HTML table:
 ![Side-by-side evaluation of LLM model quality, gpt3 vs gpt4, html output](https://user-images.githubusercontent.com/310310/235490527-e0c31f40-00a0-493a-8afc-8ed6322bb5ca.png)
 
 Full setup and output [here](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4).
+
+### Automating output assessments
+
+The above examples create a table of outputs that can be manually reviewed.  You also have the option of setting "expectations" that grade outputs on a pass/fail basis.
+
+For more information on automating the assessment of outputs, see [Expected Outputs](/docs/configuration/expected-outputs).
