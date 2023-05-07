@@ -129,7 +129,11 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      zoom: {
+        selector: '.markdown :not(em) > img',
+      }
     }),
+  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
 };
 
 module.exports = config;
