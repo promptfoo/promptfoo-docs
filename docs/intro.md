@@ -14,7 +14,13 @@ With promptfoo, you can:
 - Use as a command line tool, or integrate into your workflow as a library
 - Use OpenAI API models (built-in support), or integrate custom API providers for any LLM API
 
+promptfoo works by producing matrix views that allow you to quickly review prompt outputs across many inputs. The goal: tune prompts systematically across all relevant test cases, instead of testing prompts one-off.
+
 ![Side-by-side evaluation of LLM prompt quality](https://user-images.githubusercontent.com/310310/235529431-f4d5c395-d569-448e-9697-cd637e0372a5.gif)
+
+Here's an example of a side-by-side comparison of multiple prompts and inputs. You can manually review outputs, or set up "expectations" that automatically flag bad outputs:
+
+[![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
 
 ## Workflow and philosophy
 
@@ -38,3 +44,4 @@ Each output is graded according to our expectations. Now, we can say that Prompt
 We can use this technique repeatedly to ensure that we are iteratively improving prompt quality across the board.
 
 ![Evaluating prompts as a matrix](./assets/prompt-evaluation-matrix.png)
+

@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Parameters
 
 ### Prompt Files
@@ -50,35 +54,6 @@ Example of a vars file (`vars.json`):
   { "name": "Joe", "text": "Goodbye, everyone!" }
 ]
 ```
-
-### Expected Value
-
-You can specify an expected value for each test case to evaluate the success or failure of the model's output. To do this, add a special field called `__expected` in the `vars` file. The `__expected` field supports these types of value comparisons:
-
-1. If the expected value starts with `eval:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
-
-2. Otherwise, it attempts an exact string match comparison between the expected value and the model's output.
-
-Example of a vars file with the `__expected` field (`vars.csv`):
-
-```
-text,__expected
-"Hello, world!","Bonjour le monde"
-"Goodbye, everyone!","eval:return output.includes('Au revoir');"
-```
-
-Example of a vars file with the `__expected` field (`vars.json`):
-
-```json
-[
-  { "text": "Hello, world!", "__expected": "Bonjour le monde" },
-  { "text": "Goodbye, everyone!", "__expected": "eval:output.includes('Au revoir');" }
-]
-```
-
-When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
-
-For more advanced test cases, we recommend using a testing framework like [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/) and using promptfoo as a library.
 
 ### Output File
 
