@@ -2,7 +2,7 @@
 sidebar_position: 10
 ---
 
-# Expected Outputs
+# Expected outputs
 
 You can specify an expected value for each test case to evaluate the success or failure of the model's output.
 

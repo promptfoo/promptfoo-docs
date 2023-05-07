@@ -2,7 +2,7 @@
 sidebar_position: 20
 ---
 
-# API Providers
+# API providers
 
 `promptfoo` supports OpenAI API models out of the box. To use a custom API provider, create a custom module that implements the `ApiProvider` interface and pass the path to the module as the `provider` option.
 
