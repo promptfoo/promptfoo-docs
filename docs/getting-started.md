@@ -45,6 +45,12 @@ npx promptfoo eval -p <prompt_paths...> -o <output_path> -r <provider> [-v <vars
 - `<max_concurrency>` (optional): Number of simultaneous API requests. Defaults to 3
 - `<config_path>` (optional): Path to configuration file
 
+After running an eval, you may optionally use the view command to open the experimental web viewer:
+
+```
+npx promptfoo view
+```
+
 ## Examples
 
 ### Prompt quality

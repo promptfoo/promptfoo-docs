@@ -21,23 +21,3 @@ npx promptfoo
 ```
 npm install promptfoo
 ```
-
-## Local development
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/typpo/promptfoo.git
-```
-
-2. Install the dependencies:
-
-```bash
-npm install
-```
-
-3. Link the CLI tool:
-
-```bash
-npm link
-```
