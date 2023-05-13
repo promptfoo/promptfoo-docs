@@ -10,7 +10,7 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'A quantitative approach to prompt engineering',
+    title: 'Improve prompts systematically',
     Svg: require('@site/static/img/svgrepo_puzzle_toy.svg').default,
     description: (
       <>

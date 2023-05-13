@@ -4,7 +4,8 @@ sidebar_position: 1
 
 # Intro
 
-`promptfoo` is a tool that helps you tune LLM prompts systematically across all relevant test cases.
+`promptfoo` helps you tune LLM prompts systematically across many relevant test cases.
+
 
 With promptfoo, you can:
 
