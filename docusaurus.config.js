@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'promptfoo',
-  tagline: 'The promp engineering toolkit',
+  tagline: 'The prompt engineering toolkit',
   favicon: '/favicon.ico',
 
   // Set the production url of your site here
