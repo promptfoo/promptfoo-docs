@@ -25,6 +25,14 @@ The `__expected` field supports these types of value comparisons:
 
   [Example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/simple-test)
 
+1. **Semantic evaluation**: If the expected value starts with `similar:`, it will compare the semantic similarity of the expected and output values.
+
+   For example, `similar: greetings, world!` is semantically similar to "Hello world" even though it's not an exact match.
+
+   The `similar` directive uses cosine similarity, where 1.0 is the most similar and 0.0 is the least similar. Tune the similarity threshold by specifying `similar(0.8): ...` (passes only if similarity >= 0.8).
+
+   The embedding model currently supported is OpenAI's `text-embedding-ada-002`. As a result, the `similar` directive requires the OPENAI_API_KEY environment variable to be set.
+
 1. **LLM evaluation**: If the expected value starts with `grade:`, it will ask an LLM to evaluate whether the output meets the condition.
 
   For example: `grade: don't mention being an AI`

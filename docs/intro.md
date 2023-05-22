@@ -13,7 +13,7 @@ With promptfoo, you can:
 - **Evaluate quality and catch regressions** by comparing LLM outputs side-by-side
 - **Speed up evaluations** by running tests concurrently
 - Use as a command line tool, or integrate into your workflow as a library
-- Use OpenAI API models (built-in support), or integrate custom API providers for any LLM API
+- Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for any LLM API
 
 promptfoo works by producing matrix views that allow you to quickly review prompt outputs across many inputs.
 
