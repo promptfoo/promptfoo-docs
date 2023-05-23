@@ -73,5 +73,5 @@ Here's an example vars.json:
 
 When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
 
-For more advanced test cases, we recommend using a testing framework like [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/) and using promptfoo [as a library](/docs/node-package/).
+For more advanced test cases, we recommend using a testing framework like [Jest](/docs/integrations/jest) or [Mocha](/docs/integrations/mocha-chai) and using promptfoo [as a library](/docs/node-package/).
 
