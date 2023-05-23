@@ -69,8 +69,8 @@ By default, `promptfooconfig.js` is loaded.
 
 Example of a configuration file:
 
-```json
-{
+```js
+module.exports = {
   "prompts": ["prompt1.txt"],
   "providers": ["openai:chat"],
   "vars": "/path/to/vars.csv",
