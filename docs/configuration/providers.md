@@ -89,7 +89,7 @@ class CustomApiProvider {
   }
 }
 
-export default CustomApiProvider;
+module.exports = CustomApiProvider;
 ```
 
 To use the custom API provider with `promptfoo`, pass the path to the module as the `provider` option in the CLI invocation:
