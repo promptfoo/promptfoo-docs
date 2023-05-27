@@ -80,6 +80,7 @@ module.exports = {
   "prompts": ["prompt1.txt"],
   "providers": ["openai:chat"],
   "vars": "/path/to/vars.csv",
+  "output": "output.csv", // options: csv, json, yaml, html
   "maxConcurrency": 3
 }
 ```
