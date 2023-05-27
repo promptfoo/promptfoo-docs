@@ -6,7 +6,6 @@ sidebar_position: 1
 
 `promptfoo` helps you tune LLM prompts systematically across many relevant test cases.
 
-
 With promptfoo, you can:
 
 - **Test multiple prompts** against predefined test cases
@@ -27,7 +26,7 @@ It works on the command line too.
 
 ## Workflow and philosophy
 
-promptfoo's core philosophy is to help developers efficiently evaluate and compare the performance of language models using a well-structured, repeatable, and customizable process.
+[Serious LLM development requires a systematic approach to prompt engineering](https://www.ianww.com/blog/2023/05/21/prompt-engineering-framework). promptfoo's core purpose is to help developers efficiently evaluate and compare the performance of language models using a well-structured, repeatable, and customizable process.
 
 The goal: informed, data-driven decisions for prompt tuning. At a high level, here's how to use `promptfoo`:
 
@@ -47,4 +46,3 @@ Each output is graded according to our expectations. Now, we can say that Prompt
 We can use this technique repeatedly to ensure that we are iteratively improving prompt quality across the board.
 
 ![Evaluating prompts as a matrix](./assets/prompt-evaluation-matrix.png)
-
