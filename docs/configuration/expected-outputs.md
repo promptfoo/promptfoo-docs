@@ -14,11 +14,11 @@ The `__expected` field supports these types of value comparisons:
 
 1. **String equality**: By default, promptfoo attempts an exact string match comparison between the expected value and the model's output.
 
-1. **Code evaluation**: If the expected value starts with `eval:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { return <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
+1. **Code evaluation**: If the expected value starts with `fn:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { return <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
 
   For example:
   ```
-  eval:output.toLowerCase().includes('ahoy')
+  fn:output.toLowerCase().includes('ahoy')
   ```
 
   This will mark an output as failed if it does not include the string "ahoy".
@@ -57,7 +57,7 @@ Here's an example vars.csv:
 ```
 text,__expected
 "Hello, world!","Bonjour le monde"
-"Goodbye, everyone!","eval:return output.includes('Au revoir');"
+"Goodbye, everyone!","fn:return output.includes('Au revoir');"
 "I am a pineapple","grade:doesn't reference any fruits besides pineapple"
 ```
 
@@ -66,7 +66,7 @@ Here's an example vars.json:
 ```json
 [
   { "text": "Hello, world!", "__expected": "Bonjour le monde" },
-  { "text": "Goodbye, everyone!", "__expected": "eval:output.includes('Au revoir');" },
+  { "text": "Goodbye, everyone!", "__expected": "fn:output.includes('Au revoir');" },
   { "text": "I am a pineapple", "__expected": "grade:doesn't reference any fruits besides pineapple" }
 ]
 ```
