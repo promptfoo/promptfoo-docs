@@ -10,7 +10,7 @@ With promptfoo, you can:
 
 - **Test multiple prompts** against predefined test cases
 - **Evaluate quality and catch regressions** by comparing LLM outputs side-by-side
-- **Speed up evaluations** by running tests concurrently
+- **Speed up evaluations** with caching and concurrent tests
 - Use as a command line tool, or integrate into your workflow as a library
 - Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for any LLM API
 

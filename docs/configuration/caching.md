@@ -1,0 +1,24 @@
+---
+sidebar_position: 40
+---
+
+# Caching
+
+promptfoo caches the results of API calls to LLM providers. This helps save time and cost.
+
+## Command line
+
+If you're using the command line, you may call `promptfoo eval` with `--no-cache` to disable the cache, or set `cache: false` in your config file.
+
+## Configuration
+
+The cache is configurable through environment variables:
+
+| Environment Variable           | Description                               | Default Value                                      |
+| ------------------------------ | ----------------------------------------- | -------------------------------------------------- |
+| PROMPTFOO_CACHE_ENABLED        | Enable or disable the cache               | true                                               |
+| PROMPTFOO_CACHE_TYPE           | `disk` or `memory`                        | `memory` if `NODE_ENV` is `test`, otherwise `disk` |
+| PROMPTFOO_CACHE_MAX_FILE_COUNT | Maximum number of files in the cache      | 10,000                                             |
+| PROMPTFOO_CACHE_PATH           | Path to the cache directory               | `~/.promptfoo/cache`                               |
+| PROMPTFOO_CACHE_TTL            | Time to live for cache entries in seconds | 14 days                                            |
+| PROMPTFOO_CACHE_MAX_SIZE       | Maximum size of the cache in bytes        | 10 MB                                              |
