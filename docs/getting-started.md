@@ -32,18 +32,20 @@ After editing the prompts and variables to your liking, run the eval command to 
 npx promptfoo eval
 ```
 
-If you're looking to customize your usage, you have the full set of parameters at your disposal:
+If you're looking to customize your usage, you have a wide set of parameters at your disposal. See the [Configuration docs](/docs/configuration/parameters) for more detail:
 
-```bash
-npx promptfoo eval -p <prompt_paths...> -o <output_path> -r <provider> [-v <vars_path>] [-j <max_concurrency] [-c <config_path>]
-```
-
-- `<prompt_paths...>`: Paths to prompt file(s)
-- `<output_path>`: Path to output CSV, JSON, YAML, or HTML file. Defaults to terminal output
-- `<provider>`: One or more of: `openai:<model_name>`, or filesystem path to custom API caller module
-- `<vars_path>` (optional): Path to CSV, JSON, or YAML file with prompt variables
-- `<max_concurrency>` (optional): Number of simultaneous API requests. Defaults to 3
-- `<config_path>` (optional): Path to configuration file
+| Option                              | Description                                                                                                                                                           |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-p, --prompts <paths...>`          | Paths to prompt files, directory, or glob                                                                                                                             |
+| `-r, --providers <name or path...>` | One of: openai:chat, openai:completion, openai:model-name, localai:chat:model-name, localai:completion:model-name. See [API providers](/docs/configuration/providers) |
+| `-o, --output <path>`               | Path to output file (csv, json, yaml, html)                                                                                                                           |
+| `-v, --vars <path>`                 | Path to file with prompt variables (csv, json, yaml)                                                                                                                  |
+| `-c, --config <path>`               | Path to configuration file. `promptfooconfig.js[on]` is automatically loaded if present                                                                               |
+| `-j, --max-concurrency <number>`    | Maximum number of concurrent API calls                                                                                                                                |
+| `--table-cell-max-length <number>`  | Truncate console table cells to this length                                                                                                                           |
+| `--prompt-prefix <path>`            | This prefix is prepended to every prompt                                                                                                                              |
+| `--prompt-suffix <path>`            | This suffix is append to every prompt                                                                                                                                 |
+| `--grader`                          | Provider that will conduct the evaluation, if you are [using LLM to grade your output](/docs/configuration/expected-outputs#llm-evaluation)                           |
 
 After running an eval, you may optionally use the view command to open the experimental web viewer:
 
@@ -93,6 +95,6 @@ Full setup and output [here](https://github.com/typpo/promptfoo/tree/main/exampl
 
 ### Automating output assessments
 
-The above examples create a table of outputs that can be manually reviewed.  You also have the option of setting "expectations" that grade outputs on a pass/fail basis.
+The above examples create a table of outputs that can be manually reviewed. You also have the option of setting "expectations" that grade outputs on a pass/fail basis.
 
 For more information on automating the assessment of outputs, see [Expected Outputs](/docs/configuration/expected-outputs).
