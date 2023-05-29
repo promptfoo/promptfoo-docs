@@ -130,7 +130,16 @@ const config = {
       },
       zoom: {
         selector: '.markdown :not(em) > img',
-      }
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'VPUDC1V4TA',
+
+        // Public API key: it is safe to commit it
+        apiKey: '0b4fcfd05976eb0aaf4b7c51ec4fcd23',
+
+        indexName: 'promptfoo',
+      },
     }),
   plugins: [require.resolve("docusaurus-plugin-image-zoom")],
 };
