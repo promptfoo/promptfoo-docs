@@ -12,7 +12,7 @@ If you're using the command line, you may call `promptfoo eval` with `--no-cache
 
 ## Tests
 
-If you're integrating with [jest](/docs/integrations/jest), [mocha](/docs/integrations/mocha), or any other external framework, you'll probably want to set the following for CI:
+If you're integrating with [jest](/docs/integrations/jest), [mocha](/docs/integrations/mocha-chai), or any other external framework, you'll probably want to set the following for CI:
 
 ```sh
 PROMPTFOO_CACHE_TYPE=disk
