@@ -10,6 +10,15 @@ promptfoo caches the results of API calls to LLM providers. This helps save time
 
 If you're using the command line, you may call `promptfoo eval` with `--no-cache` to disable the cache, or set `cache: false` in your config file.
 
+## Tests
+
+If you're integrating with [jest](/docs/integrations/jest), [mocha](/docs/integrations/mocha), or any other external framework, you'll probably want to set the following for CI:
+
+```sh
+PROMPTFOO_CACHE_TYPE=disk
+PROMPTFOO_CACHE_PATH=...
+```
+
 ## Configuration
 
 The cache is configurable through environment variables:
