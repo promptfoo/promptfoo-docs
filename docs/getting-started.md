@@ -26,13 +26,43 @@ promptfoo init`}
 
 This will create some templates in your current directory: `prompts.txt`, `vars.csv`, and `promptfooconfig.js`.
 
-After editing the prompts and variables to your liking, run the eval command to kick off an evaluation:
+1. **Set up your prompts**: Open `prompts.txt` and add 2 prompts that you want to compare. Use double curly braces as placeholders for variables: `{{variable_name}}`. For example:
 
-```
-npx promptfoo eval
-```
+   ```
+   Convert this English to {{language}}: {{input}}
+   ---
+   Translate to {{language}}: {{input}}
+   ```
 
-If you're looking to customize your usage, you have a wide set of parameters at your disposal. See the [Configuration docs](/docs/configuration/parameters) for more detail:
+1. **Create test cases**: Edit `vars.csv` and add variables that you want to substitute in the prompt.
+
+   The first row are the variable names. All other rows are test cases:
+
+   ```
+   language,input
+   German,"Hello, world!"
+   Spanish,Where is the library?
+   ```
+
+   When writing test cases, think of core use cases and potential failures that you want to make sure your prompts handle correctly.
+
+   For more info on test case setup, see [Vars configuration](/docs/configuration/parameters#vars-file). For more info on creating test cases, see [Expected Outputs](/docs/configuration/expected-outputs).
+
+1. **Run the evaluation**: This tests every prompt for each test case:
+
+   ```
+   npx promptfoo eval
+   ```
+
+1. After the eval is complete, you may optionally open the web viewer:
+
+   ```
+   npx promptfoo view
+   ```
+
+## Command-line options
+
+If you're looking to customize your usage, there are a wide set of `promptfoo eval` parameters at your disposal. See the [Configuration docs](/docs/configuration/parameters) for more detail:
 
 | Option                              | Description                                                                                                                                                           |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -47,17 +77,11 @@ If you're looking to customize your usage, you have a wide set of parameters at 
 | `--prompt-suffix <path>`            | This suffix is append to every prompt                                                                                                                                 |
 | `--grader`                          | Provider that will conduct the evaluation, if you are [using LLM to grade your output](/docs/configuration/expected-outputs#llm-evaluation)                           |
 
-After running an eval, you may optionally use the view command to open the experimental web viewer:
-
-```
-npx promptfoo view
-```
-
 ## Examples
 
 ### Prompt quality
 
-In this example, we evaluate whether adding adjectives to the personality of an assistant bot affects the responses:
+In [this example](https://github.com/typpo/promptfoo/tree/main/examples/assistant-cli), we evaluate whether adding adjectives to the personality of an assistant bot affects the responses:
 
 ```bash
 npx promptfoo eval -p prompts.txt -v vars.csv -r openai:gpt-3.5-turbo
@@ -81,7 +105,7 @@ You can also output a nice [spreadsheet](https://docs.google.com/spreadsheets/d/
 
 ### Model quality
 
-In this example, we evaluate the difference between GPT 3 and GPT 4 outputs for a given prompt:
+In [this example](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4), we evaluate the difference between GPT 3 and GPT 4 outputs for a given prompt:
 
 ```bash
 npx promptfoo eval -p prompts.txt -r openai:gpt-3.5-turbo openai:gpt-4 -o output.html
@@ -93,8 +117,8 @@ Produces this HTML table:
 
 Full setup and output [here](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4).
 
-### Automating output assessments
+### Automatically assess outputs
 
-The above examples create a table of outputs that can be manually reviewed. You also have the option of setting "expectations" that grade outputs on a pass/fail basis.
+The above examples create a table of outputs that can be manually reviewed. By setting up "Expected Outputs", you can automatically grade outputs on a pass/fail basis.
 
-For more information on automating the assessment of outputs, see [Expected Outputs](/docs/configuration/expected-outputs).
+For more information on automatically assessing outputs, see [Expected Outputs](/docs/configuration/expected-outputs).

@@ -35,6 +35,10 @@ The goal: informed, data-driven decisions for prompt tuning. At a high level, he
 3. **Run the evaluation**: Execute the evaluation using the command-line tool or library. Promptfoo will evaluate your prompts against the specified API providers, generating side-by-side comparisons of their outputs.
 4. **Analyze the results**: Review results in a structured format, such as CSV, JSON, YAML, or HTML, to make informed decisions about the best model and prompt choices for your application.
 
+![test-driven llm ops](https://user-images.githubusercontent.com/310310/241601160-cf0461a7-2832-4362-9fbb-4ebd911d06ff.png)
+
+As you collect more examples and establish a user feedback loop, continue to build the pool of test cases.
+
 ### Example
 
 Below, we've used promptfoo to test out 3 different prompts that describe the impact of a given technology on an industry.
