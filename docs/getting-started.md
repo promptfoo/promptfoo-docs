@@ -117,7 +117,7 @@ Produces this HTML table:
 
 Full setup and output [here](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4).
 
-### Automatically assess outputs
+## Automatically assess outputs
 
 The above examples create a table of outputs that can be manually reviewed. By setting up "Expected Outputs", you can automatically grade outputs on a pass/fail basis.
 
