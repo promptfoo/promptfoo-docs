@@ -113,17 +113,16 @@ Here is the main structure of the promptfoo configuration file:
 
 A test case represents a single example input that is fed into all prompts and providers.
 
-| Property         | Type                      | Required | Description                                                |
-| ---------------- | ------------------------- | -------- | ---------------------------------------------------------- |
-| description      | string                    | No       | Optional description of what you're testing                |
-| vars             | Record<string, string>    | No       | Key-value pairs to substitute in the prompt                |
-| assert           | [Assertion](#assertion)[] | No       | Optional list of automatic checks to run on the LLM output |
-| prompt           | PromptConfig              | No       | Optional additional configuration settings for the prompt  |
-| prompt.prefix    | string                    | No       | This is prepended to the prompt                            |
-| prompt.suffix    | string                    | No       | This is append to the prompt                               |
-| grading          | GradingConfig             | No       | Optional configuration settings for automatic LLM grading  |
-| grading.provider | string                    | No       | The API provider to use for grading                        |
-| grading.prompt   | string                    | No       | The prompt to use for grading                              |
+| Property             | Type                      | Required | Description                                                |
+| -------------------- | ------------------------- | -------- | ---------------------------------------------------------- |
+| description          | string                    | No       | Optional description of what you're testing                |
+| vars                 | Record<string, string>    | No       | Key-value pairs to substitute in the prompt                |
+| assert               | [Assertion](#assertion)[] | No       | Optional list of automatic checks to run on the LLM output |
+| options              | Object                    | No       | Optional additional configuration settings                 |
+| options.prefix       | string                    | No       | This is prepended to the prompt                            |
+| options.suffix       | string                    | No       | This is append to the prompt                               |
+| options.provider     | string                    | No       | The API provider to use for LLM rubric grading             |
+| options.rubricPrompt | string                    | No       | The prompt to use for LLM rubric grading                   |
 
 ### Assertion
 
