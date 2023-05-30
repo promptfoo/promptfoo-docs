@@ -108,7 +108,7 @@ const config = {
               },
               {
                 label: 'Node package',
-                to: '/docs/node-package',
+                to: '/docs/usage/node-package',
               },
             ],
           },
