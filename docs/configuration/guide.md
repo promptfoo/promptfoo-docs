@@ -100,14 +100,14 @@ Here is the main structure of the promptfoo configuration file:
 
 ### Config
 
-| Property              | Type                                 | Required | Description                                                                                                      |
-| --------------------- | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| description           | string                               | No       | Optional description of what your LLM is trying to do                                                            |
-| providers             | string \| string[]                   | Yes      | One or more LLM APIs to use                                                                                      |
-| prompts               | string \| string[]                   | Yes      | One or more prompt files to load                                                                                 |
-| tests                 | string \| [Test Case](#test-case) [] | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
-| defaultTestProperties | Partial [Test Case](#test-case)      | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
-| outputPath            | string                               | No       | Where to write output. Writes to console/web viewer if not set.                                                  |
+| Property    | Type                                 | Required | Description                                                                                                      |
+| ----------- | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| description | string                               | No       | Optional description of what your LLM is trying to do                                                            |
+| providers   | string \| string[]                   | Yes      | One or more LLM APIs to use                                                                                      |
+| prompts     | string \| string[]                   | Yes      | One or more prompt files to load                                                                                 |
+| tests       | string \| [Test Case](#test-case) [] | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
+| defaultTest | Partial [Test Case](#test-case)      | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
+| outputPath  | string                               | No       | Where to write output. Writes to console/web viewer if not set.                                                  |
 
 ### Test Case
 
