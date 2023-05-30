@@ -20,7 +20,7 @@ tests:
     vars:
       example: "Hello, World!"
     assert:
-      - type: equality
+      - type: equals
         value: "Hello, World!"
 ```
 
@@ -37,13 +37,13 @@ tests:
 
 ### Equality
 
-The `equality` assertion checks if the LLM output is equal to the expected value.
+The `equals` assertion checks if the LLM output is equal to the expected value.
 
 Example:
 
 ```yaml
 assert:
-  - type: equality
+  - type: equals
     value: "The expected output"
 ```
 
@@ -69,15 +69,15 @@ assert:
   - type: contains-json
 ```
 
-### Function
+### Javascript
 
-The `function` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
+The `javascript` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
 
 Example:
 
 ```yaml
 assert:
-  - type: function
+  - type: javascript
     value: "output.includes('Hello, World!')"
 ```
 
@@ -89,7 +89,7 @@ Example:
 
 ```yaml
 assert:
-  - type: similarity
+  - type: similar
     value: "The expected output"
     threshold: 0.8
 ```
@@ -128,10 +128,10 @@ text,__expected
 All assertion types can be used in `__expected`. The column supports exactly one assertion.
 
 - `is-json` and `contains-json` are supported directly, and do not require any value
-- `fn` indicates `function` type. For example: `fn:output.includes('foo')`
-- `similar` indicates `similarity`, with a threshold value. For example: `similar(0.8):hello world`
+- `fn` indicates `javascript` type. For example: `fn:output.includes('foo')`
+- `similar` takes a threshold value. For example: `similar(0.8):hello world`
 - `grade` indicates `llm-rubric`. For example: `grade: does not mention being an AI`
-- By default, `__expected` will use type `equality`
+- By default, `__expected` will use type `equals`
 
 When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
 

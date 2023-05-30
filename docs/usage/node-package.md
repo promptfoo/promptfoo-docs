@@ -40,11 +40,11 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
 
   interface Assertion {
     type:
-      | "equality"
+      | "equals"
       | "is-json"
       | "contains-json"
-      | "function"
-      | "similarity"
+      | "javascript"
+      | "similar"
       | "llm-rubric";
     value?: string;
     threshold?: number; // For similarity assertions

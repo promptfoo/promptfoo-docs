@@ -56,7 +56,7 @@ tests:
 
 We can create additional tests. Let's add a couple other [types of assertions](/docs/configuration/expected-outputs).
 
-The `function` assertion runs Javascript against the LLM output. The `similarity` assertion checks for semantic similarity using embeddings.
+The `javascript` assertion runs Javascript against the LLM output. The `similar` assertion checks for semantic similarity using embeddings.
 
 ```yaml
 prompts: [prompt1.txt, prompt2.txt]
@@ -73,14 +73,14 @@ tests:
         assert:
           - type: contains-json
           // highlight-start
-          - type: function
+          - type: javascript
             value: output.toLowerCase().includes('bonjour')
           // highlight-end
   - vars:
       language: German
       input: How's it going?
       // highlight-start
-      - type: similarity
+      - type: similar
         value: was geht
         threshold: 0.6   # cosine similarity
       // highlight-end
@@ -126,12 +126,12 @@ A test case represents a single example input that is fed into all prompts and p
 
 ### Assertion
 
-| Property  | Type   | Required | Description                                                                                       |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
-| type      | string | Yes      | Type of assertion                                                                                 |
-| value     | string | No       | The expected value, if applicable                                                                 |
-| threshold | number | No       | The threshold value, only applicable for similarity (cosine distance)                             |
-| provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
+| Property  | Type   | Required | Description                                                                                           |
+| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------- |
+| type      | string | Yes      | Type of assertion                                                                                     |
+| value     | string | No       | The expected value, if applicable                                                                     |
+| threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)                             |
+| provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
 
 ## Loading tests from CSV
 
