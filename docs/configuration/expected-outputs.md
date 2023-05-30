@@ -125,6 +125,14 @@ text,__expected
 "I am a pineapple","grade:doesn't reference any fruits besides pineapple"
 ```
 
+All assertion types can be used in `__expected`. The column supports exactly one assertion.
+
+- `is-json` and `contains-json` are supported directly, and do not require any value
+- `fn` indicates `function` type. For example: `fn:output.includes('foo')`
+- `similar` indicates `similarity`, with a threshold value. For example: `similar(0.8):hello world`
+- `grade` indicates `llm-rubric`. For example: `grade: does not mention being an AI`
+- By default, `__expected` will use type `equality`
+
 When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
 
 For more advanced test cases, we recommend using a testing framework like [Jest](/docs/integrations/jest) or [Mocha](/docs/integrations/mocha-chai) and using promptfoo [as a library](/docs/node-package).
