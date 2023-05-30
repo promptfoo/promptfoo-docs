@@ -64,7 +64,7 @@ This will create some templates in your current directory: `prompts.txt` and `pr
    npx promptfoo view
    ```
 
-   [&raquo; More information on using the web viewer](/docs/web-ui)
+   [&raquo; More information on using the web viewer](/docs/usage/web-ui)
 
 ### Configuration
 
@@ -73,7 +73,7 @@ The YAML configuration format runs each prompt through a series of example input
 Asserts are _optional_. Many people get value out of reviewing outputs manually, and the web UI helps facilitate this.
 
 :::tip
-See the [Configuration docs](/docs/configuration/guide) for more detail.
+See the [Configuration docs](/docs/configuration/guide) for a detailed guide.
 :::
 
 <details>
