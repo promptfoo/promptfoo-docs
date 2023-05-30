@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Getting started
 
-To get started, run the following command:
+To get started, run this command:
 
 <Tabs>
   <TabItem value="npx" label="npx" default>
@@ -24,7 +24,7 @@ promptfoo init`}
   </TabItem>
 </Tabs>
 
-This will create some templates in your current directory: `prompts.txt`, `vars.csv`, and `promptfooconfig.js`.
+This will create some templates in your current directory: `prompts.txt` and `promptfooconfig.yaml`.
 
 1. **Set up your prompts**: Open `prompts.txt` and add 2 prompts that you want to compare. Use double curly braces as placeholders for variables: `{{variable_name}}`. For example:
 
@@ -34,19 +34,23 @@ This will create some templates in your current directory: `prompts.txt`, `vars.
    Translate to {{language}}: {{input}}
    ```
 
-1. **Create test cases**: Edit `vars.csv` and add variables that you want to substitute in the prompt.
+   [&raquo; More information on setting up prompts](/docs/configuration/parameters)
 
-   The first row are the variable names. All other rows are test cases:
+1. **Add test inputs**: Edit `promptfooconfig.yaml` and add some example inputs for your prompts. Optionally, add assertions to automatically ensure that outputs meet your requirements.
 
-   ```
-   language,input
-   German,"Hello, world!"
-   Spanish,Where is the library?
+   For example:
+
+   ```yaml
+   tests:
+     - language: French
+       input: Hello world
+     - language: Spanish
+       input: Where is the library?
    ```
 
    When writing test cases, think of core use cases and potential failures that you want to make sure your prompts handle correctly.
 
-   For more info on test case setup, see [Vars configuration](/docs/configuration/parameters#vars-file). For more info on creating test cases, see [Expected Outputs](/docs/configuration/expected-outputs).
+   [&raquo; More information on setting up tests](/docs/configuration/guide)
 
 1. **Run the evaluation**: This tests every prompt for each test case:
 
@@ -54,28 +58,63 @@ This will create some templates in your current directory: `prompts.txt`, `vars.
    npx promptfoo eval
    ```
 
-1. After the eval is complete, you may optionally open the web viewer:
+1. After the evaluation is complete, you may open the web viewer to review the outputs:
 
    ```
    npx promptfoo view
    ```
 
-## Command-line options
+   [&raquo; More information on using the web viewer](/docs/web-ui)
 
-If you're looking to customize your usage, there are a wide set of `promptfoo eval` parameters at your disposal. See the [Configuration docs](/docs/configuration/parameters) for more detail:
+### Configuration
 
-| Option                              | Description                                                                                                                                                           |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-p, --prompts <paths...>`          | Paths to prompt files, directory, or glob                                                                                                                             |
-| `-r, --providers <name or path...>` | One of: openai:chat, openai:completion, openai:model-name, localai:chat:model-name, localai:completion:model-name. See [API providers](/docs/configuration/providers) |
-| `-o, --output <path>`               | Path to output file (csv, json, yaml, html)                                                                                                                           |
-| `-v, --vars <path>`                 | Path to file with prompt variables (csv, json, yaml)                                                                                                                  |
-| `-c, --config <path>`               | Path to configuration file. `promptfooconfig.js[on]` is automatically loaded if present                                                                               |
-| `-j, --max-concurrency <number>`    | Maximum number of concurrent API calls                                                                                                                                |
-| `--table-cell-max-length <number>`  | Truncate console table cells to this length                                                                                                                           |
-| `--prompt-prefix <path>`            | This prefix is prepended to every prompt                                                                                                                              |
-| `--prompt-suffix <path>`            | This suffix is append to every prompt                                                                                                                                 |
-| `--grader`                          | Provider that will conduct the evaluation, if you are [using LLM to grade your output](/docs/configuration/expected-outputs#llm-evaluation)                           |
+The YAML configuration format runs each prompt through a series of example inputs (aka "test case") and checks if they meet requirements (aka "assert").
+
+Asserts are _optional_. Many people get value out of reviewing outputs manually, and the web UI helps facilitate this.
+
+:::tip
+See the [Configuration docs](/docs/configuration/guide) for more detail.
+:::
+
+<details>
+<summary>Show example YAML</summary>
+
+```yaml
+prompts: [prompts.txt]
+providers: [openai:gpt-3.5-turbo]
+tests:
+  - description: First test case - automatic review
+    vars:
+      var1: first variable's value
+      var2: another value
+      var3: some other value
+    assert:
+      - type: equality
+        value: expected LLM output goes here
+      - type: function
+        value: output.includes('some text')
+
+  - description: Second test case - manual review
+    # Test cases don't need assertions if you prefer to review the output yourself
+    vars:
+      var1: new value
+      var2: another value
+      var3: third value
+
+  - description: Third test case - other types of automatic review
+    vars:
+      var1: yet another value
+      var2: and another
+      var3: dear llm, please output your response in json format
+    assert:
+      - type: contains-json
+      - type: similarity
+        value: ensures that output is semantically similar to this text
+      - type: llm-rubric
+        value: ensure that output contains a reference to X
+```
+
+</details>
 
 ## Examples
 
@@ -84,7 +123,7 @@ If you're looking to customize your usage, there are a wide set of `promptfoo ev
 In [this example](https://github.com/typpo/promptfoo/tree/main/examples/assistant-cli), we evaluate whether adding adjectives to the personality of an assistant bot affects the responses:
 
 ```bash
-npx promptfoo eval -p prompts.txt -v vars.csv -r openai:gpt-3.5-turbo
+npx promptfoo eval -p prompts.txt -v tests.csv -r openai:gpt-3.5-turbo
 ```
 
 ![Peek 2023-05-01 13-53](https://user-images.githubusercontent.com/310310/235529431-f4d5c395-d569-448e-9697-cd637e0372a5.gif)
@@ -95,7 +134,7 @@ npx promptfoo eval -p prompts.txt -v vars.csv -r openai:gpt-3.5-turbo
 ![Side-by-side evaluation of LLM prompt quality, html output](https://user-images.githubusercontent.com/310310/235483444-4ddb832d-e103-4b9c-a862-b0d6cc11cdc0.png)
 -->
 
-This command will evaluate the prompts in `prompts.txt`, substituing the variable values from `vars.csv`, and output results in your terminal.
+This command will evaluate the prompts in `prompts.txt`, substituing the variable values from `tests.csv`, and output results in your terminal.
 
 Have a look at the setup and full output [here](https://github.com/typpo/promptfoo/tree/main/examples/assistant-cli).
 

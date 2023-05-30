@@ -1,68 +1,122 @@
 ---
-sidebar_position: 10
+sidebar_position: 5
 ---
 
-# Expected outputs
+# Test assertions
 
-You can automatically assess model outputs by setting an "expectation" for each test case. Model outputs are tagged PASS or FAIL based on this expectation.
+Assertions are used to test the output of a language model (LLM) against expected values or conditions. While they are not required, they are a useful way to automate prompt engineering analysis.
 
-To do this, add a special field called `__expected` in the `vars` file.
+Different types of assertions can be used to validate the output in various ways, such as checking for equality, JSON structure, similarity, or custom functions.
 
-## Types of expectations
+## Using assertions
 
-The `__expected` field supports these types of value comparisons:
+To use assertions in your test cases, add an `assert` property to the test case with an array of assertion objects. Each assertion object should have a `type` property indicating the assertion type and any additional properties required for that assertion type.
 
-### String equality
+Example:
 
-By default, promptfoo attempts an exact string match comparison between the expected value and the model's output.
-
-### Code evaluation
-
-If the expected value starts with `fn:`, it will evaluate the contents as the body of a JavaScript function defined like: `function(output) { return <eval> }`. The function should return a boolean value, where `true` indicates success and `false` indicates failure.
-
-For example:
-
-```
-fn:output.toLowerCase().includes('ahoy')
+```yaml
+tests:
+  - description: "Test if output is equal to the expected value"
+    vars:
+      example: "Hello, World!"
+    assert:
+      - type: equality
+        value: "Hello, World!"
 ```
 
-This will mark an output as failed if it does not include the string "ahoy".
+## Assertion properties
 
-[Example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/simple-test)
+| Property  | Type   | Required | Description                                                                                       |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
+| type      | string | Yes      | Type of assertion                                                                                 |
+| value     | string | No       | The expected value, if applicable                                                                 |
+| threshold | number | No       | The threshold value, only applicable for similarity                                               |
+| provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
 
-### Semantic evaluation
+## Assertion Types
 
-If the expected value starts with `similar:`, it will compare the semantic similarity of the expected and output values.
+### Equality
 
-For example, `similar: greetings, world!` is semantically similar to "Hello world" even though it's not an exact match.
+The `equality` assertion checks if the LLM output is equal to the expected value.
 
-The `similar` directive uses cosine similarity, where 1.0 is the most similar and 0.0 is the least similar. Tune the similarity threshold by specifying `similar(0.8): ...` (passes only if similarity >= 0.8).
+Example:
 
-The embedding model currently supported is OpenAI's `text-embedding-ada-002`. As a result, the `similar` directive requires the OPENAI_API_KEY environment variable to be set.
-
-### LLM evaluation
-
-If the expected value starts with `grade:`, it will ask an LLM to evaluate whether the output meets the condition.
-
-For example: `grade: don't mention being an AI`
-
-To enable grading, you must supply a provider name to via the `--grader` argument:
-
-```
-promptfoo --grader openai:gpt-4 ...
+```yaml
+assert:
+  - type: equality
+    value: "The expected output"
 ```
 
-Here's an example output that indicates PASS/FAIL based on LLM assessment:
+### Is-JSON
+
+The `is-json` assertion checks if the LLM output is a valid JSON string.
+
+Example:
+
+```yaml
+assert:
+  - type: is-json
+```
+
+### Contains-JSON
+
+The `contains-json` assertion checks if the LLM output contains a valid JSON structure.
+
+Example:
+
+```yaml
+assert:
+  - type: contains-json
+```
+
+### Function
+
+The `function` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
+
+Example:
+
+```yaml
+assert:
+  - type: function
+    value: "output.includes('Hello, World!')"
+```
+
+### Similarity
+
+The `similarity` assertion checks if the LLM output is semantically similar to the expected value, using a cosine similarity threshold.
+
+Example:
+
+```yaml
+assert:
+  - type: similarity
+    value: "The expected output"
+    threshold: 0.8
+```
+
+### LLM-Rubric
+
+The `llm-rubric` assertion checks if the LLM output matches a given rubric, using a Language Model to grade the output based on the rubric.
+
+Example:
+
+```yaml
+assert:
+  - type: llm-rubric
+    value: "The expected output"
+```
+
+Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
 
 [![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
 
-[Example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)
+## Load an external tests file
 
-## Add expected values to the Vars file
+The [Tests file](/docs/configuration/parameters#tests-file) is an optional format that lets you specify test cases outside of the main config file.
 
-Edit your [vars file](/docs/configuration/parameters#vars-file) and add an `__expected` column.
+To add an assertion to a test case in a vars file, use the special `__expected` column.
 
-Here's an example vars.csv:
+Here's an example tests.csv:
 
 ```
 text,__expected
@@ -71,22 +125,6 @@ text,__expected
 "I am a pineapple","grade:doesn't reference any fruits besides pineapple"
 ```
 
-Here's an example vars.json:
-
-```json
-[
-  { "text": "Hello, world!", "__expected": "Bonjour le monde" },
-  {
-    "text": "Goodbye, everyone!",
-    "__expected": "fn:output.includes('Au revoir');"
-  },
-  {
-    "text": "I am a pineapple",
-    "__expected": "grade:doesn't reference any fruits besides pineapple"
-  }
-]
-```
-
 When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
 
-For more advanced test cases, we recommend using a testing framework like [Jest](/docs/integrations/jest) or [Mocha](/docs/integrations/mocha-chai) and using promptfoo [as a library](/docs/node-package/).
+For more advanced test cases, we recommend using a testing framework like [Jest](/docs/integrations/jest) or [Mocha](/docs/integrations/mocha-chai) and using promptfoo [as a library](/docs/node-package).
