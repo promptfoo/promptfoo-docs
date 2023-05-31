@@ -26,27 +26,25 @@ It works on the command line too.
 
 ## Workflow and philosophy
 
-[Serious LLM development requires a systematic approach to prompt engineering](https://www.ianww.com/blog/2023/05/21/prompt-engineering-framework). promptfoo's core purpose is to help developers efficiently evaluate and compare the performance of language models using a well-structured, repeatable, and customizable process.
+[Serious LLM development requires a systematic approach to prompt engineering](https://www.ianww.com/blog/2023/05/21/prompt-engineering-framework). Promptfoo streamlines the process of evaluating and improving language model performance.
 
-The goal: informed, data-driven decisions for prompt tuning. At a high level, here's how to use `promptfoo`:
+The goal: **test-driven prompt engineering**, not trial-and-error.
 
-1. **Define your test cases**: Identify the scenarios and inputs that are relevant to your application. Create a set of prompts and test cases that closely represent these scenarios.
-2. **Configure your evaluation**: Set up your evaluation by specifying the prompts, test cases, and API providers you want to use. You can customize the evaluation process by configuring the input and output formats, the level of concurrency, and other options.
-3. **Run the evaluation**: Execute the evaluation using the command-line tool or library. Promptfoo will evaluate your prompts against the specified API providers, generating side-by-side comparisons of their outputs.
-4. **Analyze the results**: Review results in a structured format, such as CSV, JSON, YAML, or HTML, to make informed decisions about the best model and prompt choices for your application.
+1. **Define test cases**: Identify core use cases and failure modes. Prepare a set of prompts and test cases that represent these scenarios.
+2. **Configure evaluation**: Set up your evaluation by specifying prompts, test cases, and API providers.
+3. **Run evaluation**: Use the command-line tool or library to execute the evaluation and record model outputs for each prompt.
+4. **Analyze results**: Set up automatic requirements, or review results in a structured format/web UI. Use these results to select the best model and prompt for your use case.
 
 ![test-driven llm ops](https://user-images.githubusercontent.com/310310/241601160-cf0461a7-2832-4362-9fbb-4ebd911d06ff.png)
 
-As you collect more examples and establish a user feedback loop, continue to build the pool of test cases.
+As you gather more examples and user feedback, continue to expand your test cases.
 
 ### Example
 
-Below, we've used promptfoo to test out 3 different prompts that describe the impact of a given technology on an industry.
+Using promptfoo, we evaluate three prompts describing the impact of specific technologies on various industries. We substitute several example (technology, industry) pairs, generating a matrix of outputs for side-by-side evaluation.
 
-By substituting a handful of example (technology, industry) pairs, we've generated a matrix of outputs that we can evaluate side-by-side - either by human or automatically.
+Each output is graded based on predefined expectations. The results show that Prompt #3 satisfies 80% of the requirements, while Prompts #1 and #2 meet only 40%.
 
-Each output is graded according to our expectations. Now, we can say that Prompt #3 satisfies 80% of requirements, whereas Prompts #1 and #2 only meet 40%.
-
-We can use this technique repeatedly to ensure that we are iteratively improving prompt quality across the board.
+This technique can be applied iteratively to continuously improve prompt quality across diverse test cases.
 
 ![Evaluating prompts as a matrix](./assets/prompt-evaluation-matrix.png)
