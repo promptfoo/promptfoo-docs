@@ -142,10 +142,12 @@ For more advanced test cases, we recommend using a testing framework like [Jest]
 If you have a set of common assertions that you want to apply to multiple test cases, you can create assertion templates and reuse them across your configuration.
 
 ```yaml
+// highlight-start
 assertionTemplates:
   containsMentalHealth:
     type: javascript
     value: output.toLowerCase().includes('mental health')
+// highlight-end
 
 prompts: [prompt1.txt, prompt2.txt]
 providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
@@ -153,10 +155,12 @@ tests:
   - vars:
       input: Tell me about the benefits of exercise.
     assert:
+      // highlight-next-line
       - $ref: "#/assertionTemplates/containsMentalHealth"
   - vars:
       input: How can I improve my well-being?
     assert:
+      // highlight-next-line
       - $ref: "#/assertionTemplates/containsMentalHealth"
 ```
 
