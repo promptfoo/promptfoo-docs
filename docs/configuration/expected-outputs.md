@@ -136,3 +136,28 @@ All assertion types can be used in `__expected`. The column supports exactly one
 When the `__expected` field is provided, the success and failure statistics in the evaluation summary will be based on whether the expected criteria are met.
 
 For more advanced test cases, we recommend using a testing framework like [Jest](/docs/integrations/jest) or [Mocha](/docs/integrations/mocha-chai) and using promptfoo [as a library](/docs/usage/node-package).
+
+## Reusing assertions with templates
+
+If you have a set of common assertions that you want to apply to multiple test cases, you can create assertion templates and reuse them across your configuration.
+
+```yaml
+assertionTemplates:
+  containsMentalHealth:
+    type: javascript
+    value: output.toLowerCase().includes('mental health')
+
+prompts: [prompt1.txt, prompt2.txt]
+providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
+tests:
+  - vars:
+      input: Tell me about the benefits of exercise.
+    assert:
+      - $ref: "#/assertionTemplates/containsMentalHealth"
+  - vars:
+      input: How can I improve my well-being?
+    assert:
+      - $ref: "#/assertionTemplates/containsMentalHealth"
+```
+
+In this example, the `containsMentalHealth` assertion template is defined at the top of the configuration file and then reused in two test cases. This approach helps maintain consistency and reduces duplication in your configuration.
