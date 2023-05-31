@@ -37,11 +37,6 @@ Next, let's add an assertion. This automatically rejects any outputs that don't 
 prompts: [prompt1.txt, prompt2.txt]
 providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 tests:
-  - description: Test three variables
-    vars:
-      language: French
-
-      var3: some other value
   - vars:
       language: French
       input: Hello world
@@ -62,11 +57,6 @@ The `javascript` assertion runs Javascript against the LLM output. The `similar`
 prompts: [prompt1.txt, prompt2.txt]
 providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 tests:
-  - description: Test three variables
-    vars:
-      language: French
-
-      var3: some other value
   - vars:
       language: French
       input: Hello world
