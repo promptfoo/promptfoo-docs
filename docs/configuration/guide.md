@@ -49,9 +49,9 @@ tests:
       input: How's it going?
 ```
 
-We can create additional tests. Let's add a couple other [types of assertions](/docs/configuration/expected-outputs).
+We can create additional tests. Let's add a couple other [types of assertions](/docs/configuration/expected-outputs). Use an array of assertions for a single test case to ensure all conditions are met.
 
-The `javascript` assertion runs Javascript against the LLM output. The `similar` assertion checks for semantic similarity using embeddings.
+In this example, the `javascript` assertion runs Javascript against the LLM output. The `similar` assertion checks for semantic similarity using embeddings:
 
 ```yaml
 prompts: [prompt1.txt, prompt2.txt]
@@ -74,6 +74,33 @@ tests:
         value: was geht
         threshold: 0.6   # cosine similarity
       // highlight-end
+```
+
+You can use `defaultTest` to set an assertion for all tests. In this case, we use an `llm-rubric` assertion to ensure that the LLM does not refer to itself as an AI.
+
+```yaml
+prompts: [prompt1.txt, prompt2.txt]
+providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
+// highlight-start
+defaultTest:
+  assert:
+    - type: llm-rubric
+      value: does not describe self as an AI, model, or chatbot
+// highlight-end
+tests:
+  - vars:
+      language: French
+      input: Hello world
+        assert:
+          - type: contains-json
+          - type: javascript
+            value: output.toLowerCase().includes('bonjour')
+  - vars:
+      language: German
+      input: How's it going?
+      - type: similar
+        value: was geht
+        threshold: 0.6
 ```
 
 :::note
@@ -116,6 +143,8 @@ A test case represents a single example input that is fed into all prompts and p
 
 ### Assertion
 
+More details on using assertions, including examples [here](/docs/configuration/expected-outputs).
+
 | Property  | Type   | Required | Description                                                                                           |
 | --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------- |
 | type      | string | Yes      | Type of assertion                                                                                     |
@@ -125,7 +154,7 @@ A test case represents a single example input that is fed into all prompts and p
 
 ## Loading tests from CSV
 
-YAML is nice, but some organizations maintain their LLM tests in spreadsheets. promptfoo supports a special [CSV file format](/docs/configuration/parameters#tests-file).
+YAML is nice, but some organizations maintain their LLM tests in spreadsheets for ease of collaboration. promptfoo supports a special [CSV file format](/docs/configuration/parameters#tests-file).
 
 ```yaml
 prompts: [prompt1.txt, prompt2.txt]
