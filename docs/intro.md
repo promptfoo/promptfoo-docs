@@ -14,9 +14,11 @@ With promptfoo, you can:
 - Use as a command line tool, or integrate into your workflow as a library
 - Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for any LLM API
 
-promptfoo works by producing matrix views that allow you to quickly review prompt outputs across many inputs.
+The goal: **test-driven prompt engineering**, not trial-and-error.
 
-Here's an example of a side-by-side comparison of multiple prompts and inputs. You can manually review outputs, or set up "expectations" that automatically flag bad outputs:
+promptfoo produces matrix views that let you quickly evaluate outputs across many prompts.
+
+Here's an example of a side-by-side comparison of multiple prompts and inputs:
 
 ![Side-by-side evaluation of LLM prompt quality](https://user-images.githubusercontent.com/310310/238143127-ddcd77df-2783-425e-ade9-1a20dd0b6cd2.png)
 
@@ -26,9 +28,9 @@ It works on the command line too.
 
 ## Workflow and philosophy
 
-[Serious LLM development requires a systematic approach to prompt engineering](https://www.ianww.com/blog/2023/05/21/prompt-engineering-framework). Promptfoo streamlines the process of evaluating and improving language model performance.
+Test-driven prompt engineering is much more effective than trial-and-error.
 
-The goal: **test-driven prompt engineering**, not trial-and-error.
+[Serious LLM development requires a systematic approach to prompt engineering](https://www.ianww.com/blog/2023/05/21/prompt-engineering-framework). Promptfoo streamlines the process of evaluating and improving language model performance.
 
 1. **Define test cases**: Identify core use cases and failure modes. Prepare a set of prompts and test cases that represent these scenarios.
 2. **Configure evaluation**: Set up your evaluation by specifying prompts, test cases, and API providers.
