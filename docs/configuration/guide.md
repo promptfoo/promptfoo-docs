@@ -9,6 +9,8 @@ The YAML configuration format runs each prompt through a series of example input
 
 Asserts are _optional_. Many people get value out of reviewing outputs manually, and the web UI helps facilitate this.
 
+## Examples
+
 Let's imagine we're building an app that does language translation. This config runs each prompt through GPT-3.5 and Vicuna, substituting three variables:
 
 ```yaml
@@ -30,6 +32,8 @@ For more information on setting up a prompt file, see [input and output files](/
 :::
 
 Running `promptfoo eval` over this config will result in a _matrix view_ that you can use to evaluate GPT vs Vicuna.
+
+### Auto-validate output with assertions
 
 Next, let's add an assertion. This automatically rejects any outputs that don't contain JSON:
 
@@ -76,6 +80,8 @@ tests:
       // highlight-end
 ```
 
+### More advanced usage
+
 You can use `defaultTest` to set an assertion for all tests. In this case, we use an `llm-rubric` assertion to ensure that the LLM does not refer to itself as an AI.
 
 ```yaml
@@ -103,13 +109,30 @@ tests:
         threshold: 0.6
 ```
 
-:::note
+### Testing multiple variables in a single test case
 
-promptfoo supports `.js` and `.json` extensions in addition to `.yaml`.
+The `vars` map in the test also supports array values. If values are an array, the test case will run each combination of values.
 
-It automatically loads `promptfooconfig.*`, but you can use a custom config file with `promptfoo eval -c path/to/config`.
+For example:
 
-:::
+```
+prompts: prompts.txt
+providers: [openai:gpt-3.5-turbo, openai:gpt-4]
+tests:
+  - vars:
+      // highlight-start
+      language: [French, German, Spanish]
+      input: ['Hello world', 'Good morning', 'How are you?']
+      // highlight-end
+    assert:
+      - type: similar
+        value: 'Hello world'
+        threshold: 0.8
+```
+
+Evaluates each `language` x `input` combination:
+
+<img alt="Multiple combinations of var inputs" src="https://user-images.githubusercontent.com/310310/243108917-dab27ca5-689b-4843-bb52-de8d459d783b.png" />
 
 ## Configuration structure
 
@@ -130,16 +153,16 @@ Here is the main structure of the promptfoo configuration file:
 
 A test case represents a single example input that is fed into all prompts and providers.
 
-| Property             | Type                      | Required | Description                                                |
-| -------------------- | ------------------------- | -------- | ---------------------------------------------------------- |
-| description          | string                    | No       | Optional description of what you're testing                |
-| vars                 | Record<string, string>    | No       | Key-value pairs to substitute in the prompt                |
-| assert               | [Assertion](#assertion)[] | No       | Optional list of automatic checks to run on the LLM output |
-| options              | Object                    | No       | Optional additional configuration settings                 |
-| options.prefix       | string                    | No       | This is prepended to the prompt                            |
-| options.suffix       | string                    | No       | This is append to the prompt                               |
-| options.provider     | string                    | No       | The API provider to use for LLM rubric grading             |
-| options.rubricPrompt | string                    | No       | The prompt to use for LLM rubric grading                   |
+| Property             | Type                               | Required | Description                                                |
+| -------------------- | ---------------------------------- | -------- | ---------------------------------------------------------- |
+| description          | string                             | No       | Optional description of what you're testing                |
+| vars                 | Record<string, string \| string[]> | No       | Key-value pairs to substitute in the prompt                |
+| assert               | [Assertion](#assertion)[]          | No       | Optional list of automatic checks to run on the LLM output |
+| options              | Object                             | No       | Optional additional configuration settings                 |
+| options.prefix       | string                             | No       | This is prepended to the prompt                            |
+| options.suffix       | string                             | No       | This is append to the prompt                               |
+| options.provider     | string                             | No       | The API provider to use for LLM rubric grading             |
+| options.rubricPrompt | string                             | No       | The prompt to use for LLM rubric grading                   |
 
 ### Assertion
 
@@ -151,6 +174,14 @@ More details on using assertions, including examples [here](/docs/configuration/
 | value     | string | No       | The expected value, if applicable                                                                     |
 | threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)                             |
 | provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
+
+:::note
+
+promptfoo supports `.js` and `.json` extensions in addition to `.yaml`.
+
+It automatically loads `promptfooconfig.*`, but you can use a custom config file with `promptfoo eval -c path/to/config`.
+
+:::
 
 ## Loading tests from CSV
 
