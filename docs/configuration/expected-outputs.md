@@ -121,7 +121,7 @@ Here's an example tests.csv:
 ```
 text,__expected
 "Hello, world!","Bonjour le monde"
-"Goodbye, everyone!","fn:return output.includes('Au revoir');"
+"Goodbye, everyone!","fn:output.includes('Au revoir');"
 "I am a pineapple","grade:doesn't reference any fruits besides pineapple"
 ```
 
