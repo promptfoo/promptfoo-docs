@@ -18,7 +18,7 @@ export OPENAI_API_KEY=your_api_key_here
 
 Other OpenAI-related environment variables are supported:
 
-- `OPENAI_TEMPERATURE` - temperature model parameter, defaults to 0
+- `OPENAI_MAX_TEMPERATURE` - temperature model parameter, defaults to 0
 - `OPENAI_MAX_TOKENS` - max_tokens model parameter, defaults to 1024
 
 The OpenAI provider supports the following model formats:
