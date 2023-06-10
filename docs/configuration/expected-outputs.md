@@ -35,6 +35,25 @@ tests:
 
 ## Assertion Types
 
+| Assertion Type  | Returns true if...                                                        |
+| --------------- | ------------------------------------------------------------------------- |
+| `equals`        | output matches exactly                                                    |
+| `contains`      | output contains substring                                                 |
+| `icontains`     | output contains substring, case insensitive                               |
+| `regex`         | output matches regex                                                      |
+| `contains-some` | output contains some in list of substrings                                |
+| `contains-all`  | output contains all list of substrings                                    |
+| `is-json`       | output is valid json                                                      |
+| `contains-json` | output contains valid json                                                |
+| `javascript`    | provided Javascript function validates the output                         |
+| `webhook`       | provided webhook returns `{pass: true}                                    |
+| `similar`       | embeddings and cosine similarity are above a threshold                    |
+| `llm-rubric`    | LLM output matches a given rubric, using a Language Model to grade output |
+
+:::tip
+Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
+:::
+
 ### Equality
 
 The `equals` assertion checks if the LLM output is equal to the expected value.
@@ -45,6 +64,70 @@ Example:
 assert:
   - type: equals
     value: "The expected output"
+```
+
+Here are the new additions to the "Assertion Types" section:
+
+### Contains
+
+The `contains` assertion checks if the LLM output contains the expected value.
+
+Example:
+
+```yaml
+assert:
+  - type: contains
+    value: "The expected substring"
+```
+
+The `icontains` is the same, except it ignores case:
+
+```yaml
+assert:
+  - type: icontains
+    value: "The expected substring"
+```
+
+### Regex
+
+The `regex` assertion checks if the LLM output matches the provided regular expression.
+
+Example:
+
+```yaml
+assert:
+  - type: regex
+    value: "\\d{4}" # Matches a 4-digit number
+```
+
+### Contains-Some
+
+The `contains-some` assertion checks if the LLM output contains at least one of the specified values.
+
+Example:
+
+```yaml
+assert:
+  - type: contains-some
+    value:
+      - "Value 1"
+      - "Value 2"
+      - "Value 3"
+```
+
+### Contains-All
+
+The `contains-all` assertion checks if the LLM output contains all of the specified values.
+
+Example:
+
+```yaml
+assert:
+  - type: contains-all
+    value:
+      - "Value 1"
+      - "Value 2"
+      - "Value 3"
 ```
 
 ### Is-JSON
@@ -80,6 +163,44 @@ assert:
   - type: javascript
     value: "output.includes('Hello, World!')"
 ```
+
+### Webhook
+
+The `webhook` assertion sends the LLM output to a specified webhook URL for custom validation. The webhook should return a JSON object with a `pass` property set to `true` or `false`.
+
+Example:
+
+```yaml
+assert:
+  - type: webhook
+    value: "https://example.com/webhook"
+```
+
+The webhook will receive a POST request with a JSON payload containing the LLM output and the context (test case variables). For example, if the LLM output is "Hello, World!" and the test case has a variable `example` set to "Example text", the payload will look like:
+
+```json
+{
+  "output": "Hello, World!",
+  "context": {
+    "vars": {
+      "example": "Example text"
+    }
+  }
+}
+```
+
+The webhook should process the request and return a JSON response with a `pass` property set to `true` or `false`, indicating whether the LLM output meets the custom validation criteria. Optionally, the webhook can also provide a `reason` property to describe why the output passed or failed the assertion.
+
+Example response:
+
+```json
+{
+  "pass": true,
+  "reason": "The output meets the custom validation criteria"
+}
+```
+
+If the webhook returns a `pass` value of `true`, the assertion will be considered successful. If it returns `false`, the assertion will fail, and the provided `reason` will be used to describe the failure.
 
 ### Similarity
 
