@@ -10,11 +10,11 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Improve prompts systematically',
+    title: 'A framework for tuning prompts',
     Svg: require('@site/static/img/svgrepo_puzzle_toy.svg').default,
     description: (
       <>
-        Reduce subjectivity and the impact of small sample size when tuning prompts.
+        Reduce the subjectivity and impact of small sample size when tuning prompts.
       </>
     ),
   },
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Spend less time tuning prompts',
+    title: 'Spend less time on prompt engineering',
     Svg: require('@site/static/img/svgrepo_park.svg').default,
     description: (
       <>

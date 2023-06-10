@@ -4,15 +4,16 @@ sidebar_position: 1
 
 # Intro
 
-`promptfoo` helps you tune LLM prompts systematically across many relevant test cases.
+`promptfoo` is a tool for testing and evaluating LLM prompt quality.
 
 With promptfoo, you can:
 
-- **Test multiple prompts** against predefined test cases
-- **Evaluate quality and catch regressions** by comparing LLM outputs side-by-side
-- **Speed up evaluations** with caching and concurrent tests
-- Use as a command line tool, or integrate into your workflow as a library
-- Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for any LLM API
+- **Systematically test prompts** against predefined [test cases](/docs/configuration/expected-outputs)
+- **Evaluate quality and catch regressions** by comparing LLM outputs [side-by-side](/docs/usage/web-ui)
+- **Speed up evaluations** with [caching](/docs/configuration/caching) and concurrent tests
+- **Score outputs automatically** by defining [expectations](/docs/configuration/expected-outputs)
+- Use as a [CLI](/docs/usage/command-line), or integrate into your workflow as a [library](/docs/usage/node-package)
+- Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for [any LLM API](/docs/configuration/providers)
 
 The goal: **test-driven prompt engineering**, not trial-and-error.
 
@@ -20,7 +21,7 @@ promptfoo produces matrix views that let you quickly evaluate outputs across man
 
 Here's an example of a side-by-side comparison of multiple prompts and inputs:
 
-![Side-by-side evaluation of LLM prompt quality](https://user-images.githubusercontent.com/310310/238143127-ddcd77df-2783-425e-ade9-1a20dd0b6cd2.png)
+![Side-by-side evaluation of LLM prompt quality](https://user-images.githubusercontent.com/310310/244891219-2b79e8f8-9b79-49e7-bffb-24cba18352f2.png)
 
 It works on the command line too.
 

@@ -126,7 +126,7 @@ In [this example](https://github.com/typpo/promptfoo/tree/main/examples/assistan
 npx promptfoo eval -p prompts.txt -r openai:gpt-3.5-turbo -t tests.csv
 ```
 
-![Peek 2023-05-01 13-53](https://user-images.githubusercontent.com/310310/235529431-f4d5c395-d569-448e-9697-cd637e0372a5.gif)
+![promptfoo command line](https://user-images.githubusercontent.com/310310/244891726-480e1114-d049-40b9-bd5f-f81c15060284.gif)
 
 <!--
 <img width="1362" alt="Side-by-side evaluation of LLM prompt quality, terminal output" src="https://user-images.githubusercontent.com/310310/235329207-e8c22459-5f51-4fee-9714-1b602ac3d7ca.png">
