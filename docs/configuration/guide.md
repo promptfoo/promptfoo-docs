@@ -115,7 +115,7 @@ The `vars` map in the test also supports array values. If values are an array, t
 
 For example:
 
-```
+```yaml
 prompts: prompts.txt
 providers: [openai:gpt-3.5-turbo, openai:gpt-4]
 tests:
