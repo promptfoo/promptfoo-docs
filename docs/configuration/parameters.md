@@ -32,6 +32,21 @@ Example of multiple prompt files:
   Translate the following text to German: "{{name}}: {{text}}"
   ```
 
+Prompts can be JSON too. Use this to configure multi-shot prompt formats:
+
+```json
+[
+  {
+    "role": "system",
+    "content": "You are a translator can converts input to {{ language }}."
+  },
+  {
+    "role": "user",
+    "content": "{{ text }}"
+  }
+]
+```
+
 ### Tests File
 
 The tests file is an optional CSV file that can be used to define test cases separately from the main configuration.
