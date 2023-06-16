@@ -4,9 +4,12 @@ sidebar_position: 200
 
 # Telemetry
 
-`promptfoo` collects basic telemetry by default. This telemetry helps us decide how to spend time on development:
-- Number of commands run (e.g. `init`, `eval`, `view`)
-- Number of assertions used by type (e.g. `is-json`, `similar`, `llm-rubric`)
+`promptfoo` collects basic anonymous telemetry by default. This telemetry helps us decide how to spend time on development.
+
+An event is recorded when:
+
+- A command is run (e.g. `init`, `eval`, `view`)
+- An assertion is used (along with the type of assertion, e.g. `is-json`, `similar`, `llm-rubric`)
 
 No additional information is collected. The above list is exhaustive.
 
