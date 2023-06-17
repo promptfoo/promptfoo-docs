@@ -134,6 +134,10 @@ Evaluates each `language` x `input` combination:
 
 <img alt="Multiple combinations of var inputs" src="https://user-images.githubusercontent.com/310310/243108917-dab27ca5-689b-4843-bb52-de8d459d783b.png" />
 
+### Other capabilities
+
+promptfoo supports OpenAI functions and other provider-specific configurations. To use, override the `config` key of the provider. See example [here](http://localhost:3000/docs/configuration/providers#using-functions).
+
 ## Configuration structure
 
 Here is the main structure of the promptfoo configuration file:

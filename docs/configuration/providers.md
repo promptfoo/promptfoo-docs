@@ -31,6 +31,47 @@ The OpenAI provider supports the following model formats:
 
 The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new model, or if you have a custom model. For example, if OpenAI releases gpt-5 chat completion, you could begin using it immediately with `openai:chat:gpt-5`.
 
+#### Using functions
+
+OpenAI functions are supported. See [full example](https://github.com/typpo/promptfoo/tree/main/examples/openai-function-call).
+
+To set functions on an OpenAI provider, use the provider's `config` key. Add your function definitions under this key.
+
+```yaml
+prompts: [prompt.txt]
+providers:
+  - openai:chat:gpt-3.5-turbo-0613:
+      config:
+        "functions":
+          [
+            {
+              "name": "get_current_weather",
+              "description": "Get the current weather in a given location",
+              "parameters":
+                {
+                  "type": "object",
+                  "properties":
+                    {
+                      "location":
+                        {
+                          "type": "string",
+                          "description": "The city and state, e.g. San Francisco, CA",
+                        },
+                      "unit":
+                        { "type": "string", "enum": ["celsius", "fahrenheit"] },
+                    },
+                  "required": ["location"],
+                },
+            },
+          ]
+tests:
+  - vars:
+      city: Boston
+  - vars:
+      city: New York
+  # ...
+```
+
 ### LocalAI
 
 LocalAI is an API wrapper for open-source LLMs that is compatible with OpenAI. You can run LocalAI for compatibility with Llama, Alpaca, Vicuna, GPT4All, RedPajama, and many other models compatible with the ggml format.
@@ -65,11 +106,11 @@ Below is an example of a custom API provider that returns a predefined output an
 
 ```javascript
 // customApiProvider.js
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 class CustomApiProvider {
   id() {
-    return 'my-custom-api';
+    return "my-custom-api";
   }
 
   async callApi(prompt) {
@@ -77,7 +118,7 @@ class CustomApiProvider {
 
     return {
       // Required
-      output: 'Model output',
+      output: "Model output",
 
       // Optional
       tokenUsage: {
