@@ -164,6 +164,14 @@ assert:
     value: "output.includes('Hello, World!')"
 ```
 
+You may also return a number, which will be treated as a score:
+
+```yaml
+assert:
+  - type: javascript
+    value: Math.log(output.length) * 10
+```
+
 ### Webhook
 
 The `webhook` assertion sends the LLM output to a specified webhook URL for custom validation. The webhook should return a JSON object with a `pass` property set to `true` or `false`.
@@ -201,6 +209,16 @@ Example response:
 ```
 
 If the webhook returns a `pass` value of `true`, the assertion will be considered successful. If it returns `false`, the assertion will fail, and the provided `reason` will be used to describe the failure.
+
+You may also return a score:
+
+```json
+{
+  "pass": true,
+  "score": 0.5,
+  "reason": "The output meets the custom validation criteria"
+}
+```
 
 ### Similarity
 
