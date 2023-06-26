@@ -44,10 +44,10 @@ tests:
   - vars:
       language: French
       input: Hello world
-        // highlight-start
-        assert:
-          - type: contains-json
-        // highlight-end
+      // highlight-start
+      assert:
+        - type: contains-json
+      // highlight-end
   - vars:
       language: German
       input: How's it going?
@@ -64,20 +64,21 @@ tests:
   - vars:
       language: French
       input: Hello world
-        assert:
-          - type: contains-json
-          // highlight-start
-          - type: javascript
-            value: output.toLowerCase().includes('bonjour')
-          // highlight-end
+      assert:
+        - type: contains-json
+        // highlight-start
+        - type: javascript
+          value: output.toLowerCase().includes('bonjour')
+        // highlight-end
   - vars:
       language: German
       input: How's it going?
-      // highlight-start
-      - type: similar
-        value: was geht
-        threshold: 0.6   # cosine similarity
-      // highlight-end
+      assert:
+        // highlight-start
+        - type: similar
+          value: was geht
+          threshold: 0.6   # cosine similarity
+        // highlight-end
 ```
 
 ### More advanced usage
@@ -97,16 +98,17 @@ tests:
   - vars:
       language: French
       input: Hello world
-        assert:
-          - type: contains-json
-          - type: javascript
-            value: output.toLowerCase().includes('bonjour')
+      assert:
+        - type: contains-json
+        - type: javascript
+          value: output.toLowerCase().includes('bonjour')
   - vars:
       language: German
       input: How's it going?
-      - type: similar
-        value: was geht
-        threshold: 0.6
+      assert:
+        - type: similar
+          value: was geht
+          threshold: 0.6
 ```
 
 ### Testing multiple variables in a single test case
