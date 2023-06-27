@@ -13,7 +13,7 @@ export default function HomepageInfo(): JSX.Element {
     <section className={styles.section}>
       <div className="container">
         <h2 className={styles.blurb}>
-          Find the best prompts &amp; prevent regressions by systematically testing for quality.
+          How it works
         </h2>
       </div>
     </section>

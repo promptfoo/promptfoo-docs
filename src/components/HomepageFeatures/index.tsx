@@ -10,31 +10,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'A framework for tuning prompts',
+    title: 'Create a list of test cases',
     Svg: require('@site/static/img/svgrepo_puzzle_toy.svg').default,
     description: (
       <>
-        Reduce the subjectivity and impact of small sample size when tuning prompts.
+        Use a representative sample of user inputs to reduce subjectivity when tuning prompts.
       </>
     ),
   },
   {
-    title: 'Evaluate quality and catch regressions',
+    title: 'Set up evaluation metrics',
     Svg: require('@site/static/img/svgrepo_science.svg').default,
     description: (
       <>
-        Use built-in tools to evaluate the quality of your prompts, or use the
-        side-by-side view to aid human evaluation.
+        Use built-in metrics, LLM-graded evals, or define your own custom metrics.
       </>
     ),
   },
   {
-    title: 'Spend less time on prompt engineering',
+    title: 'Select the best prompt & model',
     Svg: require('@site/static/img/svgrepo_park.svg').default,
     description: (
       <>
-        Run multiple prompts and models at the same time, then compare the
-        results side-by-side. Or, use the library into your existing workflow.
+        Compare prompts and model outputs side-by-side, or integrate the library into your existing test/CI workflow.
       </>
     ),
   },
