@@ -81,7 +81,9 @@ tests:
         // highlight-end
 ```
 
-### More advanced usage
+### Avoiding repetition
+
+#### Default test cases
 
 You can use `defaultTest` to set an assertion for all tests. In this case, we use an `llm-rubric` assertion to ensure that the LLM does not refer to itself as an AI.
 
@@ -109,6 +111,39 @@ tests:
         - type: similar
           value: was geht
           threshold: 0.6
+```
+
+#### YAML references
+
+promptfoo configurations support JSON schema [references](https://opis.io/json-schema/2.x/references.html), which define reusable blocks.
+
+Use the `$ref` key to re-use assertions without having to fully define them more than once.  Here's an example:
+
+```yaml
+prompts: [prompt1.txt, prompt2.txt]
+providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
+tests:
+  - vars:
+      language: French
+      input: Hello world
+      assert:
+        - $ref: '#assertionTemplates/startsUpperCase'
+  - vars:
+      language: German
+      input: How's it going?
+      assert:
+        - $ref: '#assertionTemplates/noAIreference'
+        - $ref: '#assertionTemplates/startsUpperCase'
+
+// highlight-start
+assertionTemplates:
+    noAIreference:
+      - type: llm-rubric
+        value: does not describe self as an AI, model, or chatbot
+    startsUpperCase:
+      - type: javascript
+        value: output[0] === output[0].toUpperCase()
+// highlight-end
 ```
 
 ### Testing multiple variables in a single test case
