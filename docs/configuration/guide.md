@@ -81,6 +81,12 @@ tests:
         // highlight-end
 ```
 
+:::tip
+
+To learn more about assertions, see docs on configuring [expected outputs](/docs/configuration/expected-outputs).
+
+:::
+
 ### Avoiding repetition
 
 #### Default test cases
@@ -146,7 +152,7 @@ assertionTemplates:
 // highlight-end
 ```
 
-### Testing multiple variables in a single test case
+### Multiple variables in a single test case
 
 The `vars` map in the test also supports array values. If values are an array, the test case will run each combination of values.
 
@@ -170,6 +176,51 @@ tests:
 Evaluates each `language` x `input` combination:
 
 <img alt="Multiple combinations of var inputs" src="https://user-images.githubusercontent.com/310310/243108917-dab27ca5-689b-4843-bb52-de8d459d783b.png" />
+
+### Using nunjucks templates
+
+In the above examples, `vars` values are strings.  But `vars` can be any JSON or YAML entity, including nested objects.  You can manipulate these objects in the prompt, which are [nunjucks](https://mozilla.github.io/nunjucks/) templates.
+
+For example, consider this test case, which lists a handful of user and assistant messages in an OpenAI-compatible format:
+
+```yaml
+tests:
+  - vars:
+      previous_messages:
+        - role: user
+          content: hello world
+        - role: assistant
+          content: how are you?
+        - role: user
+          content: great, thanks
+```
+
+The corresponding `prompt.txt` file simply passes through the `previous_messages` object using the [dump](https://mozilla.github.io/nunjucks/templating.html#dump) and [safe](https://mozilla.github.io/nunjucks/templating.html#safe) filters to convert the object to a JSON string:
+
+```nunjucks
+{{ previous_messages | dump | safe }}
+```
+
+Running `promptfoo eval -p prompt.txt -c path_to.yaml` will call the Chat Completion API with the following prompt:
+
+```json
+[
+  {
+    "role": "user",
+    "content": "hello world"
+  },
+  {
+    "role": "assistant",
+    "content": "how are you?"
+  },
+  {
+    "role": "user",
+    "content": "great, thanks"
+  }
+]
+```
+
+Use Nunjucks templates to exert additional control over your prompt templates, including loops, conditionals, and more.
 
 ### Other capabilities
 
@@ -197,7 +248,7 @@ A test case represents a single example input that is fed into all prompts and p
 | Property             | Type                               | Required | Description                                                |
 | -------------------- | ---------------------------------- | -------- | ---------------------------------------------------------- |
 | description          | string                             | No       | Optional description of what you're testing                |
-| vars                 | Record<string, string \| string[]> | No       | Key-value pairs to substitute in the prompt                |
+| vars                 | Record<string, string \| string[] \| any> | No       | Key-value pairs to substitute in the prompt                |
 | assert               | [Assertion](#assertion)[]          | No       | Optional list of automatic checks to run on the LLM output |
 | options              | Object                             | No       | Optional additional configuration settings                 |
 | options.prefix       | string                             | No       | This is prepended to the prompt                            |
@@ -233,4 +284,14 @@ prompts: [prompt1.txt, prompt2.txt]
 providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 // highlight-next-line
 tests: tests.csv
+```
+
+promptfoo also has built-in ability to pull test cases from a Google Sheet.  The sheet must be visible to "anyone with the link".  For example:
+
+
+```yaml
+prompts: [prompt1.txt, prompt2.txt]
+providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
+// highlight-next-line
+tests: https://docs.google.com/spreadsheets/d/1eqFnv1vzkPvS7zG-mYsqNDwOzvSaiIAsKB3zKg9H18c/edit?usp=sharing
 ```
