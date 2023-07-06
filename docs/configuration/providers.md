@@ -20,6 +20,7 @@ Other OpenAI-related environment variables are supported:
 
 - `OPENAI_TEMPERATURE` - temperature model parameter, defaults to 0
 - `OPENAI_MAX_TOKENS` - max_tokens model parameter, defaults to 1024
+- `PROMPTFOO_REQUIRE_JSON_PROMPTS` - by default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior.
 
 The OpenAI provider supports the following model formats:
 
