@@ -8,7 +8,9 @@ promptfoo caches the results of API calls to LLM providers. This helps save time
 
 ## Command line
 
-If you're using the command line, you may call `promptfoo eval` with `--no-cache` to disable the cache, or set `cache: false` in your config file.
+If you're using the command line, call `promptfoo eval` with `--no-cache` to disable the cache, or set `{ commandLineOptions: { cache: false }}` in your config file.
+
+Use `promptfoo cache clear` command to clear the cache.
 
 ## Tests
 
