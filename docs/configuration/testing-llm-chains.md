@@ -23,7 +23,75 @@ Run `npx promptfoo init chain_step_X` to create the test harness for the first s
 
 ## End-to-end testing for LLM chains
 
-promptfoo supports end-to-end testing of LLM chain implements through [custom providers](/docs/configuration/providers#custom-api-provider).
+### Using a script provider
+
+To test your chained LLMs, provide a script that takes a prompt input and outputs the result of the chain. This approach is language-agnostic.
+
+In this example, we'll test LangChain's LLM Math plugin by creating a script that takes a prompt and produces an output:
+
+```python
+# langchain_example.py
+
+import sys
+import os
+
+from langchain import OpenAI
+from langchain.chains import LLMMathChain
+
+llm = OpenAI(
+    temperature=0,
+    openai_api_key=os.getenv('OPENAI_API_KEY')
+)
+
+llm_math = LLMMathChain(llm=llm, verbose=True)
+
+prompt = sys.argv[1]
+llm_math.run(prompt)
+```
+
+This script is set up so that we can run it like this:
+
+```bash
+python langchain_example.py "What is 2+2?"
+```
+
+Now, let's configure promptfoo to run this LangChain script with a bunch of test cases:
+
+```yaml
+prompts: prompt.txt
+providers:
+  - openai:chat:gpt-4-0613
+  - exec:python langchain_example.py
+tests:
+  - vars:
+      question: What is the cube root of 389017?
+  - vars:
+      question: If you have 101101 in binary, what number does it represent in base 10?
+  - vars:
+      question: What is the natural logarithm (ln) of 89234?
+  - vars:
+      question: If a geometric series has a first term of 3125 and a common ratio of 0.008, what is the sum of the first 20 terms?
+  - vars:
+      question: A number in base 7 is 3526. What is this number in base 10?
+  - vars:
+      question: If a complex number is represented as 3 + 4i, what is its magnitude?
+  - vars:
+      question: What is the fourth root of 1296?
+```
+
+For an in-depth look at configuration, see the [guide](/docs/configuration/guide). Note the following:
+- **prompts**: `prompt.txt` is just a file that contains `{{question}}`, since we're passing the question directly through to the provider.
+- **providers**: We list GPT-4 in order to compare its outputs with LangChain's LLMMathChain.  We also use the `exec` directive to make promptfoo run the Python script in its eval.
+
+In this example, the end result is a side-by-side comparison of GPT-4 vs. LangChain math performance:
+
+![langchain eval](/img/docs/langchain-eval.png)
+
+View the [full example on Github](https://github.com/promptfoo/promptfoo/tree/main/examples/langchain-python).
+
+### Using a custom provider
+
+For finer-grained control, use a [custom provider](/docs/configuration/providers#custom-api-provider).
 
 A custom provider is a short Javascript file that defines a `callApi` function.  This function can invoke your chain.  Even if your chain is not implemented in Javascript, you can write a custom provider that shells out to Python.
 
