@@ -14,7 +14,7 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <h1 className="hero__title">Test your prompts</h1>
-        <p className="hero__subtitle">Achieve high-quality LLM outputs with automatic evals.</p>
+        <p className="hero__subtitle">Ensure high-quality LLM outputs with automatic evals.</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
