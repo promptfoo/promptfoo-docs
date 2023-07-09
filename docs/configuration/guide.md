@@ -3,7 +3,7 @@ sidebar_position: 0
 sidebar_label: Guide
 ---
 
-# promptfoo configuration
+# Configuration
 
 The YAML configuration format runs each prompt through a series of example inputs (aka "test case") and checks if they meet requirements (aka "assert").
 
@@ -224,7 +224,7 @@ Use Nunjucks templates to exert additional control over your prompt templates, i
 
 ### Other capabilities
 
-promptfoo supports OpenAI functions and other provider-specific configurations. To use, override the `config` key of the provider. See example [here](http://localhost:3000/docs/configuration/providers#using-functions).
+promptfoo supports OpenAI functions and other provider-specific configurations. To use, override the `config` key of the provider. See example [here](/docs/configuration/providers#using-functions).
 
 ## Configuration structure
 
