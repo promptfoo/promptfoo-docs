@@ -52,6 +52,14 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
    [&raquo; More information on setting up tests](/docs/configuration/guide)
 
+1. **Set the `OPENAI_API_KEY` environment variable:
+
+   ```bash
+   export OPENAI_API_KEY=sk-abc123
+   ```
+
+   If you add this to a configuration file such as `~./bashrc` or ~/.zshrc`, make sure to reload your terminal.
+
 1. **Run the evaluation**: This tests every prompt for each test case:
 
    ```
