@@ -41,7 +41,7 @@ tests:
 | `contains`      | output contains substring                                                 |
 | `icontains`     | output contains substring, case insensitive                               |
 | `regex`         | output matches regex                                                      |
-| `contains-some` | output contains some in list of substrings                                |
+| `contains-any`  | output contains any of the listed substrings                              |
 | `contains-all`  | output contains all list of substrings                                    |
 | `is-json`       | output is valid json                                                      |
 | `contains-json` | output contains valid json                                                |
@@ -100,15 +100,15 @@ assert:
     value: "\\d{4}" # Matches a 4-digit number
 ```
 
-### Contains-Some
+### Contains-Any
 
-The `contains-some` assertion checks if the LLM output contains at least one of the specified values.
+The `contains-any` assertion checks if the LLM output contains at least one of the specified values.
 
 Example:
 
 ```yaml
 assert:
-  - type: contains-some
+  - type: contains-any
     value:
       - "Value 1"
       - "Value 2"
