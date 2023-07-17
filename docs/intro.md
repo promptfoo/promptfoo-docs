@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Intro
 
-`promptfoo` is a tool for testing and evaluating LLM prompt quality.
+`promptfoo` is a CLI and library for evaluating LLM output quality.
 
 With promptfoo, you can:
 
