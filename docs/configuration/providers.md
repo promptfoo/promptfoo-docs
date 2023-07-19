@@ -108,6 +108,9 @@ This example uses the `replicate/llama70b-v2-chat`, version `e951f...`.
 Supported environment variables:
 
 - `REPLICATE_API_TOKEN` - your Replicate API key
+- `REPLICATE_MAX_LENGTH` - `max_length` property
+- `REPLICATE_TEMPERATURE` - `temperature` property
+- `REPLICATE_REPETITION_PENALTY` - `repitition_penalty` property
 
 ### Script Provider
 
