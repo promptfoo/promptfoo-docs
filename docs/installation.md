@@ -4,6 +4,10 @@ sidebar_position: 4
 
 # Installation
 
+## Requirements
+
+Node 16 or newer.
+
 ## For command-line usage
 
 ```
