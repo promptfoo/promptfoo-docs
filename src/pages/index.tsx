@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title="promptfoo | LLM prompt testing"
+      title="LLM prompt testing"
       description="Library for evaluating LLM prompt quality and testing.">
       <HomepageHeader />
       <main>
