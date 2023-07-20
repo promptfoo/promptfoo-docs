@@ -12,6 +12,8 @@ The end result is a view that compares the performance of Llama, GPT 3.5, and GP
 
 ![llama2 and gpt comparison](/img/docs/llama-gpt-comparison.png)
 
+[Full code available here](https://github.com/promptfoo/promptfoo/tree/main/examples/llama-gpt-comparison).
+
 ## Requirements
 
 This guide assumes that you have promptfoo [installed](/docs/installation).  It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/configuration/providers#localai).
