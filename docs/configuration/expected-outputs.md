@@ -46,6 +46,7 @@ tests:
 | `is-json`       | output is valid json                                                      |
 | `contains-json` | output contains valid json                                                |
 | `javascript`    | provided Javascript function validates the output                         |
+| `python`        | provided Python function validates the output                             |
 | `webhook`       | provided webhook returns `{pass: true}                                    |
 | `similar`       | embeddings and cosine similarity are above a threshold                    |
 | `llm-rubric`    | LLM output matches a given rubric, using a Language Model to grade output |
@@ -170,6 +171,26 @@ You may also return a number, which will be treated as a score:
 assert:
   - type: javascript
     value: Math.log(output.length) * 10
+```
+
+### Python
+
+The `python` assertion allows you to provide a custom Python function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
+
+Example:
+
+```yaml
+assert:
+  - type: python
+    value: output[5:10] == 'Hello'
+```
+
+You may also return a number, which will be treated as a score:
+
+```yaml
+assert:
+  - type: python
+    value: math.log10(len(output)) * 10
 ```
 
 ### Webhook
