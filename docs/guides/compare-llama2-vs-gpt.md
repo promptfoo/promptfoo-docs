@@ -151,7 +151,7 @@ tests:
 ```
 
 :::info
-Learn more about setting up test assertions [here](/configuration/expected-outputs).
+Learn more about setting up test assertions [here](/docs/configuration/expected-outputs).
 :::
 
 ## Configuring model usage
