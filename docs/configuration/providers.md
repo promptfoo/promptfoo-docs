@@ -87,6 +87,37 @@ tests:
   # ...
 ```
 
+### Azure
+
+The `azureopenai` provider is an interface to OpenAI through Azure.  It behaves the same as the `openai` provider above.
+
+### Anthropic
+
+The `anthropic` provider supports the following models:
+
+- `anthropic:completion:claude-1`
+- `anthropic:completion:claude-1-100k`
+- `anthropic:completion:claude-instant-1`
+- `anthropic:completion:claude-instant-1-100k`
+- `anthropic:completion:<insert any other supported model name here>`
+
+Supported environment variables:
+
+- `ANTHROPIC_API_KEY` - required
+- `ANTHROPIC_STOP` - stopwords, must be a valid JSON string
+- `ANTHROPIC_MAX_TOKENS` - maximum number of tokens to sample, defaults to 1024
+- `ANTHROPIC_TEMPERATURE` - temperature
+
+Config parameters may also be passed like so:
+
+```yaml
+providers:
+  - anthropic:completion:claude-1:
+      prompts: chat_prompt
+      config:
+        temperature: 0
+```
+
 ### LocalAI
 
 LocalAI is an API wrapper for open-source LLMs that is compatible with OpenAI. You can run LocalAI for compatibility with Llama, Alpaca, Vicuna, GPT4All, RedPajama, and many other models compatible with the ggml format.
