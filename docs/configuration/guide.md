@@ -44,10 +44,10 @@ tests:
   - vars:
       language: French
       input: Hello world
-      // highlight-start
-      assert:
-        - type: contains-json
-      // highlight-end
+    // highlight-start
+    assert:
+      - type: contains-json
+    // highlight-end
   - vars:
       language: German
       input: How's it going?
@@ -64,21 +64,21 @@ tests:
   - vars:
       language: French
       input: Hello world
-      assert:
-        - type: contains-json
-        // highlight-start
-        - type: javascript
-          value: output.toLowerCase().includes('bonjour')
-        // highlight-end
+    assert:
+      - type: contains-json
+      // highlight-start
+      - type: javascript
+        value: output.toLowerCase().includes('bonjour')
+      // highlight-end
   - vars:
       language: German
       input: How's it going?
-      assert:
-        // highlight-start
-        - type: similar
-          value: was geht
-          threshold: 0.6   # cosine similarity
-        // highlight-end
+    assert:
+      // highlight-start
+      - type: similar
+        value: was geht
+        threshold: 0.6   # cosine similarity
+      // highlight-end
 ```
 
 :::tip
@@ -106,17 +106,17 @@ tests:
   - vars:
       language: French
       input: Hello world
-      assert:
-        - type: contains-json
-        - type: javascript
-          value: output.toLowerCase().includes('bonjour')
+    assert:
+      - type: contains-json
+      - type: javascript
+        value: output.toLowerCase().includes('bonjour')
   - vars:
       language: German
       input: How's it going?
-      assert:
-        - type: similar
-          value: was geht
-          threshold: 0.6
+    assert:
+      - type: similar
+        value: was geht
+        threshold: 0.6
 ```
 
 #### YAML references
@@ -132,14 +132,14 @@ tests:
   - vars:
       language: French
       input: Hello world
-      assert:
-        - $ref: '#assertionTemplates/startsUpperCase'
+    assert:
+      - $ref: '#assertionTemplates/startsUpperCase'
   - vars:
       language: German
       input: How's it going?
-      assert:
-        - $ref: '#assertionTemplates/noAIreference'
-        - $ref: '#assertionTemplates/startsUpperCase'
+    assert:
+      - $ref: '#assertionTemplates/noAIreference'
+      - $ref: '#assertionTemplates/startsUpperCase'
 
 // highlight-start
 assertionTemplates:
