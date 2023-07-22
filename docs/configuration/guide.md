@@ -224,7 +224,51 @@ Use Nunjucks templates to exert additional control over your prompt templates, i
 
 ### Other capabilities
 
-promptfoo supports OpenAI functions and other provider-specific configurations. To use, override the `config` key of the provider. See example [here](/docs/configuration/providers#using-functions).
+#### Functions
+
+promptfoo supports OpenAI functions and other provider-specific configurations like temperature, number of tokens, and so on.
+
+To use, override the `config` key of the provider. See example [here](/docs/configuration/providers#using-functions).
+
+#### Postprocessing
+
+The `TestCase.options.postprocess` field is a Javascript snippet that modifies the LLM output.  Postprocessing occurs before any assertions are run.
+
+This is useful if you need to somehow transform or clean LLM output before running an eval.
+
+For example:
+
+```yaml
+# ...
+tests:
+  - vars:
+      language: French
+      body: Hello world
+    options:
+      // highlight-start
+      postprocess: output.toUpperCase()
+      // highlight-end
+    # ...
+```
+
+Or multiline:
+
+```yaml
+# ...
+tests:
+  - vars:
+      language: French
+      body: Hello world
+    options:
+      // highlight-start
+      postprocess: |
+        const words = output.split(' ').filter(x => !!x);
+        return JSON.stringify(words);
+      // highlight-end
+    # ...
+```
+
+Tip: use `defaultTest` apply a postprocessing option to every test case in your test suite.
 
 ## Configuration structure
 
@@ -253,6 +297,7 @@ A test case represents a single example input that is fed into all prompts and p
 | options              | Object                             | No       | Optional additional configuration settings                 |
 | options.prefix       | string                             | No       | This is prepended to the prompt                            |
 | options.suffix       | string                             | No       | This is append to the prompt                               |
+| options.postprocess  | string                             | No       | A JavaScript snippet that runs on LLM output before any assertions |
 | options.provider     | string                             | No       | The API provider to use for LLM rubric grading             |
 | options.rubricPrompt | string                             | No       | The prompt to use for LLM rubric grading                   |
 
