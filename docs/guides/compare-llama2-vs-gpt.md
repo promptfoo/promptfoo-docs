@@ -2,7 +2,7 @@
 sidebar_label: Llama 2 vs GPT benchmark
 ---
 
-# How to benchmark Llama 2 vs GPT on your own data
+# Benchmark Llama 2 vs GPT on your own data
 
 This guide describes how to compare three models - Llama v2 70B, GPT 3.5, and GPT 4 - using the `promptfoo` CLI.
 
