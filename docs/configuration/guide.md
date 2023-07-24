@@ -152,6 +152,49 @@ assertionTemplates:
 // highlight-end
 ```
 
+#### Import tests from separate files
+
+The `tests` config attribute takes a list of paths to files or directories.  For example:
+
+```yaml
+prompts: prompts.txt
+providers: openai:gpt-3.5-turbo
+
+# Load & runs all test cases matching these filepaths
+tests:
+  # You can supply an exact filepath
+  - tests/tests2.yaml
+
+  # Or a glob (wildcard)
+  - tests/*
+
+  # Mix and match with actual test cases
+  - vars:
+      var1: foo
+      var2: bar
+```
+
+A single string is also valid:
+
+```yaml
+tests: tests/*
+```
+
+Or a list of paths:
+
+```yaml
+tests: ['tests/accuracy', 'tests/creativity', 'tests/hallucination']
+```
+
+#### Import vars from separate files
+
+The `vars` attribute can point to a file or directory.  For example:
+
+```yaml
+tests:
+  - vars: path/to/vars*.yaml
+```
+
 ### Multiple variables in a single test case
 
 The `vars` map in the test also supports array values. If values are an array, the test case will run each combination of values.
@@ -340,3 +383,5 @@ providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 // highlight-next-line
 tests: https://docs.google.com/spreadsheets/d/1eqFnv1vzkPvS7zG-mYsqNDwOzvSaiIAsKB3zKg9H18c/edit?usp=sharing
 ```
+
+See also: **[import tests from another file](#loading-tests-from-file)**.
