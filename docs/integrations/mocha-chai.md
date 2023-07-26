@@ -34,8 +34,10 @@ Create a new file called `assertions.js` and add the following:
   <TabItem value="Javascript" label="Javascript" default>
 
   ```javascript
-  import { matchesSimilarity, matchesLlmRubric } from 'promptfoo';
   import { Assertion } from 'chai';
+
+  import { assertions } from 'promptfoo';
+  const { matchesSimilarity, matchesLlmRubric } = assertions;
 
   Assertion.addAsyncMethod('toMatchSemanticSimilarity', async function (expected, threshold = 0.8) {
     const received = this._obj;
@@ -67,8 +69,10 @@ Create a new file called `assertions.js` and add the following:
   <TabItem value="Typescript" label="Typescript" default>
 
   ```typescript
-  import { matchesSimilarity, matchesLlmRubric } from 'promptfoo';
   import { Assertion } from 'chai';
+
+  import { assertions } from 'promptfoo';
+  const { matchesSimilarity, matchesLlmRubric } = assertions;
 
   import type { GradingConfig } from 'promptfoo';
 

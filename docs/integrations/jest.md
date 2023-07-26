@@ -35,7 +35,8 @@ Create a new file called `matchers.js` and add the following:
   <TabItem value="Javascript" label="Javascript" default>
 
   ```javascript
-  import { matchesSimilarity, matchesLlmRubric } from 'promptfoo';
+  import { assertions } from 'promptfoo';
+  const { matchesSimilarity, matchesLlmRubric } = assertions;
 
   export function installJestMatchers() {
     expect.extend({
@@ -79,7 +80,8 @@ Create a new file called `matchers.js` and add the following:
   <TabItem value="Typescript" label="Typescript" default>
 
   ```typescript
-  import { matchesSimilarity, matchesLlmRubric } from 'promptfoo';
+  import { assertions } from 'promptfoo';
+  const { matchesSimilarity, matchesLlmRubric } = assertions;
 
   import type { GradingConfig } from 'promptfoo';
 
