@@ -77,7 +77,7 @@ providers:
 ```
 
 :::info
-These prompt files are [Nunjucks templates](https://mozilla.github.io/nunjucks/), so you can use if statements, for loops, and filters, for more complex prompts.
+These prompt files are [Nunjucks templates](https://mozilla.github.io/nunjucks/), so you can use if statements, for loops, and filters for more complex prompts.
 :::
 
 ## Add test cases
