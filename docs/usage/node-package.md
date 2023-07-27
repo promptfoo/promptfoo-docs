@@ -21,34 +21,75 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
 
   ```typescript
   interface TestSuiteConfig {
-    providers: string[]; // Valid provider name (e.g. openai:gpt-3.5-turbo)
-    prompts: string[]; // List of prompts
-    tests: string | TestCase[]; // Path to a CSV file, or list of test cases
+    // Optional description of what your LLM is trying to do
+    description?: string;
 
-    defaultTest?: Omit<TestCase, "description">; // Optional: add default vars and assertions on test case
-    outputPath?: string; // Optional: write results to file
+    // One or more LLM APIs to use, for example: openai:gpt-3.5-turbo, openai:gpt-4, localai:chat:vicuna
+    providers: ProviderId | ProviderId[] | RawProviderConfig[];
+
+    // One or more prompt files to load
+    prompts: string | string[];
+
+    // Path to a test file, OR list of LLM prompt variations (aka "test case")
+    tests: string | string[] | TestCase[];
+
+    // Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example.
+    defaultTest?: Omit<TestCase, 'description'>;
+
+    // Path to write output. Writes to console/web viewer if not set.
+    outputPath?: string;
+
+    // Determines whether or not sharing is enabled.
+    sharing?: boolean;
   }
 
   interface TestCase {
+    // Optional description of what you're testing
     description?: string;
-    vars?: Record<string, string>;
+
+    // Key-value pairs to substitute in the prompt
+    vars?: Record<string, string | string[] | object>;
+
+    // Optional filepath or glob pattern to load vars from
+    loadVars?: string | string[];
+
+    // Optional list of automatic checks to run on the LLM output
     assert?: Assertion[];
 
-    prompt?: PromptConfig;
-    grading?: GradingConfig;
+    // Additional configuration settings for the prompt
+    options?: PromptConfig & OutputConfig & GradingConfig;
   }
 
   interface Assertion {
     type:
-      | "equals"
-      | "is-json"
-      | "contains-json"
-      | "javascript"
-      | "similar"
-      | "llm-rubric";
-    value?: string;
-    threshold?: number; // For similarity assertions
-    provider?: ApiProvider; // For assertions that require an LLM provider
+      | 'equals'
+      | 'contains'
+      | 'icontains'
+      | 'contains-all'
+      | 'contains-any'
+      | 'starts-with'
+      | 'regex'
+      | 'is-json'
+      | 'contains-json'
+      | 'javascript'
+      | 'similar'
+      | 'llm-rubric'
+      | 'webhook'
+      | 'rouge-n'
+      | 'rouge-s'
+      | 'rouge-l';
+
+    // The expected value, if applicable
+    value?: string | string[];
+
+    // The threshold value, only applicable for similarity (cosine distance)
+    threshold?: number;
+
+    // The weight of this assertion compared to other assertions in the test case. Defaults to 1.
+    weight?: number;
+
+    // Some assertions (similarity, llm-rubric) require an LLM provider
+    provider?: ApiProvider;
   }
   ```
 
@@ -94,7 +135,55 @@ console.log(results);
 
 This code imports the `promptfoo` library, defines the evaluation options, and then calls the `evaluate` function with these options.
 
-See the full example [here](https://github.com/typpo/promptfoo/tree/main/examples/simple-import).
+You can also supply functions as `providers` or `asserts`:
+
+```js
+import promptfoo from '../../dist/src/index.js';
+
+(async () => {
+  const results = await promptfoo.evaluate({
+    prompts: ['Rephrase this in French: {{body}}', 'Rephrase this like a pirate: {{body}}'],
+    providers: [
+      'openai:gpt-3.5-turbo',
+      (prompt) => {
+        // Call LLM here...
+        return {
+          output: '<LLM output>',
+        };
+      },
+    ],
+    tests: [
+      {
+        vars: {
+          body: 'Hello world',
+        },
+      },
+      {
+        vars: {
+          body: "I'm hungry",
+        },
+        assert: [
+          {
+            type: 'javascript',
+            value: (output) => {
+              const pass = output.includes("J'ai faim");
+              return {
+                pass,
+                score: pass ? 1.0 : 0.0,
+                reason: pass ? 'Output contained substring' : 'Output did not contain substring',
+              };
+            },
+          },
+        ],
+      },
+    ],
+  });
+  console.log('RESULTS:');
+  console.log(results);
+})();
+```
+
+See the full example [here](https://github.com/typpo/promptfoo/tree/main/examples/node-package).
 
 Here's the example output in JSON format:
 
