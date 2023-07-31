@@ -156,6 +156,14 @@ Supported environment variables:
 - `REPLICATE_TEMPERATURE` - `temperature` property
 - `REPLICATE_REPETITION_PENALTY` - `repitition_penalty` property
 
+### Llama.cpp
+
+The `llama` provider is compatible with the HTTP server bundled with [llama.cpp](https://github.com/ggerganov/llama.cpp).
+
+Supported environment variables:
+
+- `LLAMA_BASE_URL` - scheme, host name, and port (defaults to `http://localhost:8080`)
+
 ### Script Provider
 
 You may use any shell command as an API provider. This is particularly useful when you want to use a language or framework that is not directly supported by promptfoo.
