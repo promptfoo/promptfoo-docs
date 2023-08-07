@@ -16,7 +16,7 @@ The end result is a view that compares the performance of Llama, GPT 3.5, and GP
 
 ## Requirements
 
-This guide assumes that you have promptfoo [installed](/docs/installation).  It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/configuration/providers#localai).
+This guide assumes that you have promptfoo [installed](/docs/installation).  It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/providers/localai).
 
 ## Set up the config
 
@@ -35,9 +35,9 @@ providers:
   - replicate:replicate/llama70b-v2-chat:e951f18578850b652510200860fc4ea62b3b16fac280f83ff32282f87bbd2e48
 ```
 
-The first two [providers](/docs/configuration/providers) reference built-in OpenAI models.  The third provider references the hosted [Replicate](https://replicate.com/replicate/llama70b-v2-chat) version of chat-tuned Llama v2 with 70 billion parameters.
+The first two [providers](/docs/providers) reference built-in OpenAI models.  The third provider references the hosted [Replicate](https://replicate.com/replicate/llama70b-v2-chat) version of chat-tuned Llama v2 with 70 billion parameters.
 
-If you prefer to run against a locally hosted version of Llama, this can be done via [LocalAI](/docs/configuration/providers#localai).
+If you prefer to run against a locally hosted version of Llama, this can be done via [LocalAI](/docs/providers/localai).
 
 ## Set up the prompts
 

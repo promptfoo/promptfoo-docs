@@ -91,7 +91,7 @@ View the [full example on Github](https://github.com/promptfoo/promptfoo/tree/ma
 
 ### Using a custom provider
 
-For finer-grained control, use a [custom provider](/docs/configuration/providers#custom-api-provider).
+For finer-grained control, use a [custom provider](/docs/providers/custom-api).
 
 A custom provider is a short Javascript file that defines a `callApi` function.  This function can invoke your chain.  Even if your chain is not implemented in Javascript, you can write a custom provider that shells out to Python.
 

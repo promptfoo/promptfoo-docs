@@ -32,7 +32,7 @@ tests:
 | value     | string | No       | The expected value, if applicable                                                                 |
 | threshold | number | No       | The threshold value, only applicable for similarity                                               |
 | weight    | string | No       | How heavily to weigh the assertion. Defaults to 1.0 |
-| provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
+| provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/providers) |
 
 ## Assertion Types
 

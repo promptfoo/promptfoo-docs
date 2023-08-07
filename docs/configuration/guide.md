@@ -271,7 +271,7 @@ Use Nunjucks templates to exert additional control over your prompt templates, i
 
 promptfoo supports OpenAI functions and other provider-specific configurations like temperature, number of tokens, and so on.
 
-To use, override the `config` key of the provider. See example [here](/docs/configuration/providers#using-functions).
+To use, override the `config` key of the provider. See example [here](/docs/providers/openai#using-functions).
 
 #### Postprocessing
 
@@ -322,7 +322,7 @@ Here is the main structure of the promptfoo configuration file:
 | Property    | Type                                 | Required | Description                                                                                                      |
 | ----------- | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
 | description | string                               | No       | Optional description of what your LLM is trying to do                                                            |
-| providers   | string \| string[] \| [Record<string, {config: any}>](/docs/configuration/providers#using-functions)                   | Yes      | One or more [LLM APIs](/docs/configuration/providers) to use                                                                                      |
+| providers   | string \| string[] \| [Record<string, {config: any}>](/docs/providers/openai#using-functions)                   | Yes      | One or more [LLM APIs](/docs/providers) to use                                                                                      |
 | prompts     | string \| string[]                   | Yes      | One or more prompt files to load                                                                                 |
 | tests       | string \| [Test Case](#test-case) [] | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
 | defaultTest | Partial [Test Case](#test-case)      | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
@@ -353,7 +353,7 @@ More details on using assertions, including examples [here](/docs/configuration/
 | type      | string | Yes      | Type of assertion                                                                                     |
 | value     | string | No       | The expected value, if applicable                                                                     |
 | threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)                             |
-| provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
+| provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/providers) |
 
 :::note
 

@@ -12,7 +12,7 @@ No, the source code is executed on your machine. Any call to LLM APIs (OpenAI, A
 
 No, promptfoo runs locally and all data remains on your local machine.
 
-If you explicitly run the [share command](/usage/sharing), then your inputs/outputs are stored in Cloudflare KV for 2 weeks.  This only happens when you run `promptfoo share` or click the "Share" button in the web UI.
+If you explicitly run the [share command](/docs/usage/sharing), then your inputs/outputs are stored in Cloudflare KV for 2 weeks.  This only happens when you run `promptfoo share` or click the "Share" button in the web UI.
 
 ### Do you collect any PII?
 
