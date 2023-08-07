@@ -25,7 +25,7 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
     description?: string;
 
     // One or more LLM APIs to use, for example: openai:gpt-3.5-turbo, openai:gpt-4, localai:chat:vicuna
-    providers: ProviderId | ProviderId[] | RawProviderConfig[];
+    providers: ProviderId | ProviderId[] | RawProviderConfig[] | ProviderFunction;
 
     // One or more prompt files to load
     prompts: string | string[];
@@ -80,7 +80,7 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
       | 'rouge-l';
 
     // The expected value, if applicable
-    value?: string | string[];
+    value?: string | string[] | AssertionFunction;
 
     // The threshold value, only applicable for similarity (cosine distance)
     threshold?: number;
@@ -102,6 +102,39 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
     generateSuggestions?: boolean;
   }
   ```
+
+### Provider functions
+
+A `ProviderFunction` is a Javascript function that implements an LLM API call.  It takes a prompt string and returns an LLM response of the following type:
+
+```typescript
+type ProviderFunction = (prompt: string) => Promise<ProviderResponse>;
+
+interface ProviderResponse {
+  error?: string;
+  output?: string;
+}
+```
+
+### Assertion functions
+
+An `Assertion` can take an `AssertionFunction` as its `value`.  `AssertionFunction` has the following type:
+
+```typescript
+type AssertionFunction = (output: string, testCase: AtomicTestCase, assertion: Assertion) => Promise<GradingResult>;
+
+interface GradingResult {
+  pass: boolean;
+  score: number;
+  reason: string;
+}
+```
+
+`AssertionFunction` parameters:
+- `output`: the LLM output
+- `testCase`: the test case
+- `assertion`: the assertion object
+
 
 ### Example
 
