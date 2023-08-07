@@ -29,6 +29,26 @@ The OpenAI provider supports the following model formats:
 
 The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new model, or if you have a custom model. For example, if OpenAI releases gpt-5 chat completion, you could begin using it immediately with `openai:chat:gpt-5`.
 
+## Formatting chat messages
+
+The [prompt file](/docs/configuration/parameters#prompt-files) supports a message in OpenAI's JSON prompt format.  This allows you to set multiple messages including the system prompt.  For example:
+
+```json
+[
+  { "role": "system", "content": "You are a helpful assistant." },
+  { "role": "user", "content": "Who won the world series in {{ year }}?" }
+]
+```
+
+Equivalent yaml is also supported:
+
+```yaml
+- role: system
+  content: You are a helpful assistant.
+- role: user
+  content: Who won the world series in {{ year }}?
+```
+
 ## Configuring parameters
 
 The `providers` list takes a `config` key that allows you to set parameters like `temperature`, `max_tokens`, and [others](https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature).  For example:
