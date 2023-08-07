@@ -4,9 +4,11 @@ sidebar_position: 5
 
 # Test assertions
 
-Assertions are used to test the output of a language model (LLM) against expected values or conditions. While they are not required, they are a useful way to automate prompt engineering analysis.
+Assertions are used to compare the LLM output against expected values or conditions. While assertions are not required to run an eval, they are a useful way to automate your analysis.
 
 Different types of assertions can be used to validate the output in various ways, such as checking for equality, JSON structure, similarity, or custom functions.
+
+In machine learning, "Accuracy" is a metric that measures the proportion of correct predictions made by a model out of the total number of predictions. With `promptfoo`, accuracy is defined as the proportion of prompts that produce the expected or desired output.
 
 ## Using assertions
 
