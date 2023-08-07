@@ -31,6 +31,7 @@ tests:
 | type      | string | Yes      | Type of assertion                                                                                 |
 | value     | string | No       | The expected value, if applicable                                                                 |
 | threshold | number | No       | The threshold value, only applicable for similarity                                               |
+| weight    | string | No       | How heavily to weigh the assertion. Defaults to 1.0 |
 | provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/configuration/providers) |
 
 ## Assertion Types
@@ -269,6 +270,30 @@ assert:
 Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
 
 [![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
+
+## Weighted assertions
+
+In some cases, you might want to assign different weights to your assertions depending on their importance. The `weight` property is a number that determines the relative importance of the assertion. The default weight is 1.
+
+The final score of the test case is calculated as the weighted average of the scores of all assertions, where the weights are the `weight` values of the assertions.
+
+Here's an example:
+
+```yaml
+tests:
+  - description: "Test with weighted assertions"
+    vars:
+      example: "Hello, World!"
+    assert:
+      - type: equals
+        value: "Hello, World!"
+        weight: 2
+      - type: contains
+        value: "World"
+        weight: 1
+```
+
+In this example, the `equals` assertion is twice as important as the `contains` assertion. If the `equals` assertion fails but the `contains` assertion passes, the final score will be 0.67 (2/3), not 0.5 (1/2).
 
 ## Load an external tests file
 
