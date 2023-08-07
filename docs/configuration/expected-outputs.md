@@ -156,9 +156,9 @@ assert:
 
 ### Javascript
 
-The `javascript` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
+The `javascript` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise. If the function returns a number, it will be treated as a score.
 
-Example:
+You can use any valid JavaScript code in your function. The output of the LLM is provided as the `output` variable:
 
 ```yaml
 assert:
@@ -166,12 +166,52 @@ assert:
     value: "output.includes('Hello, World!')"
 ```
 
-You may also return a number, which will be treated as a score:
+In the example above, the `javascript` assertion checks if the output includes the string "Hello, World!". If it does, the assertion passes and a score of 1 is recorded. If it doesn't, the assertion fails and a score of 0 is returned.
+
+If you want to return a custom score, your function should return a number. For example:
 
 ```yaml
 assert:
   - type: javascript
     value: Math.log(output.length) * 10
+```
+
+In the example above, the longer the output, the higher the score.
+
+If your function throws an error, the assertion will fail and the error message will be included in the reason for the failure. For example:
+
+```yaml
+assert:
+  - type: javascript
+    value: "throw new Error('This is an error')"
+```
+
+### Using test context
+
+The `context` variable contains test case variables.
+
+For example, if your test case has a var `example`, you can access it in your JavaScript function like this:
+
+```yaml
+tests:
+  - description: "Test with context"
+    vars:
+      example: "Example text"
+    assert:
+      - type: javascript
+        value: "output.includes(context.vars.example)"
+```
+
+You can also use the `context` variable to perform more complex checks. For example, you could check if the output is longer than a certain length defined in your test case variables:
+
+```yaml
+tests:
+  - description: "Test with context"
+    vars:
+      min_length: 10
+    assert:
+      - type: javascript
+        value: "output.length >= context.vars.min_length"
 ```
 
 ### Python
