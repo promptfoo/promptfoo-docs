@@ -29,12 +29,20 @@ Here's an example of how the `share` command works:
 
 ```bash
 $ promptfoo share
-Are you sure you want to create a public URL? [y/N] y
+Are you sure you want to create a shareable URL? [y/N] y
 View results: https://app.promptfoo.dev/f:abc123
+```
+
+## Config
+
+The "share" button in the web UI can be explicitly disabled in `promptfooconfig.yaml`:
+
+```yaml
+sharing: false
 ```
 
 ## Privacy
 
-Please be aware that the `share` command creates a public URL, which means anyone who knows the URL can view your results. If you don't want anyone to see your results, you should keep your URL secret.
+Please be aware that the `share` command creates a publicly accessible URL, which means anyone who knows the URL can view your results. If you don't want anyone to see your results, you should keep your URL secret.
 
 After 2 weeks, all data associated with the URL is permanently deleted.
