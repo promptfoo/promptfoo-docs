@@ -4,7 +4,7 @@ sidebar_position: 20
 
 # Azure
 
-The `azureopenai` provider is an interface to OpenAI through Azure.  It behaves the same as the [OpenAI provider](/providers/openai).
+The `azureopenai` provider is an interface to OpenAI through Azure.  It behaves the same as the [OpenAI provider](/docs/providers/openai).
 
 It requires the `AZURE_OPENAI_API_KEY` environment variable to be set.  All `OPENAI_*` environment variables are supported.
 
