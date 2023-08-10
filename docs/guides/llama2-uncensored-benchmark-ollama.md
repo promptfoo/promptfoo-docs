@@ -4,11 +4,11 @@ sidebar_label: Uncensored Llama2 benchmark
 
 # How to test Llama2 Uncensored vs. GPT-3.5 on your own data
 
-Most LLMs go through fine-tuning that prevents them from answering certain questions such as "_How do you make Tylenol_", "_Who would win in a fist fight..._", and "_Write a recipe for dangerously spicy mayo_."
+Most LLMs go through fine-tuning that prevents them from answering questions like "_How do you make Tylenol_", "_Who would win in a fist fight..._", and "_Write a recipe for dangerously spicy mayo_."
 
-This guide will walk you through the process of benchmarking [Llama2 Uncensored](https://huggingface.co/georgesung/llama2_7b_chat_uncensored), Llama2, and GPT 3.5 across a suite of test cases using `promptfoo` and [Ollama](https://ollama.ai/).
+This guide will walk you through the process of benchmarking [Llama2 Uncensored](https://huggingface.co/georgesung/llama2_7b_chat_uncensored), Llama2, and GPT 3.5 across a suite of test cases using promptfoo and [Ollama](https://ollama.ai/).
 
-By the [end of this guide](#conclusion), you'll be able to produce a side-by-side comparison of these models using your own data. You should substitute your own test cases so you can choose the model that's best for you.
+By the [end of this guide](#conclusion), you'll be able to produce a side-by-side comparison of these models using your own data. You can substitute your own test cases and choose the model that's best for you.
 
 
 ![llama2 uncensored and gpt comparison](/img/docs/llama-uncensored-comparison.png)
