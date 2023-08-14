@@ -17,6 +17,7 @@ Other OpenAI-related environment variables are supported:
 - `OPENAI_TEMPERATURE` - temperature model parameter, defaults to 0
 - `OPENAI_MAX_TOKENS` - max_tokens model parameter, defaults to 1024
 - `OPENAI_API_HOST` - the hostname to use (useful if you're using an API proxy)
+- `OPENAI_ORGANIZATION` - the OpenAI organization key to use
 - `PROMPTFOO_REQUIRE_JSON_PROMPTS` - by default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior.
 
 The OpenAI provider supports the following model formats:
@@ -60,6 +61,28 @@ providers:
       config:
         temperature: 0
         max_tokens: 128
+```
+
+Supported parameters include:
+
+```typescript
+// Completion parameters
+temperature?: number;
+max_tokens?: number;
+top_p?: number;
+frequency_penalty?: number;
+presence_penalty?: number;
+best_of?: number;
+functions?: {
+  name: string;
+  description?: string;
+  parameters: any;
+}[];
+function_call?: 'none' | 'auto';
+
+// General OpenAI parameters
+apiKey?: string;
+organization?: string;
 ```
 
 ## Using functions
