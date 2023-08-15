@@ -145,6 +145,48 @@ assert:
   - type: is-json
 ```
 
+You may optionally set a `value` as a JSON schema.  If set, the output will be validated against this schema:
+
+```yaml
+assert:
+  - type: is-json
+    value:
+      required: [latitude, longitude]
+      type: object
+      properties:
+        latitude:
+          minimum: -90
+          type: number
+          maximum: 90
+        longitude:
+          minimum: -180
+          type: number
+          maximum: 180
+```
+
+JSON is valid YAML, so you can also just copy in any JSON schema directly:
+
+```yaml
+  assert:
+    - type: is-json
+      value: {
+        "required": ["latitude", "longitude"],
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90,
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180,
+          }
+        }
+      }
+  ```
+
 ### Contains-JSON
 
 The `contains-json` assertion checks if the LLM output contains a valid JSON structure.
@@ -155,6 +197,8 @@ Example:
 assert:
   - type: contains-json
 ```
+
+Just like `is-json` above, you may optionally set a `value` as a JSON schema in order to validate the JSON contents.
 
 ### Javascript
 
