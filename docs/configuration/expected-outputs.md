@@ -44,15 +44,18 @@ tests:
 | `contains`      | output contains substring                                                 |
 | `icontains`     | output contains substring, case insensitive                               |
 | `regex`         | output matches regex                                                      |
-| `contains-any`  | output contains any of the listed substrings                              |
+| `starts-with`   | output starts with string                                                 |
+| `contains-any ` | output contains any of the listed substrings                              |
 | `contains-all`  | output contains all list of substrings                                    |
-| `is-json`       | output is valid json                                                      |
-| `contains-json` | output contains valid json                                                |
+| `is-json`       | output is valid json (optional json schema validation)                    |
+| `contains-json` | output contains valid json (optional json schema validation)              |
 | `javascript`    | provided Javascript function validates the output                         |
 | `python`        | provided Python function validates the output                             |
-| `webhook`       | provided webhook returns `{pass: true}                                    |
+| `webhook`       | provided webhook returns `{pass: true}`                                   |
 | `similar`       | embeddings and cosine similarity are above a threshold                    |
 | `llm-rubric`    | LLM output matches a given rubric, using a Language Model to grade output |
+| `rouge-n`       | Rouge-N score is above a given threshold                                  |
+| `levenshtein`   | Levenshtein distance is below a threshold                                 |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
@@ -356,6 +359,20 @@ assert:
 Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
 
 [![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
+
+### Levenshtein distance
+
+The `levenshtein` assertion checks if the LLM output is within a given edit distance from an expected value.
+
+Example:
+
+```yaml
+assert:
+  # Ensure Levenshtein distance from "hello world" is <= 5
+  - type: levenshtein
+    threshold: 5
+    value: hello world
+```
 
 ## Weighted assertions
 
