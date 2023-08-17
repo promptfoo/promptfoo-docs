@@ -360,6 +360,42 @@ Here's an example output that indicates PASS/FAIL based on LLM assessment ([see 
 
 [![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
 
+#### Overriding the LLM grader
+
+By default, `llm-rubric` uses GPT-4 for grading.  If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader.  There are several ways to do this, depending on your preferred workflow:
+
+1. Using the `--grader` CLI option:
+
+   ```
+   promptfoo eval --grader openai:gpt-3.5-turbo
+   ```
+
+2. Using `test.options` or `defaultTest.options` on a per-test or testsuite basis:
+
+   ```yaml
+   defaultTest:
+       options:
+         provider: gpt-3.5-turbo
+   tests:
+     - description: Use LLM to evaluate output
+       assert:
+         - type: llm-rubric
+           value: Is spoken like a pirate
+   ```
+
+3. Using `assertion.provider` on a per-assertion basis:
+
+   ```yaml
+   tests:
+    - description: Use LLM to evaluate output
+      assert:
+        - type: llm-rubric
+          value: Is spoken like a pirate
+          provider: gpt-3.5-turbo
+    ```
+
+Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
+
 ### Levenshtein distance
 
 The `levenshtein` assertion checks if the LLM output is within a given edit distance from an expected value.
