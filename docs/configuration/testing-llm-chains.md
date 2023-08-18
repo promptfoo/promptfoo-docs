@@ -152,6 +152,6 @@ tests:
       input: How's it going?
 ```
 
-promptfoo will pass the full constructed prompts to `chainProvider.js` and the Python script, with variables substituted.  In this case, the script will be called _# prompts_ * _# test cases_ = 2 * 2 = 4 times.
+promptfoo will pass the full constructed prompts to `chainProvider.js` and the Python script, with variables substituted.  In this case, the script will be called _# prompts_ \* _# test cases_ = 2 \* 2 = 4 times.
 
 Using this approach, you can test your LLM chain end-to-end, view results in the [web view](/docs/usage/web-ui), set up [continuous testing](/docs/integrations/github-action), and so on.
