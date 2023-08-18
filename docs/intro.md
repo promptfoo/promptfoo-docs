@@ -42,12 +42,13 @@ Test-driven prompt engineering is much more effective than trial-and-error.
 
 As you gather more examples and user feedback, continue to expand your test cases.
 
-### Example
+## Why choose promptfoo?
 
-Using promptfoo, we evaluate three prompts describing the impact of specific technologies on various industries. We substitute several example (technology, industry) pairs, generating a matrix of outputs for side-by-side evaluation.
+There are many different ways to evaluate prompts.  Here are some reasons to consider promptfoo:
 
-Each output is graded based on predefined expectations. The results show that Prompt #3 satisfies 80% of the requirements, while Prompts #1 and #2 meet only 40%.
-
-This technique can be applied iteratively to continuously improve prompt quality across diverse test cases.
-
-![Evaluating prompts as a matrix](./assets/prompt-evaluation-matrix.png)
+- **Battle-tested**: promptfoo was built to eval & improve LLM apps serving over 10 million users in production. Our tooling is flexible and can be adapted to many setups.
+- **Simple, declarative test cases**: Define your evals without writing code or working with heavy notebooks.
+- **Language agnostic**: Use Python, Javascript, or whatever else you're working in.
+- **Share & collaborate**: Built-in share functionality & web viewer for working with teammates.
+- **Open-source**: LLM evals are a commodity and should be served by 100% open-source projects with no strings attached.
+- **Privacy**: This software runs completely locally. Your evals run on your machine and talk directly with the LLM.
