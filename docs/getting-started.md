@@ -52,7 +52,7 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
    [&raquo; More information on setting up tests](/docs/configuration/guide)
 
-1. **Set the `OPENAI_API_KEY` environment variable:
+1. Set the `OPENAI_API_KEY` environment variable:
 
    ```bash
    export OPENAI_API_KEY=sk-abc123
