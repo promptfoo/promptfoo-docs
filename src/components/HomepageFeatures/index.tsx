@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Create a list of test cases',
-    Svg: require('@site/static/img/svgrepo_puzzle_toy.svg').default,
+    Svg: require('@site/static/img/svgrepo_science2.svg').default,
     description: (
       <>
         Use a representative sample of user inputs to reduce subjectivity when tuning prompts.
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Select the best prompt & model',
-    Svg: require('@site/static/img/svgrepo_park.svg').default,
+    Svg: require('@site/static/img/svgrepo_electricity.svg').default,
     description: (
       <>
         Compare prompts and model outputs side-by-side, or integrate the library into your existing test/CI workflow.
