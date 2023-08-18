@@ -235,6 +235,28 @@ assert:
     value: "throw new Error('This is an error')"
 ```
 
+#### Multiline functions
+
+Javascript assertions support multiline strings:
+
+```yaml
+assert:
+  - type: javascript
+    value: |
+      // Insert your scoring logic here...
+      if (output === 'Expected output') {
+        return {
+          pass: true,
+          score: 0.5,
+        };
+      }
+      return {
+        pass: false,
+        score: 0,
+        reason: 'Assertion failed',
+      };
+```
+
 #### Using test context
 
 The `context` variable contains test case variables.
