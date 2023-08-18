@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
         <div style={{textAlign: 'center', padding: '2rem 0 4rem 0'}}>
           <h4>Web Viewer</h4>
           <Link to="/docs/intro">
-            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://github.com/promptfoo/promptfoo/assets/310310/d365c752-87dd-48a2-aafc-9ece03d61930" />
+            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://user-images.githubusercontent.com/310310/261666627-ce5a7817-da82-4484-b26d-32474f1cabc5.png" />
           </Link>
         </div>
         <div style={{textAlign: 'center', padding: '2rem 0 8rem 0'}}>
