@@ -235,7 +235,7 @@ assert:
     value: "throw new Error('This is an error')"
 ```
 
-### Using test context
+#### Using test context
 
 The `context` variable contains test case variables.
 
