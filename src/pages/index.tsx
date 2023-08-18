@@ -38,10 +38,27 @@ export default function Home(): JSX.Element {
         <HomepageInfo />
         <HomepageFeatures />
 
-        <div style={{textAlign: 'center', padding: '2rem 0 8rem 0'}}>
+        <div style={{textAlign: 'center', padding: '2rem 0 4rem 0'}}>
+          <h4>Web Viewer</h4>
           <Link to="/docs/intro">
-            <img style={{maxWidth: 960}} src="https://user-images.githubusercontent.com/310310/244891219-2b79e8f8-9b79-49e7-bffb-24cba18352f2.png" />
+            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://github.com/promptfoo/promptfoo/assets/310310/d365c752-87dd-48a2-aafc-9ece03d61930" />
           </Link>
+        </div>
+        <div style={{textAlign: 'center', padding: '2rem 0 8rem 0'}}>
+          <h4>Command line</h4>
+          <Link to="/docs/intro">
+            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://user-images.githubusercontent.com/310310/244891726-480e1114-d049-40b9-bd5f-f81c15060284.gif" />
+          </Link>
+        </div>
+        <div style={{textAlign: 'center', padding: '2rem 0 12rem 0'}}>
+          <h3>promptfoo is used by LLM apps serving over 10 million users</h3>
+          <div className={styles.buttons}>
+            <Link
+              className="button button--primary button--lg"
+              to="/docs/intro">
+              Get Started
+            </Link>
+          </div>
         </div>
       </main>
     </Layout>
