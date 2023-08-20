@@ -35,6 +35,7 @@ tests:
 | threshold | number | No       | The threshold value, only applicable for similarity                                               |
 | weight    | string | No       | How heavily to weigh the assertion. Defaults to 1.0 |
 | provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/providers) |
+| rubricPrompt | string | No       | LLM rubric grading prompt |
 
 ## Assertion Types
 
@@ -381,6 +382,24 @@ assert:
 Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
 
 [![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
+
+#### Using variables in the rubric
+
+You can use test `vars` in the LLM rubric.  This example uses the `question` variable to help detect hallucinations:
+
+```yaml
+providers: [openai:gpt-3.5-turbo]
+prompts: [prompt1.txt, prompt2.txt]
+defaultTest:
+  assert:
+    - type: llm-rubric
+      value: 'Says that it is uncertain or unable to answer the question: "{{question}}"'
+tests:
+  - vars:
+      question: What's the weather in New York?
+  - vars:
+      question: Who won the latest football match between the Giants and 49ers?
+```
 
 #### Overriding the LLM grader
 

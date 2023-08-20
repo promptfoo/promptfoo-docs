@@ -354,6 +354,7 @@ More details on using assertions, including examples [here](/docs/configuration/
 | value     | string | No       | The expected value, if applicable                                                                     |
 | threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)                             |
 | provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/providers) |
+| provider  | string | No       | LLM rubric grading prompt  |
 
 :::note
 
