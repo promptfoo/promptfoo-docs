@@ -97,8 +97,7 @@ A custom provider is a short Javascript file that defines a `callApi` function. 
 
 In the example below, we set up a custom provider that runs a Python script with a prompt as the argument.  The output of the Python script is the final result of the chain.
 
-```js
-// chainProvider.js
+```js title=chainProvider.js
 const { spawn } = require('child_process');
 
 class ChainProvider {
@@ -135,6 +134,8 @@ class ChainProvider {
 
 module.exports = ChainProvider;
 ```
+
+Note that you can always write the logic directly in Javascript if you're comfortable with the language.
 
 Now, we can set up a promptfoo config pointing to `chainProvider.js`:
 
