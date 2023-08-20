@@ -20,7 +20,7 @@ This guide assumes you have installed both promptfoo and Ollama.
 Run this on the command line to download the Llama2 base model:
 
 ```
-ollama pull llama2 
+ollama pull llama2
 ollama pull llama2-uncensored
 ```
 
