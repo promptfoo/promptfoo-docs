@@ -4,14 +4,15 @@ sidebar_label: Preventing hallucinations
 
 # How to measure and prevent LLM hallucations
 
-LLMs have great potential, but they can also generate incorrect or misleading information, a phenomenon known as hallucination. Factuality and LLM "grounding" is a key concern for developers building LLM applications.
+LLMs have great potential, but they are prone to generating incorrect or misleading information, a phenomenon known as hallucination. Factuality and LLM "grounding" is a key concern for developers building LLM applications.
 
 LLM app developers have several tools at their disposal:
 - **Prompt and LLM parameter tuning** to decrease the likelihood of hallucinations.
 - **Retrieval-augmented generation** (RAG) with embeddings and vector search to supply additional grounding context.
 - **Fine-tuning** to improve accuracy.
+- **Controlled decoding** to force certain outputs.
 
-Reducing LLM hallucinations requires a systematic approach to LLM evaluation. You will hit a local maximum if you're trying to prevent hallucinations by prompt trial-and-error without taking a metrics-driven approach on your own data.
+There is no way to completely eliminate hallucation risk, but you can substantially reduce the likelihood of hallucinations by adopting a metrics-driven approach to LLM evaluation that defines and measures LLM responses to common hallucination cases.
 
 Your goal should be: _How can I quantify the effectiveness of these hallucination countermeasures?_
 
@@ -109,6 +110,23 @@ Now, we'll run `promptfoo eval` and produce a quantified side-by-side view that 
 
 The example pictured above includes 150 examples of hallucination-prone questions from the [HaluEval](https://arxiv.org/abs/2305.11747) dataset.
 
+In order to set this up, we use the `defaultTest` property to set a requirement on every test:
+
+```yaml
+providers: [openai:gpt-3.5-turbo]
+prompts: [prompt1.txt, prompt2.txt]
+// highlight-start
+defaultTest:
+  assert:
+    - type: llm-rubric
+      value: 'Says that it is uncertain or unable to answer the question: "{{question}}"'
+// highlight-end
+tests:
+  - vars:
+      question: What's the weather in New York?
+  # ...
+```
+
 The default prompt shown on the left side has a pass rate of **55%**.  On the right side, the tuned prompt has a pass rate of **94%**.
 
 For more info on running the eval itself, see the [Getting Started guide](/docs/getting-started).
@@ -188,6 +206,33 @@ tests:
 ```
 
 `promptfoo eval` will run each test case against both models, allowing us to compare their performance.
+
+### Controlled decoding
+
+Several open-source projects such as [Guidance](https://github.com/guidance-ai/guidance) and [Outlines](https://github.com/normal-computing/outlines) make it possible to control LLM outputs in a more fundamental way.
+
+Both work by adjusting the probability of _logits_, the output of the last layer in the LLM neural network.  In the normal case, these logits are decoded into regular text outputs.  These libraries introduce _logit bias_, which allows them to preference certain tokens over others.
+
+With an appropriately set logit bias, you can force an LLM to choose among a fixed set of tokens.  For example, this completion forces a choice between several possibilities:
+
+```py
+import outlines.text.generate as generate
+import outlines.models as models
+
+model = models.transformers("gpt2")
+
+prompt = """You are a cuisine-identification assistant.
+What type of cuisine does the following recipe belong to?
+
+Recipe: This dish is made by stir-frying marinated pieces of chicken, vegetables, and chow mein noodles. The ingredients are stir-fried in a wok with soy sauce, ginger, and garlic.
+
+"""
+answer = generate.choice(model, ["Chinese", "Italian", "Mexican", "Indian"])(prompt)
+```
+
+In this example, the AI is given a recipe and it needs to classify it into one of the four cuisine types: Chinese, Italian, Mexican, or Indian.
+
+With this approach, you can nearly guarantee that the LLM cannot suggest other cuisines.
 
 ## Your workflow
 
