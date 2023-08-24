@@ -58,7 +58,7 @@ This will create some templates in your current directory: `prompts.txt` and `pr
    export OPENAI_API_KEY=sk-abc123
    ```
 
-   If you add this to a configuration file such as `~./bashrc` or ~/.zshrc`, make sure to reload your terminal.
+   If you add this to a configuration file such as `~./bashrc` or `~/.zshrc`, make sure to reload your terminal.
 
 1. **Run the evaluation**: This tests every prompt for each test case:
 
