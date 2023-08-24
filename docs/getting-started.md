@@ -139,12 +139,16 @@ prompts: [prompt1.txt, prompt2.txt]
 # Set an LLM
 providers: openai:gpt-4-0613
 
-# These test attributes are applied to every test
+# These test properties are applied to every test
 defaultTest:
   assert:
-    # Verify that the output doesn't identify itself as AI
+    # Verify that the output doesn't contain "AI language model"
+    - type: not-contains
+      value: AI language model
+
+    # Verify that the output doesn't apologize, using model-graded eval
     - type: llm-rubric
-      value: Do not mention that you are an AI or chat assistant
+      value: Does not contain an apology
 
     # Prefer shorter outputs using a scoring function
     - type: javascript
@@ -155,13 +159,15 @@ tests:
   - vars:
       name: Bob
       question: Can you help me find a specific product on your website?
-    # Set up individual asserts as necessary
     assert:
       - type: contains
         value: search
   - vars:
       name: Jane
       question: Do you have any promotions or discounts currently available?
+    assert:
+      - type: starts-with
+        value: Yes
   - vars:
       name: Ben
       question: Can you check the availability of a product at a specific store location?
