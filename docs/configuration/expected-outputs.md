@@ -108,6 +108,18 @@ assert:
     value: "\\d{4}" # Matches a 4-digit number
 ```
 
+### Starts-With
+
+The `starts-with` assertion checks if the LLM output begins with the specified string.
+
+This example checks if the output starts with "Yes":
+
+```yaml
+assert:
+  - type: starts-with
+    value: "Yes"
+```
+
 ### Contains-Any
 
 The `contains-any` assertion checks if the LLM output contains at least one of the specified values.
