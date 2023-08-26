@@ -85,6 +85,111 @@ apiKey?: string;
 organization?: string;
 ```
 
+## Chat conversations
+
+The OpenAI provider supports full "multishot" chat conversations, including multiple assistant, user, and system prompts.
+
+The most straightforward way to do this is by creating a list of `{role, content}` objects.  Here's an example:
+
+```yaml
+prompts: ['prompt.json']
+
+providers:
+  - openai:gpt-3.5-turbo:
+      id: openai:gpt-3.5-turbo
+
+tests:
+  - vars:
+      messages:
+        - role: system
+          content: Respond as a pirate
+        - role: user
+          content: Who founded Facebook?
+        - role: assistant
+          content: Mark Zuckerberg
+        - role: user
+          content: Did he found any other companies?
+```
+
+Then the prompt itself is just a JSON dump of `messages`:
+
+```liquid title=prompt.json
+{{ messages | dump }}
+```
+
+### Simplified chat markup
+
+Alternatively, you may prefer to specify a list of `role: message`, like this:
+
+```yaml
+tests:
+  - vars:
+      messages:
+        - user: Who founded Facebook?
+        - assistant: Mark Zuckerberg
+        - user: Did he found any other companies?
+```
+
+This simplifies the config, but we need to work some magic in the prompt template:
+
+```liquid title=prompt.json
+[
+{% for message in messages %}
+  {% set outer_loop = loop %}
+  {% for role, content in message %}
+  {
+    "role": "{{ role }}",
+    "content": "{{ content }}"
+  }{% if not (loop.last and outer_loop.last) %},{% endif %}
+  {% endfor %}
+{% endfor %}
+]
+```
+
+### Creating a conversation history fixture
+
+Using nunjucks templates, we can combine multiple chat messages.  Here's an example in which the previous conversation is a fixture for _all_ tests.  Each case tests a different follow-up message:
+
+```yaml
+# Set up the conversation history
+defaultTest:
+  - vars:
+      previous_messages:
+        - user: Who founded Facebook?
+        - assistant: Mark Zuckerberg
+        - user: What's his favorite food?
+        - assistant: Pizza
+
+# Test multiple follow-ups
+tests:
+  - vars:
+      question: Did he create any other companies?
+  - vars:
+      question: What is his role at Internet.org?
+  - vars:
+      question: Will he let me borrow $5?
+```
+
+In the prompt template, we construct the conversation history followed by a user message containing the `question`:
+
+```liquid title=prompt.json
+[
+  {% for message in messages %}
+    {% set outer_loop = loop %}
+    {% for role, content in message %}
+      {
+        "role": "{{ role }}",
+        "content": "{{ content }}"
+      },
+    {% endfor %}
+  {% endfor %}
+  {
+    "role": "user",
+    "content": "{{ question }}"
+  }
+]
+```
+
 ## Using functions
 
 OpenAI functions are supported. See [full example](https://github.com/typpo/promptfoo/tree/main/examples/openai-function-call).

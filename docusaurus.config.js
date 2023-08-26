@@ -127,6 +127,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: [],
       },
       zoom: {
         selector: '.markdown :not(em) > img',
