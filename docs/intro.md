@@ -13,9 +13,9 @@ With promptfoo, you can:
 - **Speed up evaluations** with [caching](/docs/configuration/caching) and concurrent tests
 - **Score outputs automatically** by defining [expectations](/docs/configuration/expected-outputs)
 - Use as a [CLI](/docs/usage/command-line), or integrate into your workflow as a [library](/docs/usage/node-package)
-- Use OpenAI models, open-source models like Llama and Vicuna, or integrate custom API providers for [any LLM API](/docs/providers)
+- Use OpenAI, Anthropic, Azure, open-source models like Llama, or integrate custom API providers for [any LLM API](/docs/providers)
 
-The goal: **test-driven prompt engineering**, not trial-and-error.
+The goal: **test-driven LLM development**, not trial-and-error.
 
 promptfoo produces matrix views that let you quickly evaluate outputs across many prompts.
 
