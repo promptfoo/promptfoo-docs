@@ -338,10 +338,11 @@ A test case represents a single example input that is fed into all prompts and p
 
 | Property             | Type                               | Required | Description                                                |
 | -------------------- | ---------------------------------- | -------- | ---------------------------------------------------------- |
-| description          | string                             | No       | Optional description of what you're testing                |
+| description          | string                             | No       | Description of what you're testing                |
 | vars                 | Record<string, string \| string[] \| any> | No       | Key-value pairs to substitute in the prompt                |
-| assert               | [Assertion](#assertion)[]          | No       | Optional list of automatic checks to run on the LLM output |
-| options              | Object                             | No       | Optional additional configuration settings                 |
+| assert               | [Assertion](#assertion)[]          | No       | List of automatic checks to run on the LLM output |
+| threshold            | number                             | No       | Test will fail if the combined score of assertions is less than this number |
+| options              | Object                             | No       | Additional configuration settings                 |
 | options.prefix       | string                             | No       | This is prepended to the prompt                            |
 | options.suffix       | string                             | No       | This is append to the prompt                               |
 | options.postprocess  | string                             | No       | A JavaScript snippet that runs on LLM output before any assertions |

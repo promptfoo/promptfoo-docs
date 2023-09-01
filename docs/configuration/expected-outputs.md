@@ -473,19 +473,38 @@ Here's an example:
 
 ```yaml
 tests:
-  - description: "Test with weighted assertions"
-    vars:
-      example: "Hello, World!"
-    assert:
-      - type: equals
-        value: "Hello, World!"
-        weight: 2
-      - type: contains
-        value: "World"
-        weight: 1
+  assert:
+    - type: equals
+      value: "Hello world"
+      weight: 2
+    - type: contains
+      value: "world"
+      weight: 1
 ```
 
-In this example, the `equals` assertion is twice as important as the `contains` assertion. If the `equals` assertion fails but the `contains` assertion passes, the final score will be 0.33 (1/3), not 0.5 (1/2).
+In this example, the `equals` assertion is twice as important as the `contains` assertion.
+
+If the LLM output is `Goodbye world`, the `equals` assertion fails but the `contains` assertion passes, and the final score is 0.33 (1/3).
+
+### Setting a score requirement
+
+Test cases support an optional `threshold` property.  If set, the pass/fail status of a test case is determined by whether the combined weighted score of all assertions exceeds the threshold value.
+
+For example:
+
+```yaml
+tests:
+  threshold: 0.5
+  assert:
+    - type: equals
+      value: "Hello world"
+      weight: 2
+    - type: contains
+      value: "world"
+      weight: 1
+```
+
+If the LLM outputs `Goodbye world`, the `equals` assertion fails but the `contains` assertion passes and the final score is 0.33.  Because this is below the 0.5 threshold, the test case fails.  If the threshold were lowered to 0.2, the test case would succeed.
 
 ## Load an external tests file
 
