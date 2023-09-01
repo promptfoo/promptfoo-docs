@@ -485,7 +485,7 @@ tests:
         weight: 1
 ```
 
-In this example, the `equals` assertion is twice as important as the `contains` assertion. If the `equals` assertion fails but the `contains` assertion passes, the final score will be 0.67 (2/3), not 0.5 (1/2).
+In this example, the `equals` assertion is twice as important as the `contains` assertion. If the `equals` assertion fails but the `contains` assertion passes, the final score will be 0.33 (1/3), not 0.5 (1/2).
 
 ## Load an external tests file
 
