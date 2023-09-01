@@ -255,3 +255,14 @@ These OpenAI-related environment variables are supported:
 | `PROMPTFOO_REQUIRE_JSON_PROMPTS` | By default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior. |
 | `PROMPTFOO_DELAY_MS` | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0). |
 | `PROMPTFOO_REQUEST_BACKOFF_MS` | Base number of milliseconds to backoff and retry if a request fails (defaults to 5000). |
+
+## Troubleshooting
+
+### OpenAI rate limits
+
+
+There are a few things you can do if you encounter OpenAI rate limits (most commonly with GPT-4):
+
+1. **Reduce concurrency to 1** by setting `--max-concurrency 1` in the CLI, or by setting `evaluateOptions.maxConcurrency` in the config.
+2. **Set a delay between requests** by setting `--delay 3000` in the CLI, or by setting `evaluateOptions.delay` in the config, or with the environment variable `PROMPTFOO_DELAY_MS` (all values are in milliseconds).
+3. **Adjust the exponential backoff for failed requests** by setting the environment variable `PROMPTFOO_REQUEST_BACKOFF_MS`.  This defaults to 5000 milliseconds and retries exponential up to 4 times.  You can increase this value if requests are still failing, but note that this can significantly increase end-to-end test time.
