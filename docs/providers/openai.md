@@ -12,14 +12,6 @@ Example:
 export OPENAI_API_KEY=your_api_key_here
 ```
 
-Other OpenAI-related environment variables are supported:
-
-- `OPENAI_TEMPERATURE` - temperature model parameter, defaults to 0
-- `OPENAI_MAX_TOKENS` - max_tokens model parameter, defaults to 1024
-- `OPENAI_API_HOST` - the hostname to use (useful if you're using an API proxy)
-- `OPENAI_ORGANIZATION` - the OpenAI organization key to use
-- `PROMPTFOO_REQUIRE_JSON_PROMPTS` - by default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior.
-
 The OpenAI provider supports the following model formats:
 
 - `openai:chat` - defaults to gpt-3.5-turbo
@@ -56,14 +48,31 @@ The `providers` list takes a `config` key that allows you to set parameters like
 
 ```yaml
 providers:
-  - openai:gpt-3.5-turbo-0613:
-      prompts: chat_prompt
-      config:
-        temperature: 0
-        max_tokens: 128
+  - id: openai:gpt-3.5-turbo-0613
+    config:
+      temperature: 0
+      max_tokens: 128
+      apiKey: sk-abc123
 ```
 
 Supported parameters include:
+
+| Parameter | Description |
+|-----------|-------------|
+| `temperature` | Controls the randomness of the AI's output. Higher values (close to 1) make the output more random, while lower values (close to 0) make it more deterministic. |
+| `max_tokens` | Controls the maximum length of the output in tokens. |
+| `top_p` | Controls the nucleus sampling, a method that helps control the randomness of the AI's output. |
+| `frequency_penalty` | Applies a penalty to frequent tokens, making them less likely to appear in the output. |
+| `presence_penalty` | Applies a penalty to new tokens (tokens that haven't appeared in the input), making them less likely to appear in the output. |
+| `best_of` | Controls the number of alternative outputs to generate and select from. |
+| `functions` | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`. |
+| `function_call` | Controls whether the AI should call functions. Can be either 'none' or 'auto'. |
+| `stop` | Defines a list of tokens that signal the end of the output. |
+| `apiKey` | Your OpenAI API key. |
+| `apiHost` | The hostname of the OpenAI API. |
+| `organization` | Your OpenAI organization key. |
+
+Here are the type declarations of `config` parameters:
 
 ```typescript
 // Completion parameters
@@ -79,9 +88,11 @@ functions?: {
   parameters: any;
 }[];
 function_call?: 'none' | 'auto';
+stop?: string[];
 
 // General OpenAI parameters
 apiKey?: string;
+apiHost?: string;
 organization?: string;
 ```
 
@@ -231,3 +242,16 @@ tests:
   # ...
 ```
 
+## Supported environment variables
+
+These OpenAI-related environment variables are supported:
+
+| Variable | Description |
+|----------|-------------|
+| `OPENAI_TEMPERATURE` | Temperature model parameter, defaults to 0. |
+| `OPENAI_MAX_TOKENS` | Max_tokens model parameter, defaults to 1024. |
+| `OPENAI_API_HOST` | The hostname to use (useful if you're using an API proxy). |
+| `OPENAI_ORGANIZATION` | The OpenAI organization key to use. |
+| `PROMPTFOO_REQUIRE_JSON_PROMPTS` | By default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior. |
+| `PROMPTFOO_DELAY_MS` | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0). |
+| `PROMPTFOO_REQUEST_BACKOFF_MS` | Base number of milliseconds to backoff and retry if a request fails (defaults to 5000). |
