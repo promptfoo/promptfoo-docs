@@ -514,12 +514,11 @@ To add an assertion to a test case in a vars file, use the special `__expected` 
 
 Here's an example tests.csv:
 
-```
-text,__expected
-"Hello, world!","Bonjour le monde"
-"Goodbye, everyone!","fn:output.includes('Au revoir');"
-"I am a pineapple","grade:doesn't reference any fruits besides pineapple"
-```
+| text | \_\_expected |
+| --- | --- |
+| Hello, world! | Bonjour le monde |
+| Goodbye, everyone! | fn:output.includes('Au revoir'); |
+| I am a pineapple | grade:doesn't reference any fruits besides pineapple |
 
 All assertion types can be used in `__expected`. The column supports exactly one assertion.
 
