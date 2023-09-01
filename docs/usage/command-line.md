@@ -15,8 +15,11 @@ If you're looking to customize your usage, there are a wide set of `promptfoo ev
 | `-t, --tests <path>`                | Path to [external test file](/docs/configuration/expected-outputs#load-an-external-tests-file)                                                                               |
 | `-c, --config <path>`               | Path to [configuration file](/docs/configuration/guide). `promptfooconfig.js/json/yaml` is automatically loaded if present                                                   |
 | `--grader`                          | [Provider](/docs/providers) that will conduct the evaluation, if you are [using LLM to grade your output](/docs/configuration/expected-outputs#llm-evaluation) |
+| `--repeat <number>`                          | Number of times to repeat each test case |
+| `--delay <number>`                          | Force the test runner to wait after each API call (milliseconds) |
 | `--no-cache`                        | Disable cache                                                                                                                                                                |
 | `--no-table`                        | Disable CLI table output                                                                                                                                                     |
+| `--no-progress-bar`                        | Disable the progress bar |
 | `--no-write`                        | Do not write the latest config to disk (used for web viewer and sharing)                                                                                                     |
 | `--prompt-prefix <path>`            | This prefix is prepended to every prompt                                                                                                                                     |
 | `--prompt-suffix <path>`            | This suffix is append to every prompt                                                                                                                                        |

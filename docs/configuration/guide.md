@@ -327,6 +327,10 @@ Here is the main structure of the promptfoo configuration file:
 | tests       | string \| [Test Case](#test-case) [] | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
 | defaultTest | Partial [Test Case](#test-case)      | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
 | outputPath  | string                               | No       | Where to write output. Writes to console/web viewer if not set.                                                  |
+| evaluateOptions.maxConcurrency | number  | No       | Maximum number of concurrent requests. Defaults to 4 |
+| evaluateOptions.repeat | number | No       | Number of times to run each test case . Defaults to 1 |
+| evaluateOptions.delay | number | No       | Force the test runner to wait after each API call (milliseconds) |
+| evaluateOptions.showProgressBar | boolean | No       | Whether to display the progress bar |
 
 ### Test Case
 
