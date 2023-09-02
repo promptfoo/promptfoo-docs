@@ -105,7 +105,7 @@ class ChainProvider {
     return "my-python-chain";
   }
 
-  async callApi(prompt) {
+  async callApi(prompt, context) {
     return new Promise((resolve, reject) => {
       const pythonProcess = spawn('python', ['./path_to_your_python_chain.py', prompt]);
 

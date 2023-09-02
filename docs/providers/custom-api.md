@@ -10,7 +10,7 @@ To create a custom API provider, implement the `ApiProvider` interface in a sepa
 class ApiProvider {
   constructor(options: { id?: string; config: Record<string, any>});
   id: () => string;
-  callApi: (prompt: string) => Promise<ProviderResult>;
+  callApi: (prompt: string, context: { vars: Record<string, any> }) => Promise<ProviderResult>;
 }
 ```
 
@@ -35,9 +35,11 @@ class CustomApiProvider {
     return this.providerId;
   }
 
-  async callApi(prompt) {
+  async callApi(prompt, context) {
     // Add your custom API logic here
     // Use options like: `this.config.temperature`, `this.config.max_tokens`, etc.
+
+    console.log('Vars for this test case:', JSON.stringify(context.vars));
 
     return {
       // Required
