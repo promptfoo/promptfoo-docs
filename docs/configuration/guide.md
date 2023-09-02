@@ -277,6 +277,14 @@ To use, override the `config` key of the provider. See example [here](/docs/prov
 
 The `TestCase.options.postprocess` field is a Javascript snippet that modifies the LLM output.  Postprocessing occurs before any assertions are run.
 
+Postprocess is a function that takes a string output and a context object:
+
+```
+postprocessFn: (output: string, context: {
+  vars: Record<string, any>
+})
+```
+
 This is useful if you need to somehow transform or clean LLM output before running an eval.
 
 For example:
@@ -305,6 +313,7 @@ tests:
     options:
       // highlight-start
       postprocess: |
+        output = output.replace(context.vars.language, 'foo');
         const words = output.split(' ').filter(x => !!x);
         return JSON.stringify(words);
       // highlight-end
