@@ -42,10 +42,12 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
    ```yaml
    tests:
-     - language: French
-       input: Hello world
-     - language: Spanish
-       input: Where is the library?
+     - vars:
+         language: French
+         input: Hello world
+     - vars:
+         language: Spanish
+         input: Where is the library?
    ```
 
    When writing test cases, think of core use cases and potential failures that you want to make sure your prompts handle correctly.
