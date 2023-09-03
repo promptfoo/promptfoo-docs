@@ -20,7 +20,7 @@ Here's an example of a custom API provider that returns a predefined output alon
 
 ```javascript
 // customApiProvider.js
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 class CustomApiProvider {
   constructor(options) {
@@ -43,7 +43,7 @@ class CustomApiProvider {
 
     return {
       // Required
-      output: "Model output",
+      output: 'Model output',
 
       // Optional
       tokenUsage: {

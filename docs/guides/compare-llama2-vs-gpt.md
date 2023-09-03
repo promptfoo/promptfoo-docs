@@ -6,7 +6,7 @@ sidebar_label: Llama 2 vs GPT benchmark
 
 This guide describes how to compare three models - Llama v2 70B, GPT 3.5, and GPT 4 - using the `promptfoo` CLI.
 
-LLM use cases vary widely and there is no one-size-fits-all benchmark.  We'll use some dummy test cases from the [Hacker News thread on Llama 2](https://news.ycombinator.com/item?id=36774627), but you can substitute your own.
+LLM use cases vary widely and there is no one-size-fits-all benchmark. We'll use some dummy test cases from the [Hacker News thread on Llama 2](https://news.ycombinator.com/item?id=36774627), but you can substitute your own.
 
 The end result is a view that compares the performance of Llama, GPT 3.5, and GPT 4 side-by-side:
 
@@ -16,7 +16,7 @@ The end result is a view that compares the performance of Llama, GPT 3.5, and GP
 
 ## Requirements
 
-This guide assumes that you have promptfoo [installed](/docs/installation).  It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/providers/localai).
+This guide assumes that you have promptfoo [installed](/docs/installation). It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/providers/localai).
 
 ## Set up the config
 
@@ -26,7 +26,7 @@ Initialize a new directory `llama-gpt-comparison` that will contain our prompts 
 npx promptfoo init llama-gpt-comparison
 ```
 
-Now let's start editing `promptfooconfig.yaml`.  First, we'll add the list of models we'd like to compare:
+Now let's start editing `promptfooconfig.yaml`. First, we'll add the list of models we'd like to compare:
 
 ```yaml title=promptfooconfig.yaml
 providers:
@@ -35,13 +35,13 @@ providers:
   - replicate:replicate/llama70b-v2-chat:e951f18578850b652510200860fc4ea62b3b16fac280f83ff32282f87bbd2e48
 ```
 
-The first two [providers](/docs/providers) reference built-in OpenAI models.  The third provider references the hosted [Replicate](https://replicate.com/replicate/llama70b-v2-chat) version of chat-tuned Llama v2 with 70 billion parameters.
+The first two [providers](/docs/providers) reference built-in OpenAI models. The third provider references the hosted [Replicate](https://replicate.com/replicate/llama70b-v2-chat) version of chat-tuned Llama v2 with 70 billion parameters.
 
 If you prefer to run against a locally hosted version of Llama, this can be done via [LocalAI](/docs/providers/localai).
 
 ## Set up the prompts
 
-Next, we'll add some prompts.  Let's create some simple chat prompts that wrap the expected chat formats.  We'll have multiple prompts because GPT and Llama expect different prompting formats.
+Next, we'll add some prompts. Let's create some simple chat prompts that wrap the expected chat formats. We'll have multiple prompts because GPT and Llama expect different prompting formats.
 
 First, we'll put the OpenAI chat prompts in `prompts/chat_prompt.json`:
 
@@ -61,7 +61,7 @@ User: {{message}}
 Assistant:
 ```
 
-Now, let's go back to `promptfooconfig.yaml` and add our prompts.  We'll name them `chat_prompt` and `completion_prompt` respectively:
+Now, let's go back to `promptfooconfig.yaml` and add our prompts. We'll name them `chat_prompt` and `completion_prompt` respectively:
 
 ```yaml title=promptfooconfig.yaml
 // highlight-start
@@ -210,7 +210,7 @@ npx promptfoo eval
 
 This will run each of the test cases against each of the models and output the results.
 
-Then, to open the web viewer, run `npx promptfoo view`.  Here's what we see:
+Then, to open the web viewer, run `npx promptfoo view`. Here's what we see:
 
 ![llama2 and gpt comparison](/img/docs/llama-gpt-comparison.png)
 

@@ -66,11 +66,10 @@ The `scenarios` configuration is an array of `Scenario` objects. Each `Scenario`
 
 Here is the structure of a `Scenario`:
 
-| Property    | Type                                 | Required | Description                                                                                                      |
-| ----------- | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| description | `string`                               | No       | Optional description of what you're testing                                                                     |
-| config      | `Partial<TestCase>[]`                  | Yes      | An array of variable sets. Each set will be run through the tests.                                               |
-| tests       | `TestCase[]`                           | Yes      | The tests to be run on each set of variables.                                                                    |
+| Property    | Type                  | Required | Description                                                        |
+| ----------- | --------------------- | -------- | ------------------------------------------------------------------ |
+| description | `string`              | No       | Optional description of what you're testing                        |
+| config      | `Partial<TestCase>[]` | Yes      | An array of variable sets. Each set will be run through the tests. |
+| tests       | `TestCase[]`          | Yes      | The tests to be run on each set of variables.                      |
 
 This functionality allows you to easily run a wide range of tests without having to manually create each one. It also keeps your configuration file cleaner and easier to read.
-

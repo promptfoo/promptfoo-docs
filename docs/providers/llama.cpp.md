@@ -11,4 +11,3 @@ You can use it by specifying the `llama` provider.
 Supported environment variables:
 
 - `LLAMA_BASE_URL` - scheme, host name, and port (defaults to `http://localhost:8080`)
-

@@ -9,16 +9,14 @@ import HomepageInfo from '@site/src/components/HomepageInfo';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <h1 className="hero__title">Test your prompts</h1>
         <p className="hero__subtitle">Ensure high-quality LLM outputs with automatic evals.</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
+          <Link className="button button--secondary button--lg" to="/docs/intro">
             Get Started
           </Link>
         </div>
@@ -28,34 +26,39 @@ function HomepageHeader() {
 }
 
 export default function Home(): JSX.Element {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title="LLM prompt testing"
-      description="Library for evaluating LLM prompt quality and testing.">
+      description="Library for evaluating LLM prompt quality and testing."
+    >
       <HomepageHeader />
       <main>
         <HomepageInfo />
         <HomepageFeatures />
 
-        <div style={{textAlign: 'center', padding: '2rem 0 4rem 0'}}>
+        <div style={{ textAlign: 'center', padding: '2rem 0 4rem 0' }}>
           <h4>Web Viewer</h4>
           <Link to="/docs/intro">
-            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://user-images.githubusercontent.com/310310/261666627-ce5a7817-da82-4484-b26d-32474f1cabc5.png" />
+            <img
+              style={{ maxWidth: 'min(100%, 1024px)' }}
+              src="https://user-images.githubusercontent.com/310310/261666627-ce5a7817-da82-4484-b26d-32474f1cabc5.png"
+            />
           </Link>
         </div>
-        <div style={{textAlign: 'center', padding: '2rem 0 8rem 0'}}>
+        <div style={{ textAlign: 'center', padding: '2rem 0 8rem 0' }}>
           <h4>Command line</h4>
           <Link to="/docs/intro">
-            <img style={{maxWidth: 'min(100%, 1024px)'}} src="https://user-images.githubusercontent.com/310310/244891726-480e1114-d049-40b9-bd5f-f81c15060284.gif" />
+            <img
+              style={{ maxWidth: 'min(100%, 1024px)' }}
+              src="https://user-images.githubusercontent.com/310310/244891726-480e1114-d049-40b9-bd5f-f81c15060284.gif"
+            />
           </Link>
         </div>
-        <div style={{textAlign: 'center', padding: '2rem 0 12rem 0'}}>
+        <div style={{ textAlign: 'center', padding: '2rem 0 12rem 0' }}>
           <h3>promptfoo is used by LLM apps serving over 10 million users</h3>
           <div className={styles.buttons}>
-            <Link
-              className="button button--primary button--lg"
-              to="/docs/intro">
+            <Link className="button button--primary button--lg" to="/docs/intro">
               Get Started
             </Link>
           </div>

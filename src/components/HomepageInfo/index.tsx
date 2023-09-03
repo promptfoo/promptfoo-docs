@@ -12,9 +12,7 @@ export default function HomepageInfo(): JSX.Element {
   return (
     <section className={styles.section}>
       <div className="container">
-        <h2 className={styles.blurb}>
-          How it works
-        </h2>
+        <h2 className={styles.blurb}>How it works</h2>
       </div>
     </section>
   );

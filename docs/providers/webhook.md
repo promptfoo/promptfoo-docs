@@ -13,6 +13,7 @@ providers: [webhook:http://example.com/webhook]
 ```
 
 promptfoo will send an HTTP POST request with the following JSON payload:
+
 ```json
 {
   "prompt": "..."
@@ -20,6 +21,7 @@ promptfoo will send an HTTP POST request with the following JSON payload:
 ```
 
 It expects a JSON response in this format:
+
 ```json
 {
   "output": "..."

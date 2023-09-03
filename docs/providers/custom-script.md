@@ -26,4 +26,3 @@ promptfoo eval -p prompt1.txt prompt2.txt -o results.csv  -v vars.csv -r 'script
 In the above example, `chain.py` is a Python script that takes a prompt as an argument, executes an LLM chain, and outputs the result.
 
 For a more in-depth example of a script provider, see the [LLM Chain](/docs/configuration/testing-llm-chains#using-a-script-provider) example.
-

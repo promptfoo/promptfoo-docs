@@ -33,50 +33,52 @@ Create a new file called `assertions.js` and add the following:
 <Tabs>
   <TabItem value="Javascript" label="Javascript" default>
 
-  ```javascript
-  import { Assertion } from 'chai';
+```javascript
+import { Assertion } from 'chai';
 
-  import { assertions } from 'promptfoo';
-  const { matchesSimilarity, matchesLlmRubric } = assertions;
+import { assertions } from 'promptfoo';
+const { matchesSimilarity, matchesLlmRubric } = assertions;
 
-  Assertion.addAsyncMethod('toMatchSemanticSimilarity', async function (expected, threshold = 0.8) {
-    const received = this._obj;
-    const result = await matchesSimilarity(received, expected, threshold);
-    const pass = received === expected || result.pass;
+Assertion.addAsyncMethod('toMatchSemanticSimilarity', async function (expected, threshold = 0.8) {
+  const received = this._obj;
+  const result = await matchesSimilarity(received, expected, threshold);
+  const pass = received === expected || result.pass;
 
-    this.assert(
-      pass,
-      `expected #{this} to match semantic similarity with #{exp}, but it did not. Reason: ${result.reason}`,
-      `expected #{this} not to match semantic similarity with #{exp}`,
-      expected,
-    );
-  });
+  this.assert(
+    pass,
+    `expected #{this} to match semantic similarity with #{exp}, but it did not. Reason: ${result.reason}`,
+    `expected #{this} not to match semantic similarity with #{exp}`,
+    expected,
+  );
+});
 
-  Assertion.addAsyncMethod('toPassLLMRubric', async function (expected, gradingConfig) {
-    const received = this._obj;
-    const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
+Assertion.addAsyncMethod('toPassLLMRubric', async function (expected, gradingConfig) {
+  const received = this._obj;
+  const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
 
-    this.assert(
-      gradingResult.pass,
-      `expected #{this} to pass LLM Rubric with #{exp}, but it did not. Reason: ${gradingResult.reason}`,
-      `expected #{this} not to pass LLM Rubric with #{exp}`,
-      expected,
-    );
-  });
-  ```
+  this.assert(
+    gradingResult.pass,
+    `expected #{this} to pass LLM Rubric with #{exp}, but it did not. Reason: ${gradingResult.reason}`,
+    `expected #{this} not to pass LLM Rubric with #{exp}`,
+    expected,
+  );
+});
+```
 
   </TabItem>
   <TabItem value="Typescript" label="Typescript" default>
 
-  ```typescript
-  import { Assertion } from 'chai';
+```typescript
+import { Assertion } from 'chai';
 
-  import { assertions } from 'promptfoo';
-  const { matchesSimilarity, matchesLlmRubric } = assertions;
+import { assertions } from 'promptfoo';
+const { matchesSimilarity, matchesLlmRubric } = assertions;
 
-  import type { GradingConfig } from 'promptfoo';
+import type { GradingConfig } from 'promptfoo';
 
-  Assertion.addAsyncMethod('toMatchSemanticSimilarity', async function (this: Assertion, expected: string, threshold: number = 0.8) {
+Assertion.addAsyncMethod(
+  'toMatchSemanticSimilarity',
+  async function (this: Assertion, expected: string, threshold: number = 0.8) {
     const received = this._obj;
     const result = await matchesSimilarity(received, expected, threshold);
     const pass = received === expected || result.pass;
@@ -87,9 +89,12 @@ Create a new file called `assertions.js` and add the following:
       `expected #{this} not to match semantic similarity with #{exp}`,
       expected,
     );
-  });
+  },
+);
 
-  Assertion.addAsyncMethod('toPassLLMRubric', async function (this: Assertion, expected: string, gradingConfig: GradingConfig) {
+Assertion.addAsyncMethod(
+  'toPassLLMRubric',
+  async function (this: Assertion, expected: string, gradingConfig: GradingConfig) {
     const received = this._obj;
     const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
 
@@ -99,8 +104,9 @@ Create a new file called `assertions.js` and add the following:
       `expected #{this} not to pass LLM Rubric with #{exp}`,
       expected,
     );
-  });
-  ```
+  },
+);
+```
 
   </TabItem>
 </Tabs>

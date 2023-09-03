@@ -44,7 +44,7 @@ As you gather more examples and user feedback, continue to expand your test case
 
 ## Why choose promptfoo?
 
-There are many different ways to evaluate prompts.  Here are some reasons to consider promptfoo:
+There are many different ways to evaluate prompts. Here are some reasons to consider promptfoo:
 
 - **Battle-tested**: promptfoo was built to eval & improve LLM apps serving over 10 million users in production. Our tooling is flexible and can be adapted to many setups.
 - **Simple, declarative test cases**: Define your evals without writing code or working with heavy notebooks.

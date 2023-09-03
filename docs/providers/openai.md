@@ -24,7 +24,7 @@ The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new 
 
 ## Formatting chat messages
 
-The [prompt file](/docs/configuration/parameters#prompt-files) supports a message in OpenAI's JSON prompt format.  This allows you to set multiple messages including the system prompt.  For example:
+The [prompt file](/docs/configuration/parameters#prompt-files) supports a message in OpenAI's JSON prompt format. This allows you to set multiple messages including the system prompt. For example:
 
 ```json
 [
@@ -44,7 +44,7 @@ Equivalent yaml is also supported:
 
 ## Configuring parameters
 
-The `providers` list takes a `config` key that allows you to set parameters like `temperature`, `max_tokens`, and [others](https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature).  For example:
+The `providers` list takes a `config` key that allows you to set parameters like `temperature`, `max_tokens`, and [others](https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature). For example:
 
 ```yaml
 providers:
@@ -57,20 +57,20 @@ providers:
 
 Supported parameters include:
 
-| Parameter | Description |
-|-----------|-------------|
-| `temperature` | Controls the randomness of the AI's output. Higher values (close to 1) make the output more random, while lower values (close to 0) make it more deterministic. |
-| `max_tokens` | Controls the maximum length of the output in tokens. |
-| `top_p` | Controls the nucleus sampling, a method that helps control the randomness of the AI's output. |
-| `frequency_penalty` | Applies a penalty to frequent tokens, making them less likely to appear in the output. |
-| `presence_penalty` | Applies a penalty to new tokens (tokens that haven't appeared in the input), making them less likely to appear in the output. |
-| `best_of` | Controls the number of alternative outputs to generate and select from. |
-| `functions` | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`. |
-| `function_call` | Controls whether the AI should call functions. Can be either 'none' or 'auto'. |
-| `stop` | Defines a list of tokens that signal the end of the output. |
-| `apiKey` | Your OpenAI API key. |
-| `apiHost` | The hostname of the OpenAI API. |
-| `organization` | Your OpenAI organization key. |
+| Parameter           | Description                                                                                                                                                     |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `temperature`       | Controls the randomness of the AI's output. Higher values (close to 1) make the output more random, while lower values (close to 0) make it more deterministic. |
+| `max_tokens`        | Controls the maximum length of the output in tokens.                                                                                                            |
+| `top_p`             | Controls the nucleus sampling, a method that helps control the randomness of the AI's output.                                                                   |
+| `frequency_penalty` | Applies a penalty to frequent tokens, making them less likely to appear in the output.                                                                          |
+| `presence_penalty`  | Applies a penalty to new tokens (tokens that haven't appeared in the input), making them less likely to appear in the output.                                   |
+| `best_of`           | Controls the number of alternative outputs to generate and select from.                                                                                         |
+| `functions`         | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`.                               |
+| `function_call`     | Controls whether the AI should call functions. Can be either 'none' or 'auto'.                                                                                  |
+| `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
+| `apiKey`            | Your OpenAI API key.                                                                                                                                            |
+| `apiHost`           | The hostname of the OpenAI API.                                                                                                                                 |
+| `organization`      | Your OpenAI organization key.                                                                                                                                   |
 
 Here are the type declarations of `config` parameters:
 
@@ -100,7 +100,7 @@ organization?: string;
 
 The OpenAI provider supports full "multishot" chat conversations, including multiple assistant, user, and system prompts.
 
-The most straightforward way to do this is by creating a list of `{role, content}` objects.  Here's an example:
+The most straightforward way to do this is by creating a list of `{role, content}` objects. Here's an example:
 
 ```yaml
 prompts: ['prompt.json']
@@ -159,7 +159,7 @@ This simplifies the config, but we need to work some magic in the prompt templat
 
 ### Creating a conversation history fixture
 
-Using nunjucks templates, we can combine multiple chat messages.  Here's an example in which the previous conversation is a fixture for _all_ tests.  Each case tests a different follow-up message:
+Using nunjucks templates, we can combine multiple chat messages. Here's an example in which the previous conversation is a fixture for _all_ tests. Each case tests a different follow-up message:
 
 ```yaml
 # Set up the conversation history
@@ -212,25 +212,24 @@ prompts: [prompt.txt]
 providers:
   - openai:chat:gpt-3.5-turbo-0613:
       config:
-        "functions":
+        'functions':
           [
             {
-              "name": "get_current_weather",
-              "description": "Get the current weather in a given location",
-              "parameters":
+              'name': 'get_current_weather',
+              'description': 'Get the current weather in a given location',
+              'parameters':
                 {
-                  "type": "object",
-                  "properties":
+                  'type': 'object',
+                  'properties':
                     {
-                      "location":
+                      'location':
                         {
-                          "type": "string",
-                          "description": "The city and state, e.g. San Francisco, CA",
+                          'type': 'string',
+                          'description': 'The city and state, e.g. San Francisco, CA',
                         },
-                      "unit":
-                        { "type": "string", "enum": ["celsius", "fahrenheit"] },
+                      'unit': { 'type': 'string', 'enum': ['celsius', 'fahrenheit'] },
                     },
-                  "required": ["location"],
+                  'required': ['location'],
                 },
             },
           ]
@@ -246,23 +245,22 @@ tests:
 
 These OpenAI-related environment variables are supported:
 
-| Variable | Description |
-|----------|-------------|
-| `OPENAI_TEMPERATURE` | Temperature model parameter, defaults to 0. |
-| `OPENAI_MAX_TOKENS` | Max_tokens model parameter, defaults to 1024. |
-| `OPENAI_API_HOST` | The hostname to use (useful if you're using an API proxy). |
-| `OPENAI_ORGANIZATION` | The OpenAI organization key to use. |
+| Variable                         | Description                                                                                                                                      |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `OPENAI_TEMPERATURE`             | Temperature model parameter, defaults to 0.                                                                                                      |
+| `OPENAI_MAX_TOKENS`              | Max_tokens model parameter, defaults to 1024.                                                                                                    |
+| `OPENAI_API_HOST`                | The hostname to use (useful if you're using an API proxy).                                                                                       |
+| `OPENAI_ORGANIZATION`            | The OpenAI organization key to use.                                                                                                              |
 | `PROMPTFOO_REQUIRE_JSON_PROMPTS` | By default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior. |
-| `PROMPTFOO_DELAY_MS` | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0). |
-| `PROMPTFOO_REQUEST_BACKOFF_MS` | Base number of milliseconds to backoff and retry if a request fails (defaults to 5000). |
+| `PROMPTFOO_DELAY_MS`             | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0).                                 |
+| `PROMPTFOO_REQUEST_BACKOFF_MS`   | Base number of milliseconds to backoff and retry if a request fails (defaults to 5000).                                                          |
 
 ## Troubleshooting
 
 ### OpenAI rate limits
 
-
 There are a few things you can do if you encounter OpenAI rate limits (most commonly with GPT-4):
 
 1. **Reduce concurrency to 1** by setting `--max-concurrency 1` in the CLI, or by setting `evaluateOptions.maxConcurrency` in the config.
 2. **Set a delay between requests** by setting `--delay 3000` in the CLI, or by setting `evaluateOptions.delay` in the config, or with the environment variable `PROMPTFOO_DELAY_MS` (all values are in milliseconds).
-3. **Adjust the exponential backoff for failed requests** by setting the environment variable `PROMPTFOO_REQUEST_BACKOFF_MS`.  This defaults to 5000 milliseconds and retries exponential up to 4 times.  You can increase this value if requests are still failing, but note that this can significantly increase end-to-end test time.
+3. **Adjust the exponential backoff for failed requests** by setting the environment variable `PROMPTFOO_REQUEST_BACKOFF_MS`. This defaults to 5000 milliseconds and retries exponential up to 4 times. You can increase this value if requests are still failing, but note that this can significantly increase end-to-end test time.

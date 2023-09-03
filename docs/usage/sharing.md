@@ -13,6 +13,7 @@ Here's how to use it:
 ```bash
 promptfoo share
 ```
+
 ## Usage
 
 When you run `promptfoo share`, it will ask for a confirmation to create a URL.

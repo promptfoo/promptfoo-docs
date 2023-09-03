@@ -210,7 +210,7 @@ providers:
   - openai:gpt-4
 ```
 
-A simple `npx promptfoo eval` will run the example.  Also note that you can override parameters directly from the command line. For example, this command:
+A simple `npx promptfoo eval` will run the example. Also note that you can override parameters directly from the command line. For example, this command:
 
 ```bash
 npx promptfoo eval -p prompts.txt -r openai:gpt-3.5-turbo openai:gpt-4 -o output.html
@@ -223,6 +223,7 @@ Produces this HTML table:
 Full setup and output [here](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4).
 
 A similar approach can be used to run other model comparisons. For example, you can:
+
 - Compare same models with different temperatures (see [GPT 3.5 temperature comparison](https://github.com/promptfoo/promptfoo/tree/main/examples/gpt-3.5-temperature-comparison))
 - Compare Llama vs. GPT (see [Llama vs GPT benchmark](/docs/guides/compare-llama2-vs-gpt))
 - Compare Retrieval-Augmented Generation (RAG) with LangChain vs. regular GPT-4 (see [LangChain example](https://promptfoo.dev/docs/configuration/testing-llm-chains))

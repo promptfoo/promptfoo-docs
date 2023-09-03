@@ -10,7 +10,6 @@ This guide will walk you through the process of benchmarking [Llama2 Uncensored]
 
 By the [end of this guide](#conclusion), you'll be able to produce a side-by-side comparison of these models using your own data. You can substitute your own test cases and choose the model that's best for you.
 
-
 ![llama2 uncensored and gpt comparison](/img/docs/llama-uncensored-comparison.png)
 
 ## Requirements
@@ -207,10 +206,10 @@ Which produces a simple spreadsheet containing the eval results.
 
 On the whole, this test found that within our set of example inputs, Llama2 is more likely to self-censor than GPT 3.5, and Llama2-uncensored removes all the various ethical objections and admonitions:
 
-|            | GPT 3.5 | Llama2 (7B) | Llama2 Uncensored (7B) |
-|------------|---------|-------------|------------------------|
-| **Pass rate**  | **50%**     | **20%**         | **100%**                   |
-| Test cases | 5/10    | 2/20        | 10/10                  |
-| Asserts    | 68/80   | 62/80       | 80/80                  |
+|               | GPT 3.5 | Llama2 (7B) | Llama2 Uncensored (7B) |
+| ------------- | ------- | ----------- | ---------------------- |
+| **Pass rate** | **50%** | **20%**     | **100%**               |
+| Test cases    | 5/10    | 2/20        | 10/10                  |
+| Asserts       | 68/80   | 62/80       | 80/80                  |
 
-This example demonstrates how to evaluate the uncensored Llama 2 model versus OpenAI's GPT 3.5.  Try it out yourself and see how it does on your application's example inputs.
+This example demonstrates how to evaluate the uncensored Llama 2 model versus OpenAI's GPT 3.5. Try it out yourself and see how it does on your application's example inputs.

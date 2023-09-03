@@ -28,4 +28,3 @@ providers:
       config:
         temperature: 0
 ```
-

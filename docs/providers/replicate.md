@@ -4,7 +4,7 @@ sidebar_position: 99
 
 # Replicate
 
-Replicate is an API for machine learning models.  It currently hosts models like [Llama v2](https://replicate.com/replicate/llama70b-v2-chat).
+Replicate is an API for machine learning models. It currently hosts models like [Llama v2](https://replicate.com/replicate/llama70b-v2-chat).
 
 To run a model, specify the Replicate model name and version, like so:
 
@@ -20,4 +20,3 @@ Supported environment variables:
 - `REPLICATE_MAX_LENGTH` - `max_length` property
 - `REPLICATE_TEMPERATURE` - `temperature` property
 - `REPLICATE_REPETITION_PENALTY` - `repitition_penalty` property
-

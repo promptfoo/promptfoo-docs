@@ -19,4 +19,3 @@ You can use it by specifying any of the following providers from the [Ollama lib
 Supported environment variables:
 
 - `OLLAMA_BASE_URL` - scheme, host name, and port (defaults to `http://localhost:11434`)
-

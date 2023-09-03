@@ -11,7 +11,7 @@ import JestExampleImage from '../assets/jest-example.png';
 
 `promptfoo` can be integrated with test frameworks like [Jest](https://jestjs.io/) in order to evaluate prompts as part of existing testing and CI workflows.
 
-This guide includes examples that show how to create Jest test cases for desired prompt quality using semantic similarity and LLM grading.  You can also skip to the [full example code](https://github.com/typpo/promptfoo/tree/main/examples/jest-integration).
+This guide includes examples that show how to create Jest test cases for desired prompt quality using semantic similarity and LLM grading. You can also skip to the [full example code](https://github.com/typpo/promptfoo/tree/main/examples/jest-integration).
 
 For more information on supported checks, see [Expected Outputs documentation](/docs/configuration/expected-outputs/).
 
@@ -34,111 +34,111 @@ Create a new file called `matchers.js` and add the following:
 <Tabs>
   <TabItem value="Javascript" label="Javascript" default>
 
-  ```javascript
-  import { assertions } from 'promptfoo';
-  const { matchesSimilarity, matchesLlmRubric } = assertions;
+```javascript
+import { assertions } from 'promptfoo';
+const { matchesSimilarity, matchesLlmRubric } = assertions;
 
-  export function installJestMatchers() {
-    expect.extend({
-      async toMatchSemanticSimilarity( received, expected, threshold = 0.8) {
-        const result = await matchesSimilarity(received, expected, threshold);
-        const pass = received === expected || result.pass;
-        if (pass) {
-          return {
-            message: () => `expected ${received} not to match semantic similarity with ${expected}`,
-            pass: true,
-          };
-        } else {
-          return {
-            message: () =>
-              `expected ${received} to match semantic similarity with ${expected}, but it did not. Reason: ${result.reason}`,
-            pass: false,
-          };
-        }
-      },
+export function installJestMatchers() {
+  expect.extend({
+    async toMatchSemanticSimilarity(received, expected, threshold = 0.8) {
+      const result = await matchesSimilarity(received, expected, threshold);
+      const pass = received === expected || result.pass;
+      if (pass) {
+        return {
+          message: () => `expected ${received} not to match semantic similarity with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to match semantic similarity with ${expected}, but it did not. Reason: ${result.reason}`,
+          pass: false,
+        };
+      }
+    },
 
-      async toPassLLMRubric(received, expected, gradingConfig) {
-        const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
-        if (gradingResult.pass) {
-          return {
-            message: () => `expected ${received} not to pass LLM Rubric with ${expected}`,
-            pass: true,
-          };
-        } else {
-          return {
-            message: () =>
-              `expected ${received} to pass LLM Rubric with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
-            pass: false,
-          };
-        }
-      },
-    });
-  }
-  ```
+    async toPassLLMRubric(received, expected, gradingConfig) {
+      const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
+      if (gradingResult.pass) {
+        return {
+          message: () => `expected ${received} not to pass LLM Rubric with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to pass LLM Rubric with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
+          pass: false,
+        };
+      }
+    },
+  });
+}
+```
 
   </TabItem>
   <TabItem value="Typescript" label="Typescript" default>
 
-  ```typescript
-  import { assertions } from 'promptfoo';
-  const { matchesSimilarity, matchesLlmRubric } = assertions;
+```typescript
+import { assertions } from 'promptfoo';
+const { matchesSimilarity, matchesLlmRubric } = assertions;
 
-  import type { GradingConfig } from 'promptfoo';
+import type { GradingConfig } from 'promptfoo';
 
-  declare global {
-    namespace jest {
-      interface Matchers<R> {
-        toMatchSemanticSimilarity(expected: string, threshold?: number): R;
-        toPassLLMRubric(expected: string, gradingConfig: GradingConfig): R;
-      }
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toMatchSemanticSimilarity(expected: string, threshold?: number): R;
+      toPassLLMRubric(expected: string, gradingConfig: GradingConfig): R;
     }
   }
+}
 
-  export function installJestMatchers() {
-    expect.extend({
-      async toMatchSemanticSimilarity(
-        received: string,
-        expected: string,
-        threshold: number = 0.8,
-      ): Promise<jest.CustomMatcherResult> {
-        const result = await matchesSimilarity(received, expected, threshold);
-        const pass = received === expected || result.pass;
-        if (pass) {
-          return {
-            message: () => `expected ${received} not to match semantic similarity with ${expected}`,
-            pass: true,
-          };
-        } else {
-          return {
-            message: () =>
-              `expected ${received} to match semantic similarity with ${expected}, but it did not. Reason: ${result.reason}`,
-            pass: false,
-          };
-        }
-      },
+export function installJestMatchers() {
+  expect.extend({
+    async toMatchSemanticSimilarity(
+      received: string,
+      expected: string,
+      threshold: number = 0.8,
+    ): Promise<jest.CustomMatcherResult> {
+      const result = await matchesSimilarity(received, expected, threshold);
+      const pass = received === expected || result.pass;
+      if (pass) {
+        return {
+          message: () => `expected ${received} not to match semantic similarity with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to match semantic similarity with ${expected}, but it did not. Reason: ${result.reason}`,
+          pass: false,
+        };
+      }
+    },
 
-      async toPassLLMRubric(
-        received: string,
-        expected: string,
-        gradingConfig: GradingConfig,
-      ): Promise<jest.CustomMatcherResult> {
-        const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
-        if (gradingResult.pass) {
-          return {
-            message: () => `expected ${received} not to pass LLM Rubric with ${expected}`,
-            pass: true,
-          };
-        } else {
-          return {
-            message: () =>
-              `expected ${received} to pass LLM Rubric with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
-            pass: false,
-          };
-        }
-      },
-    });
-  }
-  ```
+    async toPassLLMRubric(
+      received: string,
+      expected: string,
+      gradingConfig: GradingConfig,
+    ): Promise<jest.CustomMatcherResult> {
+      const gradingResult = await matchesLlmRubric(expected, received, gradingConfig);
+      if (gradingResult.pass) {
+        return {
+          message: () => `expected ${received} not to pass LLM Rubric with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to pass LLM Rubric with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
+          pass: false,
+        };
+      }
+    },
+  });
+}
+```
 
   </TabItem>
 </Tabs>

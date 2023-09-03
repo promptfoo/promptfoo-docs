@@ -8,7 +8,7 @@ For an example of using promptfoo in a Google Colab/Jupyter Notebook, **[see thi
 
 This notebook shows how to
 
-1.   Set up & configure Promptfoo
-2.   Set up secrets (such as an OpenAI or Anthropic API key)
-3.   Run an eval of LLM models, prompts and outputs
-4.   Run another eval that includes Python code
+1.  Set up & configure Promptfoo
+2.  Set up secrets (such as an OpenAI or Anthropic API key)
+3.  Run an eval of LLM models, prompts and outputs
+4.  Run another eval that includes Python code

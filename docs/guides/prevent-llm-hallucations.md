@@ -7,6 +7,7 @@ sidebar_label: Preventing hallucinations
 LLMs have great potential, but they are prone to generating incorrect or misleading information, a phenomenon known as hallucination. Factuality and LLM "grounding" is a key concern for developers building LLM applications.
 
 LLM app developers have several tools at their disposal:
+
 - **Prompt and LLM parameter tuning** to decrease the likelihood of hallucinations.
 - **Retrieval-augmented generation** (RAG) with embeddings and vector search to supply additional grounding context.
 - **Fine-tuning** to improve accuracy.
@@ -65,7 +66,7 @@ In this configuration, we're using the `llm-rubric` assertion type to ensure tha
 
 ## Evaluating anti-hallucination techniques
 
-Below are some examples of how to evaluate different hallucination mitigations on your own data.  Remember, **testing on your own data is key**.  There is no one-size-fits-all solution to hallucination.
+Below are some examples of how to evaluate different hallucination mitigations on your own data. Remember, **testing on your own data is key**. There is no one-size-fits-all solution to hallucination.
 
 ### Prompt tuning
 
@@ -89,7 +90,7 @@ You are a helpful assistant. Reply with a concise answer to this inquiry: "{{que
 - If you are not confident in your answer, begin your response with "Unsure".
 ```
 
-Note that the above is just an example.  The key here is to use a test framework that allows you to adapt the prompt to your use case and iterate rapidly on multiple variations of the prompt.
+Note that the above is just an example. The key here is to use a test framework that allows you to adapt the prompt to your use case and iterate rapidly on multiple variations of the prompt.
 
 Once you've set up a few prompts, add them to the config file:
 
@@ -104,7 +105,7 @@ tests:
         value: does not claim to know the current weather in New York
 ```
 
-Now, we'll run `promptfoo eval` and produce a quantified side-by-side view that scores the performance of multiple prompts against each other.  Running the `promptfoo view` command afterwards displays the following assessment:
+Now, we'll run `promptfoo eval` and produce a quantified side-by-side view that scores the performance of multiple prompts against each other. Running the `promptfoo view` command afterwards displays the following assessment:
 
 ![llm hallucination eval](/img/docs/hallucination-example-1.png)
 
@@ -127,7 +128,7 @@ tests:
   # ...
 ```
 
-The default prompt shown on the left side has a pass rate of **55%**.  On the right side, the tuned prompt has a pass rate of **94%**.
+The default prompt shown on the left side has a pass rate of **55%**. On the right side, the tuned prompt has a pass rate of **94%**.
 
 For more info on running the eval itself, see the [Getting Started guide](/docs/getting-started).
 
@@ -163,7 +164,7 @@ question = sys.argv[1]
 print(agent.run(question))
 ```
 
-We use LangChain in this example because it's a popular library, but any custom script will do.  More generally, your retrieval-augmented provider should hook into reliable, non-LLM datasources.
+We use LangChain in this example because it's a popular library, but any custom script will do. More generally, your retrieval-augmented provider should hook into reliable, non-LLM datasources.
 
 Then, we can use this provider in our evaluation and compare the results:
 
@@ -188,7 +189,7 @@ Running `promptfoo eval` and `promptfoo view` will produce a similar view to the
 
 ### Fine tuning
 
-Suppose you spent some time fine-tuning a model and wanted to compare different versions of the same model.  Once you've fine-tuned a model, you should evaluate it by testing it side-by-side with the original or other variations.
+Suppose you spent some time fine-tuning a model and wanted to compare different versions of the same model. Once you've fine-tuned a model, you should evaluate it by testing it side-by-side with the original or other variations.
 
 In this example, we use the Ollama provider to test two versions of Meta's Llama 2 model that are fine-tuned on different data:
 
@@ -211,9 +212,9 @@ tests:
 
 Several open-source projects such as [Guidance](https://github.com/guidance-ai/guidance) and [Outlines](https://github.com/normal-computing/outlines) make it possible to control LLM outputs in a more fundamental way.
 
-Both work by adjusting the probability of _logits_, the output of the last layer in the LLM neural network.  In the normal case, these logits are decoded into regular text outputs.  These libraries introduce _logit bias_, which allows them to preference certain tokens over others.
+Both work by adjusting the probability of _logits_, the output of the last layer in the LLM neural network. In the normal case, these logits are decoded into regular text outputs. These libraries introduce _logit bias_, which allows them to preference certain tokens over others.
 
-With an appropriately set logit bias, you can force an LLM to choose among a fixed set of tokens.  For example, this completion forces a choice between several possibilities:
+With an appropriately set logit bias, you can force an LLM to choose among a fixed set of tokens. For example, this completion forces a choice between several possibilities:
 
 ```py
 import outlines.text.generate as generate
@@ -236,8 +237,8 @@ With this approach, you can nearly guarantee that the LLM cannot suggest other c
 
 ## Your workflow
 
-The key takeaway from this article is that you should set up tests and run them continuously as you iterate.  Without test cases and a framework for tracking results, you will likely be feeling around in the dark with trial and error.
+The key takeaway from this article is that you should set up tests and run them continuously as you iterate. Without test cases and a framework for tracking results, you will likely be feeling around in the dark with trial and error.
 
 ![test-driven llm ops](https://user-images.githubusercontent.com/310310/241601160-cf0461a7-2832-4362-9fbb-4ebd911d06ff.png)
 
-A development loop with evals will allow you to make quantitative statements such as "we have reduced hallucinations by 20%".  Using these tests as a basis, you can iterate on your LLM app with confidence.
+A development loop with evals will allow you to make quantitative statements such as "we have reduced hallucinations by 20%". Using these tests as a basis, you can iterate on your LLM app with confidence.

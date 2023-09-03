@@ -25,6 +25,6 @@ The web viewer is under development and will eventually include features such as
 
 ## Sharing
 
-To get a URL that you can send to others, click the 'Share' button in the top right.  This will generate a URL that others can load to view your config and results.
+To get a URL that you can send to others, click the 'Share' button in the top right. This will generate a URL that others can load to view your config and results.
 
-Shared data is temporarily stored on our servers, and permanently deleted after 1 week, at which point the URL will cease to function.  Shared data is "private" in the sense that the UUID-based URL is unguessable, but if you publish your URL then anyone can access it (similar to a Github secret gist).
+Shared data is temporarily stored on our servers, and permanently deleted after 1 week, at which point the URL will cease to function. Shared data is "private" in the sense that the UUID-based URL is unguessable, but if you publish your URL then anyone can access it (similar to a Github secret gist).

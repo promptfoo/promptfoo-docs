@@ -40,8 +40,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/typpo/promptfoo-docs/tree/main',
+          editUrl: 'https://github.com/typpo/promptfoo-docs/tree/main',
           sidebarCollapsed: false,
         },
         /*
@@ -141,7 +140,7 @@ const config = {
         indexName: 'promptfoo',
       },
     }),
-  plugins: [require.resolve("docusaurus-plugin-image-zoom")],
+  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
 };
 
 module.exports = config;

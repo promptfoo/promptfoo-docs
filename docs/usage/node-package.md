@@ -105,7 +105,7 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
 
 ### Provider functions
 
-A `ProviderFunction` is a Javascript function that implements an LLM API call.  It takes a prompt string and returns an LLM response of the following type:
+A `ProviderFunction` is a Javascript function that implements an LLM API call. It takes a prompt string and returns an LLM response of the following type:
 
 ```typescript
 type ProviderFunction = (prompt: string) => Promise<ProviderResponse>;
@@ -118,10 +118,14 @@ interface ProviderResponse {
 
 ### Assertion functions
 
-An `Assertion` can take an `AssertionFunction` as its `value`.  `AssertionFunction` has the following type:
+An `Assertion` can take an `AssertionFunction` as its `value`. `AssertionFunction` has the following type:
 
 ```typescript
-type AssertionFunction = (output: string, testCase: AtomicTestCase, assertion: Assertion) => Promise<GradingResult>;
+type AssertionFunction = (
+  output: string,
+  testCase: AtomicTestCase,
+  assertion: Assertion,
+) => Promise<GradingResult>;
 
 interface GradingResult {
   pass: boolean;
@@ -131,28 +135,25 @@ interface GradingResult {
 ```
 
 `AssertionFunction` parameters:
+
 - `output`: the LLM output
 - `testCase`: the test case
 - `assertion`: the assertion object
-
 
 ### Example
 
 `promptfoo` exports an `evaluate` function that you can use to run prompt evaluations.
 
 ```js
-import promptfoo from "promptfoo";
+import promptfoo from 'promptfoo';
 
 const results = await promptfoo.evaluate({
-  prompts: [
-    "Rephrase this in French: {{body}}",
-    "Rephrase this like a pirate: {{body}}",
-  ],
-  providers: ["openai:gpt-3.5-turbo"],
+  prompts: ['Rephrase this in French: {{body}}', 'Rephrase this like a pirate: {{body}}'],
+  providers: ['openai:gpt-3.5-turbo'],
   tests: [
     {
       vars: {
-        body: "Hello world",
+        body: 'Hello world',
       },
     },
     {
@@ -269,16 +270,8 @@ Here's the example output in JSON format:
     }
   },
   "table": [
-    [
-      "Rephrase this in French: {{body}}",
-      "Rephrase this like a pirate: {{body}}",
-      "body"
-    ],
-    [
-      "Bonjour le monde",
-      "Ahoy thar, me hearties! Avast ye, world!",
-      "Hello world"
-    ],
+    ["Rephrase this in French: {{body}}", "Rephrase this like a pirate: {{body}}", "body"],
+    ["Bonjour le monde", "Ahoy thar, me hearties! Avast ye, world!", "Hello world"],
     [
       "J'ai faim.",
       "Arrr, me belly be empty and me throat be parched! I be needin' some grub, matey!",

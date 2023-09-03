@@ -21,4 +21,3 @@ Supported environment variables:
 
 - `LOCALAI_BASE_URL` - defaults to `http://localhost:8080/v1`
 - `REQUEST_TIMEOUT_MS` - maximum request time, in milliseconds. Defaults to 60000.
-

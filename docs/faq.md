@@ -16,7 +16,7 @@ No, API keys are set as local environment variables and never transmitted to any
 
 No, promptfoo runs locally and all data remains on your local machine.
 
-If you _explicitly_ run the [share command](/docs/usage/sharing), then your inputs/outputs are stored in Cloudflare KV for 2 weeks.  This only happens when you run `promptfoo share` or click the "Share" button in the web UI.
+If you _explicitly_ run the [share command](/docs/usage/sharing), then your inputs/outputs are stored in Cloudflare KV for 2 weeks. This only happens when you run `promptfoo share` or click the "Share" button in the web UI.
 
 ### Do you collect any PII?
 

@@ -4,9 +4,9 @@ sidebar_position: 20
 
 # Azure
 
-The `azureopenai` provider is an interface to OpenAI through Azure.  It behaves the same as the [OpenAI provider](/docs/providers/openai).
+The `azureopenai` provider is an interface to OpenAI through Azure. It behaves the same as the [OpenAI provider](/docs/providers/openai).
 
-It requires the `AZURE_OPENAI_API_KEY` environment variable to be set.  All `OPENAI_*` environment variables are supported.
+It requires the `AZURE_OPENAI_API_KEY` environment variable to be set. All `OPENAI_*` environment variables are supported.
 
 - `azureopenai:chat` - defaults to gpt-3.5-turbo
 - `azureopenai:completion` - defaults to `text-davinci-003`
@@ -24,4 +24,3 @@ providers:
         temperature: 0.5
         max_tokens: 1024
 ```
-

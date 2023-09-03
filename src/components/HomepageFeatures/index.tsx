@@ -13,32 +13,27 @@ const FeatureList: FeatureItem[] = [
     title: 'Create a list of test cases',
     Svg: require('@site/static/img/svgrepo_science2.svg').default,
     description: (
-      <>
-        Use a representative sample of user inputs to reduce subjectivity when tuning prompts.
-      </>
+      <>Use a representative sample of user inputs to reduce subjectivity when tuning prompts.</>
     ),
   },
   {
     title: 'Set up evaluation metrics',
     Svg: require('@site/static/img/svgrepo_science.svg').default,
-    description: (
-      <>
-        Use built-in metrics, LLM-graded evals, or define your own custom metrics.
-      </>
-    ),
+    description: <>Use built-in metrics, LLM-graded evals, or define your own custom metrics.</>,
   },
   {
     title: 'Select the best prompt & model',
     Svg: require('@site/static/img/svgrepo_electricity.svg').default,
     description: (
       <>
-        Compare prompts and model outputs side-by-side, or integrate the library into your existing test/CI workflow.
+        Compare prompts and model outputs side-by-side, or integrate the library into your existing
+        test/CI workflow.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

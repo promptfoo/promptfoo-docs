@@ -18,24 +18,24 @@ Example:
 
 ```yaml
 tests:
-  - description: "Test if output is equal to the expected value"
+  - description: 'Test if output is equal to the expected value'
     vars:
-      example: "Hello, World!"
+      example: 'Hello, World!'
     assert:
       - type: equals
-        value: "Hello, World!"
+        value: 'Hello, World!'
 ```
 
 ## Assertion properties
 
-| Property  | Type   | Required | Description                                                                                       |
-| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
-| type      | string | Yes      | Type of assertion                                                                                 |
-| value     | string | No       | The expected value, if applicable                                                                 |
-| threshold | number | No       | The threshold value, only applicable for similarity                                               |
-| weight    | string | No       | How heavily to weigh the assertion. Defaults to 1.0 |
-| provider  | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/providers) |
-| rubricPrompt | string | No       | LLM rubric grading prompt |
+| Property     | Type   | Required | Description                                                                         |
+| ------------ | ------ | -------- | ----------------------------------------------------------------------------------- |
+| type         | string | Yes      | Type of assertion                                                                   |
+| value        | string | No       | The expected value, if applicable                                                   |
+| threshold    | number | No       | The threshold value, only applicable for similarity                                 |
+| weight       | string | No       | How heavily to weigh the assertion. Defaults to 1.0                                 |
+| provider     | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/providers) |
+| rubricPrompt | string | No       | LLM rubric grading prompt                                                           |
 
 ## Assertion Types
 
@@ -71,7 +71,7 @@ Example:
 ```yaml
 assert:
   - type: equals
-    value: "The expected output"
+    value: 'The expected output'
 ```
 
 Here are the new additions to the "Assertion Types" section:
@@ -85,7 +85,7 @@ Example:
 ```yaml
 assert:
   - type: contains
-    value: "The expected substring"
+    value: 'The expected substring'
 ```
 
 The `icontains` is the same, except it ignores case:
@@ -93,7 +93,7 @@ The `icontains` is the same, except it ignores case:
 ```yaml
 assert:
   - type: icontains
-    value: "The expected substring"
+    value: 'The expected substring'
 ```
 
 ### Regex
@@ -117,7 +117,7 @@ This example checks if the output starts with "Yes":
 ```yaml
 assert:
   - type: starts-with
-    value: "Yes"
+    value: 'Yes'
 ```
 
 ### Contains-Any
@@ -130,9 +130,9 @@ Example:
 assert:
   - type: contains-any
     value:
-      - "Value 1"
-      - "Value 2"
-      - "Value 3"
+      - 'Value 1'
+      - 'Value 2'
+      - 'Value 3'
 ```
 
 ### Contains-All
@@ -145,9 +145,9 @@ Example:
 assert:
   - type: contains-all
     value:
-      - "Value 1"
-      - "Value 2"
-      - "Value 3"
+      - 'Value 1'
+      - 'Value 2'
+      - 'Value 3'
 ```
 
 ### Is-JSON
@@ -161,7 +161,7 @@ assert:
   - type: is-json
 ```
 
-You may optionally set a `value` as a JSON schema.  If set, the output will be validated against this schema:
+You may optionally set a `value` as a JSON schema. If set, the output will be validated against this schema:
 
 ```yaml
 assert:
@@ -183,25 +183,19 @@ assert:
 JSON is valid YAML, so you can also just copy in any JSON schema directly:
 
 ```yaml
-  assert:
-    - type: is-json
-      value: {
-        "required": ["latitude", "longitude"],
-        "type": "object",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "minimum": -90,
-            "maximum": 90,
+assert:
+  - type: is-json
+    value:
+      {
+        'required': ['latitude', 'longitude'],
+        'type': 'object',
+        'properties':
+          {
+            'latitude': { 'type': 'number', 'minimum': -90, 'maximum': 90 },
+            'longitude': { 'type': 'number', 'minimum': -180, 'maximum': 180 },
           },
-          "longitude": {
-            "type": "number",
-            "minimum": -180,
-            "maximum": 180,
-          }
-        }
       }
-  ```
+```
 
 ### Contains-JSON
 
@@ -278,24 +272,24 @@ For example, if your test case has a var `example`, you can access it in your Ja
 
 ```yaml
 tests:
-  - description: "Test with context"
+  - description: 'Test with context'
     vars:
-      example: "Example text"
+      example: 'Example text'
     assert:
       - type: javascript
-        value: "output.includes(context.vars.example)"
+        value: 'output.includes(context.vars.example)'
 ```
 
 You can also use the `context` variable to perform more complex checks. For example, you could check if the output is longer than a certain length defined in your test case variables:
 
 ```yaml
 tests:
-  - description: "Test with context"
+  - description: 'Test with context'
     vars:
       min_length: 10
     assert:
       - type: javascript
-        value: "output.length >= context.vars.min_length"
+        value: 'output.length >= context.vars.min_length'
 ```
 
 ### Python
@@ -327,7 +321,7 @@ Example:
 ```yaml
 assert:
   - type: webhook
-    value: "https://example.com/webhook"
+    value: 'https://example.com/webhook'
 ```
 
 The webhook will receive a POST request with a JSON payload containing the LLM output and the context (test case variables). For example, if the LLM output is "Hello, World!" and the test case has a variable `example` set to "Example text", the payload will look like:
@@ -375,7 +369,7 @@ Example:
 ```yaml
 assert:
   - type: similar
-    value: "The expected output"
+    value: 'The expected output'
     threshold: 0.8
 ```
 
@@ -388,7 +382,7 @@ Example:
 ```yaml
 assert:
   - type: llm-rubric
-    value: "The expected output"
+    value: 'The expected output'
 ```
 
 Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
@@ -397,7 +391,7 @@ Here's an example output that indicates PASS/FAIL based on LLM assessment ([see 
 
 #### Using variables in the rubric
 
-You can use test `vars` in the LLM rubric.  This example uses the `question` variable to help detect hallucinations:
+You can use test `vars` in the LLM rubric. This example uses the `question` variable to help detect hallucinations:
 
 ```yaml
 providers: [openai:gpt-3.5-turbo]
@@ -415,7 +409,7 @@ tests:
 
 #### Overriding the LLM grader
 
-By default, `llm-rubric` uses GPT-4 for grading.  If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader.  There are several ways to do this, depending on your preferred workflow:
+By default, `llm-rubric` uses GPT-4 for grading. If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader. There are several ways to do this, depending on your preferred workflow:
 
 1. Using the `--grader` CLI option:
 
@@ -427,8 +421,8 @@ By default, `llm-rubric` uses GPT-4 for grading.  If you do not have access to G
 
    ```yaml
    defaultTest:
-       options:
-         provider: gpt-3.5-turbo
+     options:
+       provider: gpt-3.5-turbo
    tests:
      - description: Use LLM to evaluate output
        assert:
@@ -440,12 +434,12 @@ By default, `llm-rubric` uses GPT-4 for grading.  If you do not have access to G
 
    ```yaml
    tests:
-    - description: Use LLM to evaluate output
-      assert:
-        - type: llm-rubric
-          value: Is spoken like a pirate
-          provider: gpt-3.5-turbo
-    ```
+     - description: Use LLM to evaluate output
+       assert:
+         - type: llm-rubric
+           value: Is spoken like a pirate
+           provider: gpt-3.5-turbo
+   ```
 
 Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
 
@@ -475,10 +469,10 @@ Here's an example:
 tests:
   assert:
     - type: equals
-      value: "Hello world"
+      value: 'Hello world'
       weight: 2
     - type: contains
-      value: "world"
+      value: 'world'
       weight: 1
 ```
 
@@ -488,7 +482,7 @@ If the LLM output is `Goodbye world`, the `equals` assertion fails but the `cont
 
 ### Setting a score requirement
 
-Test cases support an optional `threshold` property.  If set, the pass/fail status of a test case is determined by whether the combined weighted score of all assertions exceeds the threshold value.
+Test cases support an optional `threshold` property. If set, the pass/fail status of a test case is determined by whether the combined weighted score of all assertions exceeds the threshold value.
 
 For example:
 
@@ -497,14 +491,14 @@ tests:
   threshold: 0.5
   assert:
     - type: equals
-      value: "Hello world"
+      value: 'Hello world'
       weight: 2
     - type: contains
-      value: "world"
+      value: 'world'
       weight: 1
 ```
 
-If the LLM outputs `Goodbye world`, the `equals` assertion fails but the `contains` assertion passes and the final score is 0.33.  Because this is below the 0.5 threshold, the test case fails.  If the threshold were lowered to 0.2, the test case would succeed.
+If the LLM outputs `Goodbye world`, the `equals` assertion fails but the `contains` assertion passes and the final score is 0.33. Because this is below the 0.5 threshold, the test case fails. If the threshold were lowered to 0.2, the test case would succeed.
 
 ## Load an external tests file
 
@@ -514,11 +508,11 @@ To add an assertion to a test case in a vars file, use the special `__expected` 
 
 Here's an example tests.csv:
 
-| text | \_\_expected |
-| --- | --- |
-| Hello, world! | Bonjour le monde |
-| Goodbye, everyone! | fn:output.includes('Au revoir'); |
-| I am a pineapple | grade:doesn't reference any fruits besides pineapple |
+| text               | \_\_expected                                         |
+| ------------------ | ---------------------------------------------------- |
+| Hello, world!      | Bonjour le monde                                     |
+| Goodbye, everyone! | fn:output.includes('Au revoir');                     |
+| I am a pineapple   | grade:doesn't reference any fruits besides pineapple |
 
 All assertion types can be used in `__expected`. The column supports exactly one assertion.
 
