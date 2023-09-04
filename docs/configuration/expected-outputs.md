@@ -268,7 +268,17 @@ assert:
 
 #### Using test context
 
-The `context` variable contains test case variables.
+The `context` variable contains the prompt and test case variables:
+
+```ts
+interface AssertContext {
+  // Raw prompt sent to LLM
+  prompt: string;
+
+  // Test case variables
+  vars: Record<string, string | object>;
+}
+```
 
 For example, if your test case has a var `example`, you can access it in your JavaScript function like this:
 
@@ -332,6 +342,7 @@ The webhook will receive a POST request with a JSON payload containing the LLM o
 {
   "output": "Hello, World!",
   "context": {
+    "prompt": "Greet the user",
     "vars": {
       "example": "Example text"
     }
