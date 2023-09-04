@@ -28,6 +28,8 @@ First, we'll create custom jest matchers:
 
 - `toMatchSemanticSimilarity`: Compares two strings for semantic similarity.
 - `toPassLLMRubric`: Checks if a string meets the specified LLM Rubric criteria.
+- `toMatchFactuality`: Checks if a string meets the specified factuality criteria.
+- `toMatchClosedQA`: Checks if a string meets the specified question-answering criteria.
 
 Create a new file called `matchers.js` and add the following:
 
@@ -68,6 +70,38 @@ export function installJestMatchers() {
         return {
           message: () =>
             `expected ${received} to pass LLM Rubric with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
+          pass: false,
+        };
+      }
+    },
+
+    async toMatchFactuality(input, expected, received, gradingConfig) {
+      const gradingResult = await matchesFactuality(input, expected, received, gradingConfig);
+      if (gradingResult.pass) {
+        return {
+          message: () => `expected ${received} not to match factuality with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to match factuality with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
+          pass: false,
+        };
+      }
+    },
+
+    async toMatchClosedQA(input, expected, received, gradingConfig) {
+      const gradingResult = await matchesClosedQa(input, expected, received, gradingConfig);
+      if (gradingResult.pass) {
+        return {
+          message: () => `expected ${received} not to match ClosedQA with ${expected}`,
+          pass: true,
+        };
+      } else {
+        return {
+          message: () =>
+            `expected ${received} to match ClosedQA with ${expected}, but it did not. Reason: ${gradingResult.reason}`,
           pass: false,
         };
       }

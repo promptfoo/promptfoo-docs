@@ -27,6 +27,8 @@ First, we'll create custom chai assertions:
 
 - `toMatchSemanticSimilarity`: Compares two strings for semantic similarity.
 - `toPassLLMRubric`: Checks if a string meets the specified LLM Rubric criteria.
+- `toMatchFactuality`: Checks if a string meets the specified factuality criteria.
+- `toMatchClosedQA`: Checks if a string meets the specified question-answering criteria.
 
 Create a new file called `assertions.js` and add the following:
 
@@ -60,6 +62,30 @@ Assertion.addAsyncMethod('toPassLLMRubric', async function (expected, gradingCon
     gradingResult.pass,
     `expected #{this} to pass LLM Rubric with #{exp}, but it did not. Reason: ${gradingResult.reason}`,
     `expected #{this} not to pass LLM Rubric with #{exp}`,
+    expected,
+  );
+});
+
+Assertion.addAsyncMethod('toMatchFactuality', async function (input, expected, gradingConfig) {
+  const received = this._obj;
+  const gradingResult = await matchesFactuality(input, expected, received, gradingConfig);
+
+  this.assert(
+    gradingResult.pass,
+    `expected #{this} to match factuality with #{exp}, but it did not. Reason: ${gradingResult.reason}`,
+    `expected #{this} not to match factuality with #{exp}`,
+    expected,
+  );
+});
+
+Assertion.addAsyncMethod('toMatchClosedQA', async function (input, expected, gradingConfig) {
+  const received = this._obj;
+  const gradingResult = await matchesClosedQa(input, expected, received, gradingConfig);
+
+  this.assert(
+    gradingResult.pass,
+    `expected #{this} to match ClosedQA with #{exp}, but it did not. Reason: ${gradingResult.reason}`,
+    `expected #{this} not to match ClosedQA with #{exp}`,
     expected,
   );
 });
