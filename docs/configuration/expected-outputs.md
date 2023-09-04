@@ -28,35 +28,37 @@ tests:
 
 ## Assertion properties
 
-| Property     | Type   | Required | Description                                                                         |
-| ------------ | ------ | -------- | ----------------------------------------------------------------------------------- |
-| type         | string | Yes      | Type of assertion                                                                   |
-| value        | string | No       | The expected value, if applicable                                                   |
-| threshold    | number | No       | The threshold value, only applicable for similarity                                 |
-| weight       | string | No       | How heavily to weigh the assertion. Defaults to 1.0                                 |
-| provider     | string | No       | Some assertions (similarity, llm-rubric) require an [LLM provider](/docs/providers) |
-| rubricPrompt | string | No       | LLM rubric grading prompt                                                           |
+| Property     | Type   | Required | Description                                                                                          |
+| ------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------- |
+| type         | string | Yes      | Type of assertion                                                                                    |
+| value        | string | No       | The expected value, if applicable                                                                    |
+| threshold    | number | No       | The threshold value, only applicable for similarity                                                  |
+| weight       | string | No       | How heavily to weigh the assertion. Defaults to 1.0                                                  |
+| provider     | string | No       | Some assertions (similarity, llm-rubric, model-graded-\*) require an [LLM provider](/docs/providers) |
+| rubricPrompt | string | No       | LLM rubric grading prompt                                                                            |
 
-## Assertion Types
+## Assertion types
 
-| Assertion Type  | Returns true if...                                                        |
-| --------------- | ------------------------------------------------------------------------- |
-| `equals`        | output matches exactly                                                    |
-| `contains`      | output contains substring                                                 |
-| `icontains`     | output contains substring, case insensitive                               |
-| `regex`         | output matches regex                                                      |
-| `starts-with`   | output starts with string                                                 |
-| `contains-any ` | output contains any of the listed substrings                              |
-| `contains-all`  | output contains all list of substrings                                    |
-| `is-json`       | output is valid json (optional json schema validation)                    |
-| `contains-json` | output contains valid json (optional json schema validation)              |
-| `javascript`    | provided Javascript function validates the output                         |
-| `python`        | provided Python function validates the output                             |
-| `webhook`       | provided webhook returns `{pass: true}`                                   |
-| `similar`       | embeddings and cosine similarity are above a threshold                    |
-| `llm-rubric`    | LLM output matches a given rubric, using a Language Model to grade output |
-| `rouge-n`       | Rouge-N score is above a given threshold                                  |
-| `levenshtein`   | Levenshtein distance is below a threshold                                 |
+| Assertion Type                                 | Returns true if...                                                              |
+| ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| [equals](#equality)                            | output matches exactly                                                          |
+| [contains](#contains)                          | output contains substring                                                       |
+| [icontains](#contains)                         | output contains substring, case insensitive                                     |
+| [regex](#regex)                                | output matches regex                                                            |
+| [starts-with](#starts-with)                    | output starts with string                                                       |
+| [contains-any](#contains-any)                  | output contains any of the listed substrings                                    |
+| [contains-all](#contains-all)                  | output contains all list of substrings                                          |
+| [is-json](#is-json)                            | output is valid json (optional json schema validation)                          |
+| [contains-json](#contains-json)                | output contains valid json (optional json schema validation)                    |
+| [javascript](#javascript)                      | provided Javascript function validates the output                               |
+| [python](#python)                              | provided Python function validates the output                                   |
+| [webhook](#webhook)                            | provided webhook returns {pass: true}                                           |
+| [similar](#similarity)                         | embeddings and cosine similarity are above a threshold                          |
+| rouge-n                                        | Rouge-N score is above a given threshold                                        |
+| [levenshtein](#levenshtein-distance)           | Levenshtein distance is below a threshold                                       |
+| [llm-rubric](#model-graded-evals)              | LLM output matches a given rubric, using a Language Model to grade output       |
+| [model-graded-factuality](#model-graded-evals) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
+| [model-graded-closedqa](#model-graded-evals)   | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
@@ -373,16 +375,44 @@ assert:
     threshold: 0.8
 ```
 
-### LLM-Rubric
+### Levenshtein distance
 
-The `llm-rubric` assertion checks if the LLM output matches a given rubric, using a Language Model to grade the output based on the rubric.
+The `levenshtein` assertion checks if the LLM output is within a given edit distance from an expected value.
 
 Example:
 
 ```yaml
 assert:
-  - type: llm-rubric
-    value: 'The expected output'
+  # Ensure Levenshtein distance from "hello world" is <= 5
+  - type: levenshtein
+    threshold: 5
+    value: hello world
+```
+
+### Model-graded evals
+
+There are 3 types of model-graded assertions:
+
+- `llm-rubric` - checks if the LLM output matches given requirements, using a language model to grade the output based on the rubric.
+- `model-graded-closedqa` - similar to the above, a "criteria-checking" eval which specifies the evaluation prompt as checking a given criteria. Uses the prompt from OpenAI's public evals.
+- `model-graded-factuality` - a factual consistency eval which, given a completion `A` and reference answer `B` evaluates whether A is a subset of B, A is a superset of B, A and B are equivalent, A and B disagree, or A and B differ, but difference don't matter from the perspective of factuality. Uses the prompt from OpenAI's public evals.
+
+Example of `llm-rubric` and/or `model-graded-closedqa`:
+
+```yaml
+assert:
+  - type: model-graded-closedqa
+    # Make sure the LLM output adheres to this criteria:
+    value: Is not apologetic
+```
+
+Example of factuality check:
+
+```yaml
+assert:
+  - type: model-graded-factuality
+    # Make sure the LLM output is consistent with this statement:
+    value: Sacramento is the capital of California
 ```
 
 Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
@@ -409,7 +439,7 @@ tests:
 
 #### Overriding the LLM grader
 
-By default, `llm-rubric` uses GPT-4 for grading. If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader. There are several ways to do this, depending on your preferred workflow:
+By default, model-graded asserts use GPT-4 for grading. If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader. There are several ways to do this, depending on your preferred workflow:
 
 1. Using the `--grader` CLI option:
 
@@ -442,20 +472,6 @@ By default, `llm-rubric` uses GPT-4 for grading. If you do not have access to GP
    ```
 
 Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
-
-### Levenshtein distance
-
-The `levenshtein` assertion checks if the LLM output is within a given edit distance from an expected value.
-
-Example:
-
-```yaml
-assert:
-  # Ensure Levenshtein distance from "hello world" is <= 5
-  - type: levenshtein
-    threshold: 5
-    value: hello world
-```
 
 ## Weighted assertions
 

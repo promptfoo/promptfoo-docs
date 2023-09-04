@@ -120,8 +120,8 @@ tests:
       - type: contains-json
       - type: similar
         value: ensures that output is semantically similar to this text
-      - type: llm-rubric
-        value: ensure that output contains a reference to X
+      - type: model-graded-closedqa
+        value: must contain a reference to X
 ```
 
 </details>
@@ -149,8 +149,8 @@ defaultTest:
       value: AI language model
 
     # Verify that the output doesn't apologize, using model-graded eval
-    - type: llm-rubric
-      value: Does not contain an apology
+    - type: model-graded-closedqa
+      value: must not contain an apology
 
     # Prefer shorter outputs using a scoring function
     - type: javascript

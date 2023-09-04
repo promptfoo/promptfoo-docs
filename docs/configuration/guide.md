@@ -91,7 +91,7 @@ To learn more about assertions, see docs on configuring [expected outputs](/docs
 
 #### Default test cases
 
-You can use `defaultTest` to set an assertion for all tests. In this case, we use an `llm-rubric` assertion to ensure that the LLM does not refer to itself as an AI.
+You can use `defaultTest` to set an assertion for all tests. In this case, we use a `model-graded-closedqa` assertion to ensure that the LLM does not refer to itself as an AI.
 
 ```yaml
 prompts: [prompt1.txt, prompt2.txt]
@@ -99,7 +99,7 @@ providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 // highlight-start
 defaultTest:
   assert:
-    - type: llm-rubric
+    - type: model-graded-closedqa
       value: does not describe self as an AI, model, or chatbot
 // highlight-end
 tests:
@@ -144,7 +144,7 @@ tests:
 // highlight-start
 assertionTemplates:
     noAIreference:
-      - type: llm-rubric
+      - type: model-graded-closedqa
         value: does not describe self as an AI, model, or chatbot
     startsUpperCase:
       - type: javascript
@@ -362,13 +362,13 @@ A test case represents a single example input that is fed into all prompts and p
 
 More details on using assertions, including examples [here](/docs/configuration/expected-outputs).
 
-| Property  | Type   | Required | Description                                                                             |
-| --------- | ------ | -------- | --------------------------------------------------------------------------------------- |
-| type      | string | Yes      | Type of assertion                                                                       |
-| value     | string | No       | The expected value, if applicable                                                       |
-| threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)               |
-| provider  | string | No       | Some assertions (type = similar, llm-rubric) require an [LLM provider](/docs/providers) |
-| provider  | string | No       | LLM rubric grading prompt                                                               |
+| Property  | Type   | Required | Description                                                                                              |
+| --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| type      | string | Yes      | Type of assertion                                                                                        |
+| value     | string | No       | The expected value, if applicable                                                                        |
+| threshold | number | No       | The threshold value, only applicable for `type=similar` (cosine distance)                                |
+| provider  | string | No       | Some assertions (type = similar, llm-rubric, model-graded-\*) require an [LLM provider](/docs/providers) |
+| provider  | string | No       | LLM rubric grading prompt                                                                                |
 
 :::note
 
