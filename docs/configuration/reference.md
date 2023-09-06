@@ -8,27 +8,27 @@ Here is the main structure of the promptfoo configuration file:
 
 ### Config
 
-| Property                        | Type                                                                                          | Required | Description                                                                                                      |
-| ------------------------------- | --------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| description                     | string                                                                                        | No       | Optional description of what your LLM is trying to do                                                            |
+| Property                        | Type                                                                                                                 | Required | Description                                                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| description                     | string                                                                                                               | No       | Optional description of what your LLM is trying to do                                                            |
 | providers                       | string \| string[] \| [Record<string, ProviderOptions>](/docs/providers/openai#using-functions) \| ProviderOptions[] | Yes      | One or more [LLM APIs](/docs/providers) to use                                                                   |
-| prompts                         | string \| string[]                                                                            | Yes      | One or more prompt files to load                                                                                 |
-| tests                           | string \| [Test Case](#test-case)[]                                                          | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
-| defaultTest                     | Partial [Test Case](#test-case)                                                               | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
-| outputPath                      | string                                                                                        | No       | Where to write output. Writes to console/web viewer if not set.                                                  |
-| evaluateOptions.maxConcurrency  | number                                                                                        | No       | Maximum number of concurrent requests. Defaults to 4                                                             |
-| evaluateOptions.repeat          | number                                                                                        | No       | Number of times to run each test case . Defaults to 1                                                            |
-| evaluateOptions.delay           | number                                                                                        | No       | Force the test runner to wait after each API call (milliseconds)                                                 |
-| evaluateOptions.showProgressBar | boolean                                                                                       | No       | Whether to display the progress bar                                                                              |
+| prompts                         | string \| string[]                                                                                                   | Yes      | One or more prompt files to load                                                                                 |
+| tests                           | string \| [Test Case](#test-case)[]                                                                                  | Yes      | Path to a test file, OR list of LLM prompt variations (aka "test case")                                          |
+| defaultTest                     | Partial [Test Case](#test-case)                                                                                      | No       | Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example. |
+| outputPath                      | string                                                                                                               | No       | Where to write output. Writes to console/web viewer if not set.                                                  |
+| evaluateOptions.maxConcurrency  | number                                                                                                               | No       | Maximum number of concurrent requests. Defaults to 4                                                             |
+| evaluateOptions.repeat          | number                                                                                                               | No       | Number of times to run each test case . Defaults to 1                                                            |
+| evaluateOptions.delay           | number                                                                                                               | No       | Force the test runner to wait after each API call (milliseconds)                                                 |
+| evaluateOptions.showProgressBar | boolean                                                                                                              | No       | Whether to display the progress bar                                                                              |
 
 ### Test Case
 
 A test case represents a single example input that is fed into all prompts and providers.
 
 | Property             | Type                                      | Required | Description                                                                 |
-| -------------------- | ----------------------------------------- | -------- | --------------------------------------------------------------------------- |
+| -------------------- | ----------------------------------------- | -------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | description          | string                                    | No       | Description of what you're testing                                          |
-| vars                 | Record<string, string \| string[] \| any> | No       | Key-value pairs to substitute in the prompt                                 |
+| vars                 | Record<string, string \| string[] \| any> | string   | No                                                                          | Key-value pairs to substitute in the prompt. If `vars` is a plain string, it will be treated as a YAML filepath to load a var mapping from. |
 | assert               | [Assertion](#assertion)[]                 | No       | List of automatic checks to run on the LLM output                           |
 | threshold            | number                                    | No       | Test will fail if the combined score of assertions is less than this number |
 | options              | Object                                    | No       | Additional configuration settings                                           |
@@ -58,7 +58,6 @@ It automatically loads `promptfooconfig.*`, but you can use a custom config file
 :::
 
 ## Provider-related types
-
 
 ### ProviderFunction
 
@@ -129,7 +128,6 @@ interface Scenario {
   tests: TestCase[];
 }
 ```
-
 
 ### EvaluateOptions
 
@@ -220,4 +218,3 @@ interface GradingResult {
   assertion: Assertion | null;
 }
 ```
-

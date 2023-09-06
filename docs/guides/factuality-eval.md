@@ -7,13 +7,14 @@ sidebar_position: 0
 promptfoo implements OpenAI's evaluation methodology for factuality, using the [`model-graded-factuality`](/docs/configuration/expected-outputs#model-graded-evals) assertion type.
 
 The model-graded factuality check takes the following three inputs:
+
 - **Prompt**: prompt sent to the LLM
 - **Output**: text produced by the LLM
 - **Reference**: the ideal LLM output, provided by the author of the eval
 
 ## Usage
 
-In this example, we ensure that two prompts correctly output the capital of California.  The `value` provided in the assertion is the ideal answer:
+In this example, we ensure that two prompts correctly output the capital of California. The `value` provided in the assertion is the ideal answer:
 
 ```yaml
 providers: [openai:gpt-3.5-turbo]
@@ -46,6 +47,7 @@ tests:
 Scoring can be customized in the grading configuration to match your preferred level of factual agreement.
 
 The underlying evaluation classifies the LLM output into one of five categories:
+
 - A: The submitted answer is a subset of the expert answer and is fully consistent with it.
 - B: The submitted answer is a superset of the expert answer and is fully consistent with it.
 - C: The submitted answer contains all the same details as the expert answer.
@@ -67,10 +69,10 @@ assert:
       differButFactual: 0
 ```
 
-The above configuration marks the eval as failed if the LLM output is a superset of the ideal answer, or if it differs from the ideal answer even if it is still factual.  It sets a preference for an exact agreement, but a partial answer still gets a score of 0.8.
+The above configuration marks the eval as failed if the LLM output is a superset of the ideal answer, or if it differs from the ideal answer even if it is still factual. It sets a preference for an exact agreement, but a partial answer still gets a score of 0.8.
 
 ## Model grading
 
-In general, grading should be done by a model that is proficient in reasoning.  By default, promptfoo uses GPT-4 to run model-graded evals.
+In general, grading should be done by a model that is proficient in reasoning. By default, promptfoo uses GPT-4 to run model-graded evals.
 
-However, you can use any model you want to grade the evals.  To use something other than GPT-4, see [overriding the LLM grader](/docs/configuration/expected-outputs#overriding-the-llm-grader).
+However, you can use any model you want to grade the evals. To use something other than GPT-4, see [overriding the LLM grader](/docs/configuration/expected-outputs#overriding-the-llm-grader).
