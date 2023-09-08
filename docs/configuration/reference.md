@@ -204,6 +204,24 @@ interface EvaluateStats {
 }
 ```
 
+### EvaluateResult
+
+EvaluateResult roughly corresponds to a single "cell" in the grid comparison view.  It includes information on the provider, prompt, and other inputs, as well as the outputs.
+
+```typescript
+interface EvaluateResult {
+  provider: Pick<ProviderOptions, 'id'>;
+  prompt: Prompt;
+  vars: Record<string, string | object>;
+  response?: ProviderResponse;
+  error?: string;
+  success: boolean;
+  score: number;
+  latencyMs: number;
+  gradingResult?: GradingResult;
+}
+```
+
 ### GradingResult
 
 GradingResult is an object that represents the result of grading a test case. It includes whether the test case passed, the score, the reason for the result, the tokens used, and the results of any component assertions.
