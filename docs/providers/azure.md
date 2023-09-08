@@ -18,9 +18,9 @@ Config parameters may also be passed like so:
 
 ```yaml
 providers:
-  - azureopenai:chat:gpt-3.5-turbo:
-      prompts: chat_prompt
-      config:
-        temperature: 0.5
-        max_tokens: 1024
+  - id: azureopenai:chat:gpt-3.5-turbo
+    prompts: chat_prompt
+    config:
+      temperature: 0.5
+      max_tokens: 1024
 ```

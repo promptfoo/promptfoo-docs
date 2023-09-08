@@ -206,7 +206,7 @@ interface EvaluateStats {
 
 ### EvaluateResult
 
-EvaluateResult roughly corresponds to a single "cell" in the grid comparison view.  It includes information on the provider, prompt, and other inputs, as well as the outputs.
+EvaluateResult roughly corresponds to a single "cell" in the grid comparison view. It includes information on the provider, prompt, and other inputs, as well as the outputs.
 
 ```typescript
 interface EvaluateResult {

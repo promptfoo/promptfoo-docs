@@ -22,6 +22,16 @@ The OpenAI provider supports the following model formats:
 
 The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new model, or if you have a custom model. For example, if OpenAI releases gpt-5 chat completion, you could begin using it immediately with `openai:chat:gpt-5`.
 
+The OpenAI provider supports a handful of [configuration options](https://github.com/promptfoo/promptfoo/blob/main/src/providers/openai.ts#L14-L32), such as `temperature` and `functions`, which can be used to customize the behavior of the model like so:
+
+```yaml
+providers:
+  - id: openai:gpt-3.5-turbo
+    config:
+      temperature: 0
+      max_tokens: 1024
+```
+
 ## Formatting chat messages
 
 The [prompt file](/docs/configuration/parameters#prompt-files) supports a message in OpenAI's JSON prompt format. This allows you to set multiple messages including the system prompt. For example:

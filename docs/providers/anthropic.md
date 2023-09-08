@@ -19,12 +19,12 @@ Supported environment variables:
 - `ANTHROPIC_MAX_TOKENS` - maximum number of tokens to sample, defaults to 1024
 - `ANTHROPIC_TEMPERATURE` - temperature
 
-Config parameters may also be passed like so:
+[Config parameters](https://github.com/promptfoo/promptfoo/blob/main/src/providers/azureopenai.ts#L12-L26) may also be passed like so:
 
 ```yaml
 providers:
-  - anthropic:completion:claude-1:
-      prompts: chat_prompt
-      config:
-        temperature: 0
+  - id: anthropic:completion:claude-1
+    prompts: chat_prompt
+    config:
+      temperature: 0
 ```

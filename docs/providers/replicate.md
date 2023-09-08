@@ -20,3 +20,13 @@ Supported environment variables:
 - `REPLICATE_MAX_LENGTH` - `max_length` property
 - `REPLICATE_TEMPERATURE` - `temperature` property
 - `REPLICATE_REPETITION_PENALTY` - `repitition_penalty` property
+
+The Replicate provider supports several [configuration options](https://github.com/promptfoo/promptfoo/blob/main/src/providers/replicate.ts#L9-L17) that can be used to customize the behavior of the models, like so:
+
+```yaml
+providers:
+  - id: replicate:replicate/llama70b-v2-chat:...
+    config:
+      temperature: 0
+      max_length: 1024
+```
