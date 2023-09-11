@@ -98,8 +98,8 @@ You can use `promptfoo` as a library in your project by importing the `evaluate`
   ```typescript
   interface EvaluateOptions {
     maxConcurrency?: number;
+    delay?: number;
     showProgressBar?: boolean;
-    generateSuggestions?: boolean;
   }
   ```
 
@@ -162,6 +162,8 @@ const results = await promptfoo.evaluate({
       },
     },
   ],
+}, {
+  maxConcurrency: 2,
 });
 
 console.log(results);
