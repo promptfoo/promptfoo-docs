@@ -113,10 +113,10 @@ The evaluate function takes the following parameters:
 
 ### Provider functions
 
-A `ProviderFunction` is a Javascript function that implements an LLM API call. It takes a prompt string and returns an LLM response of the following type:
+A `ProviderFunction` is a Javascript function that implements an LLM API call. It takes a prompt string and a context. It returns the LLM response or an error:
 
 ```typescript
-type ProviderFunction = (prompt: string) => Promise<ProviderResponse>;
+type ProviderFunction = (prompt: string, context: { vars: Record<string, string | object> } ) => Promise<ProviderResponse>;
 
 interface ProviderResponse {
   error?: string;
