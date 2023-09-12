@@ -116,7 +116,10 @@ The evaluate function takes the following parameters:
 A `ProviderFunction` is a Javascript function that implements an LLM API call. It takes a prompt string and a context. It returns the LLM response or an error:
 
 ```typescript
-type ProviderFunction = (prompt: string, context: { vars: Record<string, string | object> } ) => Promise<ProviderResponse>;
+type ProviderFunction = (
+  prompt: string,
+  context: { vars: Record<string, string | object> },
+) => Promise<ProviderResponse>;
 
 interface ProviderResponse {
   error?: string;
@@ -155,24 +158,27 @@ interface GradingResult {
 ```js
 import promptfoo from 'promptfoo';
 
-const results = await promptfoo.evaluate({
-  prompts: ['Rephrase this in French: {{body}}', 'Rephrase this like a pirate: {{body}}'],
-  providers: ['openai:gpt-3.5-turbo'],
-  tests: [
-    {
-      vars: {
-        body: 'Hello world',
+const results = await promptfoo.evaluate(
+  {
+    prompts: ['Rephrase this in French: {{body}}', 'Rephrase this like a pirate: {{body}}'],
+    providers: ['openai:gpt-3.5-turbo'],
+    tests: [
+      {
+        vars: {
+          body: 'Hello world',
+        },
       },
-    },
-    {
-      vars: {
-        body: "I'm hungry",
+      {
+        vars: {
+          body: "I'm hungry",
+        },
       },
-    },
-  ],
-}, {
-  maxConcurrency: 2,
-});
+    ],
+  },
+  {
+    maxConcurrency: 2,
+  },
+);
 
 console.log(results);
 ```
