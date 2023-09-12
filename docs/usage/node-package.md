@@ -15,7 +15,15 @@ npm install promptfoo
 
 ## Usage
 
-You can use `promptfoo` as a library in your project by importing the `evaluate` function. The function takes the following parameters:
+Use `promptfoo` as a library in your project by importing the `evaluate` function:
+
+```ts
+import promptfoo from 'promptfoo';
+
+const results = await promptfoo.evaluate(testSuite, options);
+```
+
+The evaluate function takes the following parameters:
 
 - `testSuite`: the Javascript equivalent of the promptfooconfig.yaml
 
@@ -140,7 +148,7 @@ interface GradingResult {
 - `testCase`: the test case
 - `assertion`: the assertion object
 
-### Example
+## Example
 
 `promptfoo` exports an `evaluate` function that you can use to run prompt evaluations.
 
