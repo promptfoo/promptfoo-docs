@@ -486,6 +486,37 @@ By default, model-graded asserts use GPT-4 for grading. If you do not have acces
 
 Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
 
+#### Overriding the rubric prompt
+
+For the greatest control over the output of `llm-rubric`, you may set a custom prompt using the `rubricPrompt` property of `TestCase` or `Assertion`.
+
+The rubric prompt has two built-in variables that you may use:
+- `{{output}}` - The output of the LLM (you probably want to use this)
+- `{{rubric}}` - The `value` of the llm-rubric `assert` object
+
+
+In this example, we set `rubricPrompt` under `defaultTest`, which applies it to every test in this test suite:
+
+```yaml
+defaultTest:
+  options:
+    rubricPrompt:
+      - role: system
+        content: >-
+          Grade the output by the following specifications, keeping track of the points scored:
+
+          Did the output mention {{x}}? +1 point
+          Did the output describe {{y}}? + 1 point
+          Did the output ask to clarify {{z}}? +1 point
+
+          Calculate the score but always pass the test. Output your response in the following JSON format:
+          {pass: true, score: number, reason: string}
+      - role: user
+        content: 'Output: {{ output }}'
+```
+
+See the [full example](https://github.com/promptfoo/promptfoo/blob/main/examples/custom-grading-prompt/promptfooconfig.yaml).
+
 ## Weighted assertions
 
 In some cases, you might want to assign different weights to your assertions depending on their importance. The `weight` property is a number that determines the relative importance of the assertion. The default weight is 1.
