@@ -113,11 +113,9 @@ The OpenAI provider supports full "multishot" chat conversations, including mult
 The most straightforward way to do this is by creating a list of `{role, content}` objects. Here's an example:
 
 ```yaml
-prompts: ['prompt.json']
+prompts: [prompt.json]
 
-providers:
-  - openai:gpt-3.5-turbo:
-      id: openai:gpt-3.5-turbo
+providers: [openai:gpt-3.5-turbo]
 
 tests:
   - vars:
@@ -174,12 +172,12 @@ Using nunjucks templates, we can combine multiple chat messages. Here's an examp
 ```yaml
 # Set up the conversation history
 defaultTest:
-  - vars:
-      previous_messages:
-        - user: Who founded Facebook?
-        - assistant: Mark Zuckerberg
-        - user: What's his favorite food?
-        - assistant: Pizza
+  vars:
+    messages:
+      - user: Who founded Facebook?
+      - assistant: Mark Zuckerberg
+      - user: What's his favorite food?
+      - assistant: Pizza
 
 # Test multiple follow-ups
 tests:
@@ -196,7 +194,6 @@ In the prompt template, we construct the conversation history followed by a user
 ```liquid title=prompt.json
 [
   {% for message in messages %}
-    {% set outer_loop = loop %}
     {% for role, content in message %}
       {
         "role": "{{ role }}",
