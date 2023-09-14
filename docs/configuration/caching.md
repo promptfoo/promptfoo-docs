@@ -8,9 +8,19 @@ promptfoo caches the results of API calls to LLM providers. This helps save time
 
 ## Command line
 
-If you're using the command line, call `promptfoo eval` with `--no-cache` to disable the cache, or set `{ commandLineOptions: { cache: false }}` in your config file.
+If you're using the command line, call `promptfoo eval` with `--no-cache` to disable the cache, or set `{ evaluateOptions: { cache: false }}` in your config file.
 
 Use `promptfoo cache clear` command to clear the cache.
+
+## Node package
+
+Set `EvaluateOptions.cache` to false to disable cache:
+
+```js
+promptfoo.evaluate(testSuite, {
+  cache: false,
+});
+```
 
 ## Tests
 
