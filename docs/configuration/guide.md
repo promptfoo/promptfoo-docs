@@ -195,6 +195,16 @@ tests:
   - vars: path/to/vars*.yaml
 ```
 
+You can also load individual variables from file by using the `file://` prefix.  For example:
+
+```yaml
+tests:
+  - vars:
+      var1: some value...
+      var2: another value...
+      var3: file://path/to/var3.txt
+```
+
 ### Multiple variables in a single test case
 
 The `vars` map in the test also supports array values. If values are an array, the test case will run each combination of values.
