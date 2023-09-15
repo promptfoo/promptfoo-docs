@@ -17,6 +17,8 @@ Once you have LocalAI up and running, specify one of the following based on the 
 
 The model name is typically the filename of the .bin file that you downloaded to set up the model in LocalAI. For example, `ggml-vic13b-uncensored-q5_1.bin`
 
+The `localai:chat` prefix invokes models using the [LocalAI chat completion endpoint](https://localai.io/features/text-generation/#chat-completions).  The `localai:completion` prefix invokes models using the [LocalAI completion endpoint](https://localai.io/features/text-generation/#completions).
+
 Supported environment variables:
 
 - `LOCALAI_BASE_URL` - defaults to `http://localhost:8080/v1`

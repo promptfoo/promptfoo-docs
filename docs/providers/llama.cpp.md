@@ -6,7 +6,7 @@ sidebar_position: 40
 
 The `llama` provider is compatible with the HTTP server bundled with [llama.cpp](https://github.com/ggerganov/llama.cpp).
 
-You can use it by specifying the `llama` provider.
+You can use it by specifying `llama` as the provider.
 
 Supported environment variables:
 
