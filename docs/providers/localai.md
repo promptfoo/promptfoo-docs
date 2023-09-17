@@ -11,13 +11,13 @@ View all compatible models [here](https://github.com/go-skynet/LocalAI#model-com
 
 Once you have LocalAI up and running, specify one of the following based on the model you have selected:
 
-- `localai:chat:<model name>`
-- `localai:completion:<model name>`
-- `localai:<model name>` - defaults to chat-type model
+- `localai:chat:<model name>`, which invokes models using the
+  [LocalAI chat completion endpoint](https://localai.io/features/text-generation/#chat-completions)
+- `localai:completion:<model name>`, which invokes models using the
+  [LocalAI completion endpoint](https://localai.io/features/text-generation/#completions)
+- `localai:<model name>`, which defaults to chat-type model
 
 The model name is typically the filename of the .bin file that you downloaded to set up the model in LocalAI. For example, `ggml-vic13b-uncensored-q5_1.bin`
-
-The `localai:chat` prefix invokes models using the [LocalAI chat completion endpoint](https://localai.io/features/text-generation/#chat-completions).  The `localai:completion` prefix invokes models using the [LocalAI completion endpoint](https://localai.io/features/text-generation/#completions).
 
 Supported environment variables:
 
