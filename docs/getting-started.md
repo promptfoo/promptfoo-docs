@@ -56,7 +56,10 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
 1. In `promptfooconfig.yaml`, edit the models (["providers"](/docs/providers)) you wish to test.
 
-   Your preferred model may have configuration requirements.  For example, if testing GPT you'll need to set the `OPENAI_API_KEY` environment variable:
+   Your preferred model may have configuration requirements.
+   For example, if testing GPT with OpenAI's chat endpoint,
+   you'll need to set the `OPENAI_API_KEY` environment variable
+   (see [OpenAI provider docs](/docs/providers/openai) for more info):
 
    ```bash
    export OPENAI_API_KEY=sk-abc123
