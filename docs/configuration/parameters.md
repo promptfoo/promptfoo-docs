@@ -54,55 +54,55 @@ Prompt functions allow you to incorporate custom logic in your prompts. These fu
 
 In the prompt function, you can access the test case variables through the `vars` object. The function should return a string or an object that represents the prompt.
 
-#### Example
+#### Examples
 
-- Javascript prompt function:
-  ```javascript title=prompt.js
-  module.exports = async function ({ vars }) {
-    return [
-      {
-        role: 'system',
-        content: `You're an angry pirate. Be concise and stay in character.`,
-      },
-      {
-        role: 'user',
-        content: `Tell me about ${vars.topic}`,
-      },
-    ];
-  };
-  ```
+A Javascript prompt function, `prompt.js`:
 
-- In some cases, you might want to include multiple prompt functions in a single JavaScript file. To reference a specific function in your prompt file, use the following syntax: `filename.js:functionName`:
+```javascript title=prompt.js
+module.exports = async function ({ vars }) {
+  return [
+    {
+      role: 'system',
+      content: `You're an angry pirate. Be concise and stay in character.`,
+    },
+    {
+      role: 'user',
+      content: `Tell me about ${vars.topic}`,
+    },
+  ];
+};
+```
 
-    ```javascript title=prompt.js:prompt1
-    // highlight-start
-    module.exports.prompt1 = async function ({ vars }) {
-    // highlight-end
-      return [
-        {
-          role: 'system',
-          content: `You're an angry pirate. Be concise and stay in character.`,
-        },
-        {
-          role: 'user',
-          content: `Tell me about ${vars.topic}`,
-        },
-      ];
-    };
-    ```
+To reference a specific function in your prompt file, use the following syntax: `filename.js:functionName`:
 
+```javascript title=prompt.js:prompt1
+// highlight-start
+module.exports.prompt1 = async function ({ vars }) {
+// highlight-end
+  return [
+    {
+      role: 'system',
+      content: `You're an angry pirate. Be concise and stay in character.`,
+    },
+    {
+      role: 'user',
+      content: `Tell me about ${vars.topic}`,
+    },
+  ];
+};
+```
 
-- Python prompt function:
-  ```python title=prompt.py
-  import sys
-  import json
+A Python prompt function, `prompt.py`:
+```python title=prompt.py
+import sys
+import json
 
-  def generate_prompt(context):
-      return f'Describe {context["vars"]["topic"]} concisely, comparing it to the Python programming language.'
+def generate_prompt(context):
+    return f'Describe {context["vars"]["topic"]} concisely, comparing it to the Python programming language.'
 
-  if __name__ == '__main__':
-      print(generate_prompt(json.loads(sys.argv[1])))
-  ```
+if __name__ == '__main__':
+    print(generate_prompt(json.loads(sys.argv[1])))
+```
 
 ## Tests File
 
