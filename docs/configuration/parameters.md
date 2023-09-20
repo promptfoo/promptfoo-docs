@@ -139,3 +139,14 @@ The results of the evaluation are written to this file. Each record in the outpu
 For example outputs, see the [examples/](https://github.com/typpo/promptfoo/tree/main/examples/simple-cli) directory.
 
 The output file is specified by the `outputPath` key in the promptfoo configuration.
+
+## Permuting both inputs and assertions
+
+A vanilla `prompts.txt`/`promptfooconfig.yaml` pair supports
+each test combining one set of variables with one set of assertions.
+To use different variables with the same assertions,
+a separate test entry needs to be made.
+
+[Scenarios](/docs/configuration/scenarios.md)
+enables one to use all possible combinations of 1+ sets of variables
+and 1+ sets of assertions within one test entry.
