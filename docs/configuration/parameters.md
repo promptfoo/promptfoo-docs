@@ -110,21 +110,23 @@ if __name__ == "__main__":
 
 ## Tests File
 
-The tests file is an optional CSV file that can be used to define test cases separately from the main configuration.
+The tests file is an optional CSV file that can be used to define test cases
+separately from the `promptfooconfig` configuration file.
 
-The first row of the CSV file should contain the variable names, and each subsequent row should contain the corresponding values for each test case.
+The first row of the CSV file should contain the variable names,
+and each subsequent row should contain the corresponding values for each test case.
 
 Vars are substituted by [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax into prompts. The first row is the variable names. All other rows are variable values.
 
 Example of a tests file (`tests.csv`):
 
-```
+```csv
 language,input
 German,"Hello, world!"
 Spanish,Where is the library?
 ```
 
-The vars file optionally supports some special columns:
+The tests file optionally supports several special columns:
 
 - `__expected`: A column that includes [test assertions](/docs/configuration/expected-outputs). This column lets you automatically mark output according to quality expectations.
 - `__prefix`: This string is prepended to each prompt before it's sent to the API
