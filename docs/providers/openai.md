@@ -76,7 +76,7 @@ Supported parameters include:
 | `presence_penalty`  | Applies a penalty to new tokens (tokens that haven't appeared in the input), making them less likely to appear in the output.                                   |
 | `best_of`           | Controls the number of alternative outputs to generate and select from.                                                                                         |
 | `functions`         | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`.                               |
-| `function_call`     | Controls whether the AI should call functions. Can be either 'none' or 'auto'.                                                                                  |
+| `function_call`     | Controls whether the AI should call functions. Can be either 'none', 'auto', or an object with a `name` that specifies the function to call.   |
 | `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
 | `apiKey`            | Your OpenAI API key.                                                                                                                                            |
 | `apiHost`           | The hostname of the OpenAI API.                                                                                                                                 |
@@ -97,7 +97,7 @@ functions?: {
   description?: string;
   parameters: any;
 }[];
-function_call?: 'none' | 'auto';
+function_call?: 'none' | 'auto' | { name: string; };
 stop?: string[];
 
 // General OpenAI parameters
