@@ -93,14 +93,18 @@ module.exports.prompt1 = async function ({ vars }) {
 ```
 
 A Python prompt function, `prompt.py`:
+
 ```python title=prompt.py
-import sys
 import json
+import sys
 
-def generate_prompt(context):
-    return f'Describe {context["vars"]["topic"]} concisely, comparing it to the Python programming language.'
+def generate_prompt(context: dict) -> str:
+    return (
+        f"Describe {context['vars']['topic']} concisely, comparing it to the Python"
+        " programming language."
+    )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(generate_prompt(json.loads(sys.argv[1])))
 ```
 
