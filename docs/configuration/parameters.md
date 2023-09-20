@@ -144,9 +144,9 @@ The output file is specified by the `outputPath` key in the promptfoo configurat
 
 A vanilla `prompts.txt`/`promptfooconfig.yaml` pair supports
 each test combining one set of variables with one set of assertions.
-To use different variables with the same assertions,
-a separate test entry needs to be made.
+Trying to combine many sets of variables with many sets of assertions
+can lead to exponentially more config entries.
 
 [Scenarios](/docs/configuration/scenarios.md)
 enables one to use all possible combinations of 1+ sets of variables
-and 1+ sets of assertions within one test entry.
+and 1+ sets of assertions within one config entry.
