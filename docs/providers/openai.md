@@ -269,5 +269,7 @@ These OpenAI-related environment variables are supported:
 There are a few things you can do if you encounter OpenAI rate limits (most commonly with GPT-4):
 
 1. **Reduce concurrency to 1** by setting `--max-concurrency 1` in the CLI, or by setting `evaluateOptions.maxConcurrency` in the config.
-2. **Set a delay between requests** by setting `--delay 3000` in the CLI, or by setting `evaluateOptions.delay` in the config, or with the environment variable `PROMPTFOO_DELAY_MS` (all values are in milliseconds).
+2. **Set a delay between requests** by setting `--delay 3000` (3000 ms) in the CLI,
+   or by setting `evaluateOptions.delay` in the config,
+   or with the environment variable `PROMPTFOO_DELAY_MS` (all values are in milliseconds).
 3. **Adjust the exponential backoff for failed requests** by setting the environment variable `PROMPTFOO_REQUEST_BACKOFF_MS`. This defaults to 5000 milliseconds and retries exponential up to 4 times. You can increase this value if requests are still failing, but note that this can significantly increase end-to-end test time.
