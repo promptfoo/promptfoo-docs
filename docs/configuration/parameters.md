@@ -93,34 +93,40 @@ module.exports.prompt1 = async function ({ vars }) {
 ```
 
 A Python prompt function, `prompt.py`:
+
 ```python title=prompt.py
-import sys
 import json
+import sys
 
-def generate_prompt(context):
-    return f'Describe {context["vars"]["topic"]} concisely, comparing it to the Python programming language.'
+def generate_prompt(context: dict) -> str:
+    return (
+        f"Describe {context['vars']['topic']} concisely, comparing it to the Python"
+        " programming language."
+    )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(generate_prompt(json.loads(sys.argv[1])))
 ```
 
 ## Tests File
 
-The tests file is an optional CSV file that can be used to define test cases separately from the main configuration.
+The tests file is an optional CSV file that can be used to define test cases
+separately from the `promptfooconfig` configuration file.
 
-The first row of the CSV file should contain the variable names, and each subsequent row should contain the corresponding values for each test case.
+The first row of the CSV file should contain the variable names,
+and each subsequent row should contain the corresponding values for each test case.
 
 Vars are substituted by [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax into prompts. The first row is the variable names. All other rows are variable values.
 
 Example of a tests file (`tests.csv`):
 
-```
+```csv
 language,input
 German,"Hello, world!"
 Spanish,Where is the library?
 ```
 
-The vars file optionally supports some special columns:
+The tests file optionally supports several special columns:
 
 - `__expected`: A column that includes [test assertions](/docs/configuration/expected-outputs). This column lets you automatically mark output according to quality expectations.
 - `__prefix`: This string is prepended to each prompt before it's sent to the API
@@ -133,3 +139,14 @@ The results of the evaluation are written to this file. Each record in the outpu
 For example outputs, see the [examples/](https://github.com/typpo/promptfoo/tree/main/examples/simple-cli) directory.
 
 The output file is specified by the `outputPath` key in the promptfoo configuration.
+
+## Permuting both inputs and assertions
+
+A vanilla `prompts.txt`/`promptfooconfig.yaml` pair supports
+each test combining one set of variables with one set of assertions.
+Trying to combine many sets of variables with many sets of assertions
+can lead to exponentially more config entries.
+
+[Scenarios](/docs/configuration/scenarios.md)
+enables one to use all possible combinations of 1+ sets of variables
+and 1+ sets of assertions within one config entry.

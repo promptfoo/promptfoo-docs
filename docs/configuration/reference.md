@@ -119,7 +119,8 @@ interface UnifiedConfig {
 
 ### Scenario
 
-Scenario is an object that represents a group of test cases to be evaluated. It includes a description, default test case configuration, and a list of test cases.
+`Scenario` is an object that represents a group of test cases to be evaluated.
+It includes a description, default test case configuration, and a list of test cases.
 
 ```typescript
 interface Scenario {
@@ -128,6 +129,9 @@ interface Scenario {
   tests: TestCase[];
 }
 ```
+
+Also, see [this table here](/docs/configuration/scenarios#configuration)
+for descriptions.
 
 ### EvaluateOptions
 
