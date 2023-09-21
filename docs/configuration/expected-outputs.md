@@ -375,7 +375,7 @@ You may also return a score:
 
 ### Similarity
 
-The `similarity` assertion checks if an embedding of the LLM's output
+The `similar` assertion checks if an embedding of the LLM's output
 is semantically similar to the expected value,
 using a cosine similarity threshold.
 By default, embeddings are computed via OpenAI's `text-embedding-ada-002` model.
