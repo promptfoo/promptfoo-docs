@@ -49,8 +49,13 @@ Prompts can be JSON too. Use this to configure multi-shot prompt formats:
 
 ### Prompt functions
 
-
 Prompt functions allow you to incorporate custom logic in your prompts. These functions are written in JavaScript or Python and are included in the prompt files with `.js` or `.py` extensions.
+
+To specify a prompt function in `promptfooconfig.yaml`, reference the file directly.  For example:
+
+```yaml
+prompts: ['prompt.js', 'prompt.py']
+```
 
 In the prompt function, you can access the test case variables through the `vars` object. The function should return a string or an object that represents the prompt.
 
@@ -107,6 +112,11 @@ def generate_prompt(context: dict) -> str:
 if __name__ == "__main__":
     print(generate_prompt(json.loads(sys.argv[1])))
 ```
+
+To verify that your function is producing the correct prompt:
+1. Run `promptfoo view`
+1. Check that the table header contains your function code.
+1. Hover over a particular output that you want to investigate and click the Magnifying Glass (🔎) to view the final prompt in the details pane.
 
 ## Tests File
 
