@@ -72,7 +72,7 @@ providers:
 Supported parameters include:
 
 | Parameter           | Description                                                                                                                                                     |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `temperature`       | Controls the randomness of the AI's output. Higher values (close to 1) make the output more random, while lower values (close to 0) make it more deterministic. |
 | `max_tokens`        | Controls the maximum length of the output in tokens.                                                                                                            |
 | `top_p`             | Controls the nucleus sampling, a method that helps control the randomness of the AI's output.                                                                   |
