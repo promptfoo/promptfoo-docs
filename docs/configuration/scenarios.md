@@ -5,15 +5,23 @@ sidebar_label: Scenarios
 
 # Scenarios
 
-Scenarios enable you to group a set of data along with a set of tests that should be run on that data. This is useful for when you want to test a wide range of inputs with the same set of tests.
+The `scenarios` configuration lets you group a set of data along with a set of tests that should be run on that data.
+This is useful for when you want to test a wide range of inputs with the same set of tests.
 
 ## Example
 
 Let's take the example of a language translation app. We want to test whether the system can accurately translate three phrases ('Hello world', 'Good morning', and 'How are you?') from English to three different languages (Spanish, French, and German).
 
-Instead of creating individual tests for each combination, we can create a scenario that groups this data and the tests together:
+```text title=prompts.txt
+You're a translator.  Translate this into {{language}}: {{input}}
+---
+Speak in {{language}}: {{input}}
+```
 
-```yaml
+Instead of creating individual `tests` for each combination,
+we can create a `scenarios` that groups this data and the tests/assertions together:
+
+```yaml title=promptfooconfig.yaml
 scenarios:
   - config:
       - vars:
@@ -57,6 +65,8 @@ scenarios:
 
 This will generate a matrix of tests for each language and input phrase combination, running the same set of assertions on each.
 
+The full source behind this sample is in [`examples/multiple-translations-scenarios`][1].
+
 ## Configuration
 
 The `scenarios` configuration is an array of `Scenario` objects. Each `Scenario` has two main parts:
@@ -73,3 +83,5 @@ Here is the structure of a `Scenario`:
 | tests       | `TestCase[]`          | Yes      | The tests to be run on each set of variables.                      |
 
 This functionality allows you to easily run a wide range of tests without having to manually create each one. It also keeps your configuration file cleaner and easier to read.
+
+[1]: https://github.com/promptfoo/promptfoo/tree/main/examples/multiple-translations-scenarios
