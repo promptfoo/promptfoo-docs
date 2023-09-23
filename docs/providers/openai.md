@@ -4,7 +4,9 @@ sidebar_position: 1
 
 # OpenAI
 
-To use the OpenAI API, set the `OPENAI_API_KEY` environment variable or pass the API key as an argument to the constructor.
+To use the OpenAI API, set the `OPENAI_API_KEY` environment variable,
+specify via `apiKey` field in the configuration file,
+or pass the API key as an argument to the constructor.
 
 Example:
 
@@ -80,10 +82,11 @@ Supported parameters include:
 | `presence_penalty`  | Applies a penalty to new tokens (tokens that haven't appeared in the input), making them less likely to appear in the output.                                   |
 | `best_of`           | Controls the number of alternative outputs to generate and select from.                                                                                         |
 | `functions`         | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`.                               |
-| `function_call`     | Controls whether the AI should call functions. Can be either 'none', 'auto', or an object with a `name` that specifies the function to call.   |
+| `function_call`     | Controls whether the AI should call functions. Can be either 'none', 'auto', or an object with a `name` that specifies the function to call.                    |
 | `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
 | `apiKey`            | Your OpenAI API key.                                                                                                                                            |
-| `apiHost`           | The hostname of the OpenAI API.                                                                                                                                 |
+| `apiHost`           | The hostname of the OpenAI API, please also read `OPENAI_API_HOST` below.                                                                                       |
+| `apiBaseUrl`        | The base URL of the OpenAI API, please also read `OPENAI_API_BASE_URL` below.                                                                                   |
 | `organization`      | Your OpenAI organization key.                                                                                                                                   |
 
 Here are the type declarations of `config` parameters:
@@ -107,6 +110,7 @@ stop?: string[];
 // General OpenAI parameters
 apiKey?: string;
 apiHost?: string;
+apiBaseUrl?: string;
 organization?: string;
 ```
 
@@ -257,10 +261,12 @@ tests:
 These OpenAI-related environment variables are supported:
 
 | Variable                         | Description                                                                                                                                      |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | `OPENAI_TEMPERATURE`             | Temperature model parameter, defaults to 0.                                                                                                      |
 | `OPENAI_MAX_TOKENS`              | Max_tokens model parameter, defaults to 1024.                                                                                                    |
-| `OPENAI_API_HOST`                | The hostname to use (useful if you're using an API proxy).                                                                                       |
+| `OPENAI_API_HOST`                | The hostname to use (useful if you're using an API proxy). Takes priority over `OPENAI_API_BASE_URL`.                                            |
+| `OPENAI_API_BASE_URL`            | The base URL (protocol + hostname + port) to use, this is a more general option than `OPENAI_API_HOST`.                                          |
+| `OPENAI_API_KEY`                 | OpenAI API key.                                                                                                                                  |
 | `OPENAI_ORGANIZATION`            | The OpenAI organization key to use.                                                                                                              |
 | `PROMPTFOO_REQUIRE_JSON_PROMPTS` | By default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior. |
 | `PROMPTFOO_DELAY_MS`             | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0).                                 |
