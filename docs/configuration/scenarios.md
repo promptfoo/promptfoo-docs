@@ -5,7 +5,7 @@ sidebar_label: Scenarios
 
 # Scenarios
 
-`scenarios` enable you to group a set of data along with a set of tests that should be run on that data.
+The `scenarios` configuration lets you group a set of data along with a set of tests that should be run on that data.
 This is useful for when you want to test a wide range of inputs with the same set of tests.
 
 ## Example
