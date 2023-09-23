@@ -19,8 +19,12 @@ The OpenAI provider supports the following model formats:
 - `openai:<model name>` - uses a specific model name (mapped automatically to chat or completion endpoint)
 - `openai:chat:<model name>` - uses any model name against the chat endpoint
 - `openai:completion:<model name>` - uses any model name against the completion endpoint
+- `openai:embedding:<model name>` - uses any model name against the `/v1/embeddings` endpoint
 
-The `openai:<endpoint>:<model>` construction is useful if OpenAI releases a new model, or if you have a custom model. For example, if OpenAI releases gpt-5 chat completion, you could begin using it immediately with `openai:chat:gpt-5`.
+The `openai:<endpoint>:<model name>` construction is useful if OpenAI releases a new model,
+or if you have a custom model.
+For example, if OpenAI releases gpt-5 chat completion,
+you could begin using it immediately with `openai:chat:gpt-5`.
 
 The OpenAI provider supports a handful of [configuration options](https://github.com/promptfoo/promptfoo/blob/main/src/providers/openai.ts#L14-L32), such as `temperature` and `functions`, which can be used to customize the behavior of the model like so:
 
