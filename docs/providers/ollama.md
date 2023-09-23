@@ -4,9 +4,11 @@ sidebar_position: 41
 
 # Ollama
 
-The `ollama` provider is compatible with [Ollama](https://github.com/jmorganca/ollama), which enables access to Llama2, Codellama, Orca, Vicuna, Nous-Hermes, Wizard Vicuna, and more.
+The `ollama` provider is compatible with [Ollama](https://github.com/jmorganca/ollama),
+which enables access to Llama2, Codellama, Orca, Vicuna, Nous-Hermes, Wizard Vicuna, and more.
 
-You can use it by specifying any of the following providers from the [Ollama library](https://ollama.ai/library):
+You can use its `/api/generate` endpoint
+by specifying any of the following providers from the [Ollama library](https://ollama.ai/library):
 
 - `ollama:llama2`
 - `ollama:llama2:13b`
@@ -16,9 +18,11 @@ You can use it by specifying any of the following providers from the [Ollama lib
 - `ollama:orca-mini`
 - and so on...
 
+Also supported is the `/api/embeddings` endpoint via `ollama:embeddings:<model name>`.
+
 Supported environment variables:
 
-- `OLLAMA_BASE_URL` - scheme, host name, and port (defaults to `http://localhost:11434`)
+- `OLLAMA_BASE_URL` - protocol, host name, and port (defaults to `http://localhost:11434`)
 
 ## `localhost` and IPv4 vs IPv6
 
