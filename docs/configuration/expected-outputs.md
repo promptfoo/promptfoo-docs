@@ -564,7 +564,83 @@ tests:
 
 If the LLM outputs `Goodbye world`, the `equals` assertion fails but the `contains` assertion passes and the final score is 0.33. Because this is below the 0.5 threshold, the test case fails. If the threshold were lowered to 0.2, the test case would succeed.
 
-## Load an external tests file
+## Load assertions from external file
+
+#### Raw files
+
+The `value` of an assertion can be loaded directly from a file using the `file://` syntax:
+
+```yaml
+- assert:
+    - type: contains
+      value: file://gettysburg_address.txt
+```
+
+#### Javascript
+
+If the file ends in `.js`, the Javascript is executed:
+
+```yaml title=promptfooconfig.yaml
+- assert:
+    - type: javascript
+      value: file://path/to/assert.js
+```
+
+The type definition is:
+
+```ts
+type AssertionResponse = string | boolean | number | GradingResult;
+type AssertFunction = (output: string, context: { vars: Record<string, string> }) => AssertResponse;
+```
+
+See [GradingResult definition](/docs/configuration/reference#gradingresult).
+
+Here's an example `assert.js`:
+
+```js
+module.exports = (output, { vars }) => {
+  console.log(`Received ${output} using variables ${JSON.stringify(vars)}`);
+  return {
+    pass: true,
+    score: 0.5,
+    reason: 'Some custom reason',
+  };
+};
+```
+
+You can also use Javascript files in non-`javascript`-type asserts.  For example, using a Javascript file in a `contains` assertion will check that the output contains the string returned by Javascript.
+
+#### Python
+
+If the file ends in `.py`, the Python is executed:
+
+```yaml title=promptfooconfig.yaml
+- assert:
+    - type: python
+      value: file://path/to/assert.py
+```
+
+The assertion expects an output that is `bool`, `float`, or a JSON [GradingResult](/docs/configuration/reference#gradingresult).
+
+For example:
+
+```py
+import sys
+import json
+
+output = sys.argv[1]
+context = json.loads(sys.argv[2])
+
+print(f'Received {output} with variables {context}')
+
+return {
+  'pass': True,
+  'score': 0.5,
+  'reason': 'Some custom reason',
+}
+```
+
+## Load assertions from CSV
 
 The [Tests file](/docs/configuration/parameters#tests-file) is an optional format that lets you specify test cases outside of the main config file.
 
