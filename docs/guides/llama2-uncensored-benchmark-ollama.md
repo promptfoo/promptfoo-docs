@@ -8,7 +8,9 @@ Most LLMs go through fine-tuning that prevents them from answering questions lik
 
 This guide will walk you through the process of benchmarking [Llama2 Uncensored](https://huggingface.co/georgesung/llama2_7b_chat_uncensored), Llama2, and GPT 3.5 across a suite of test cases using promptfoo and [Ollama](https://ollama.ai/).
 
-By the [end of this guide](#conclusion), you'll be able to produce a side-by-side comparison of these models using your own data. You can substitute your own test cases and choose the model that's best for you.
+By the end of this guide, you'll be able to produce a side-by-side comparison of these models using your own data. You can substitute your own test cases and choose the model that's best for you.
+
+View the final example code [here](https://github.com/promptfoo/promptfoo/tree/main/examples/llama-gpt-comparison).
 
 ![llama2 uncensored and gpt comparison](/img/docs/llama-uncensored-comparison.png)
 
