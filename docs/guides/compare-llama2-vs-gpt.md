@@ -12,7 +12,7 @@ The end result is a view that compares the performance of Llama, GPT 3.5, and GP
 
 ![llama2 and gpt comparison](/img/docs/llama-gpt-comparison.png)
 
-[Full code available here](https://github.com/promptfoo/promptfoo/tree/main/examples/llama-gpt-comparison).
+View the final example code [here](https://github.com/promptfoo/promptfoo/tree/main/examples/llama-gpt-comparison).
 
 ## Requirements
 
