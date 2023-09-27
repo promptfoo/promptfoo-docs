@@ -24,6 +24,15 @@ Supported environment variables:
 
 - `OLLAMA_BASE_URL` - protocol, host name, and port (defaults to `http://localhost:11434`)
 
+To pass configuration options to Ollama, use the `config` key like so:
+
+```yaml title=promptfooconfig.yaml
+providers:
+  - id: ollama:llama2
+    config:
+      num_predict: 1024
+```
+
 ## `localhost` and IPv4 vs IPv6
 
 If locally developing with `localhost` (promptfoo's default),
