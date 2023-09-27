@@ -6,7 +6,9 @@ sidebar_position: 40
 
 The CLI provides a `share` command to share your most recent evaluation results from `promptfoo eval`.
 
-The command creates a URL which can be used to view the results. The URL is valid for 2 weeks. This is useful, for example, if you're working on a team that is tuning a prompt together.
+The command creates a URL which can be used to view the results.
+The URL is valid for 2 weeks, and data is stored in Cloudflare Workers KV.
+This is useful, for example, if you're working on a team that is tuning a prompt together.
 
 Here's how to use it:
 
