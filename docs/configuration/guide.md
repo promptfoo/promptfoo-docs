@@ -33,7 +33,7 @@ For more information on setting up a prompt file, see [input and output files](/
 
 Running `promptfoo eval` over this config will result in a _matrix view_ that you can use to evaluate GPT vs Vicuna.
 
-### Auto-validate output with assertions
+### Use assertions to validate output
 
 Next, let's add an assertion. This automatically rejects any outputs that don't contain JSON:
 
