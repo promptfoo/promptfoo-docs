@@ -113,6 +113,10 @@ const config = {
                 label: 'Node package',
                 to: '/docs/usage/node-package',
               },
+              {
+                label: 'Privacy policy',
+                to: '/privacy',
+              },
             ],
           },
           {
