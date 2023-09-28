@@ -88,6 +88,11 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://discord.gg/gHPS9jjfbs',
+            label: 'Discord',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -111,11 +116,32 @@ const config = {
             ],
           },
           {
+            title: 'Guides',
+            items: [
+              {
+                label: 'Running benchmarks',
+                to: '/docs/guides/llama2-uncensored-benchmark-ollama',
+              },
+              {
+                label: 'Evaluating factuality',
+                to: '/docs/guides/factuality-eval',
+              },
+              {
+                label: 'Minimizing hallucinations',
+                to: '/docs/guides/prevent-llm-hallucations',
+              },
+            ],
+          },
+          {
             title: 'Community',
             items: [
               {
                 label: 'GitHub',
                 href: 'https://github.com/typpo/promptfoo',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/gHPS9jjfbs',
               },
             ],
           },
