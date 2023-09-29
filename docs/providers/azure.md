@@ -24,3 +24,12 @@ providers:
       temperature: 0.5
       max_tokens: 1024
 ```
+
+If you have a custom host with a custom engine, here's how you can configure it:
+
+```yaml
+providers:
+  - id: azureopenai:chat:engineNameGoesHere
+    config:
+      apiHost: "xxxxxxxx.openai.azure.com"
+```
