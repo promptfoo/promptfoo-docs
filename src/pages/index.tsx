@@ -13,8 +13,8 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">Test your prompts</h1>
-        <p className="hero__subtitle">Ensure high-quality LLM outputs with automatic evals.</p>
+        <h1 className="hero__title">Iterate on LLMs faster</h1>
+        <p className="hero__subtitle">Measure LLM quality improvements and catch regressions</p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/docs/intro">
             Get Started
@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title="LLM prompt testing"
+      title="LLM evaluation"
       description="Library for evaluating LLM prompt quality and testing."
     >
       <HomepageHeader />
