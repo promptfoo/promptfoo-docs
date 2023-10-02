@@ -16,7 +16,7 @@ View the final example code [here](https://github.com/promptfoo/promptfoo/tree/m
 
 ## Requirements
 
-This guide assumes that you have promptfoo [installed](/docs/installation). It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any [local LLM](/docs/providers/localai).
+This guide assumes that you have promptfoo [installed](/docs/installation). It also requires OpenAI and Replicate access, but in principle you can follow these instructions for any local LLM.
 
 ## Set up the config
 
@@ -37,7 +37,7 @@ providers:
 
 The first two [providers](/docs/providers) reference built-in OpenAI models. The third provider references the hosted [Replicate](https://replicate.com/replicate/llama70b-v2-chat) version of chat-tuned Llama v2 with 70 billion parameters.
 
-If you prefer to run against a locally hosted version of Llama, this can be done via [LocalAI](/docs/providers/localai).
+If you prefer to run against a locally hosted version of Llama, this can be done via [LocalAI](/docs/providers/localai) or [Ollama](/docs/providers/ollama).
 
 ## Set up the prompts
 
