@@ -3,9 +3,26 @@ sidebar_position: 10
 sidebar_label: Command line
 ---
 
-# Command-line options
+# Command line
 
-If you're looking to customize your usage, there are a wide set of `promptfoo eval` parameters at your disposal.
+The `promptfoo` command line utility supports the following subcommands:
+
+- `init [directory]` - Initialize a new project with dummy files.
+- `eval` - Evaluate prompts and models. This is the command you'll be using the most!
+- `view` - Start a browser UI for visualization of results.
+- `share` - Create a URL that can be shared online.
+- `cache` - Manage cache.
+  - `cache clear`
+- `list` - List various resources like evaluations, prompts, and datasets.
+  - `list evals`
+  - `list prompts`
+  - `list datasets`
+- `show <id>` - Show details of a specific resource (evaluation, prompt, dataset).
+- `feedback [message]` - Send feedback to the Promptfoo developers.
+
+## `promptfoo eval`
+
+By default the `eval` command will read the `promptfooconfig.yaml` configuration file in your current directory.  But, if you're looking to override certain parameters you can supply optional arguments:
 
 | Option                              | Description                                                                                                                                                                                        |
 | ----------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -31,3 +48,65 @@ If you're looking to customize your usage, there are a wide set of `promptfoo ev
 
 [1]: /docs/providers/openai
 [2]: /docs/providers/localai
+
+## `promptfoo init [directory]`
+
+Initialize a new project with dummy files.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `directory`  | Directory to create files in |
+
+## `promptfoo view`
+
+Start a browser UI for visualization of results.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `-p, --port <number>`  | Port number for the local server |
+| `-y, --yes`  | Skip confirmation and auto-open the URL |
+
+## `promptfoo share`
+
+Create a URL that can be shared online.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `-y, --yes`  | Skip confirmation before creating shareable URL |
+
+## `promptfoo cache`
+
+Manage cache.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `clear`  | Clear the cache |
+
+## `promptfoo feedback [message]`
+
+Send feedback to the Promptfoo developers.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `message`  | Feedback message |
+
+## `promptfoo list`
+
+List various resources like evaluations, prompts, and datasets.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `evals`  | List evaluations |
+| `prompts`  | List prompts |
+| `datasets`  | List datasets |
+
+## `promptfoo show <id>`
+
+Show details of a specific resource.
+
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `eval <id>`  | Show details of a specific evaluation |
+| `prompt <id>`  | Show details of a specific prompt |
+| `dataset <id>`  | Show details of a specific dataset |
+
