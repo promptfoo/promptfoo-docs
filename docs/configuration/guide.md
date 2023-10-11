@@ -356,4 +356,4 @@ providers: [openai:gpt-3.5-turbo, localai:chat:vicuna]
 tests: https://docs.google.com/spreadsheets/d/1eqFnv1vzkPvS7zG-mYsqNDwOzvSaiIAsKB3zKg9H18c/edit?usp=sharing
 ```
 
-See also: **[import tests from another file](#loading-tests-from-file)**.
+Here's a [full example](https://github.com/promptfoo/promptfoo/tree/main/examples/google-sheets). See also: **[import tests from another file](#loading-tests-from-file)**.
