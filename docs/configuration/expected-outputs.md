@@ -48,6 +48,8 @@ tests:
 | [starts-with](#starts-with)                    | output starts with string                                                       |
 | [contains-any](#contains-any)                  | output contains any of the listed substrings                                    |
 | [contains-all](#contains-all)                  | output contains all list of substrings                                          |
+| [icontains-any](#contains-any)                  | output contains any of the listed substrings, case insensitive                                    |
+| [icontains-all](#contains-all)                  | output contains all list of substrings, case insensitive                                          |
 | [is-json](#is-json)                            | output is valid json (optional json schema validation)                          |
 | [contains-json](#contains-json)                | output contains valid json (optional json schema validation)                    |
 | [javascript](#javascript)                      | provided Javascript function validates the output                               |
@@ -137,6 +139,8 @@ assert:
       - 'Value 3'
 ```
 
+For case insensitive matching, use `icontains-any`.
+
 ### Contains-All
 
 The `contains-all` assertion checks if the LLM output contains all of the specified values.
@@ -151,6 +155,8 @@ assert:
       - 'Value 2'
       - 'Value 3'
 ```
+
+For case insensitive matching, use `icontains-all`.
 
 ### Is-JSON
 
