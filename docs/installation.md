@@ -17,7 +17,7 @@ npm install -g promptfoo
 Or use `npx` to run promptfoo directly:
 
 ```
-npx promptfoo
+npx promptfoo@latest
 ```
 
 ## For library usage

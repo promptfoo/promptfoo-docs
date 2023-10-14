@@ -13,7 +13,7 @@ To get started, run this command:
 <Tabs>
   <TabItem value="npx" label="npx" default>
     <CodeBlock language="bash">
-      npx promptfoo init
+      npx promptfoo@latest init
     </CodeBlock>
   </TabItem>
   <TabItem value="npm" label="npm" default>
@@ -68,13 +68,13 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 1. **Run the evaluation**: This tests every prompt for each test case:
 
    ```
-   npx promptfoo eval
+   npx promptfoo@latest eval
    ```
 
 1. After the evaluation is complete, you may open the web viewer to review the outputs:
 
    ```
-   npx promptfoo view
+   npx promptfoo@latest view
    ```
 
    [&raquo; More information on using the web viewer](/docs/usage/web-ui)
@@ -179,7 +179,7 @@ tests:
   # ...
 ```
 
-A simple `npx promptfoo eval` will run this example from the command line:
+A simple `npx promptfoo@latest eval` will run this example from the command line:
 
 ![promptfoo command line](https://user-images.githubusercontent.com/310310/244891726-480e1114-d049-40b9-bd5f-f81c15060284.gif)
 
@@ -196,7 +196,7 @@ Have a look at the setup and full output [here](https://github.com/promptfoo/pro
 You can also output a nice [spreadsheet](https://docs.google.com/spreadsheets/d/1nanoj3_TniWrDl1Sj-qYqIMD6jwm5FBy15xPFdUTsmI/edit?usp=sharing), [JSON](https://github.com/typpo/promptfoo/blob/main/examples/simple-cli/output.json), YAML, or an HTML file:
 
 ```bash
-npx promptfoo eval -o output.html
+npx promptfoo@latest eval -o output.html
 ```
 
 ![Table output](https://user-images.githubusercontent.com/310310/235483444-4ddb832d-e103-4b9c-a862-b0d6cc11cdc0.png)
@@ -215,10 +215,10 @@ providers:
   - openai:gpt-4
 ```
 
-A simple `npx promptfoo eval` will run the example. Also note that you can override parameters directly from the command line. For example, this command:
+A simple `npx promptfoo@latest eval` will run the example. Also note that you can override parameters directly from the command line. For example, this command:
 
 ```bash
-npx promptfoo eval -p prompts.txt -r openai:gpt-3.5-turbo openai:gpt-4 -o output.html
+npx promptfoo@latest eval -p prompts.txt -r openai:gpt-3.5-turbo openai:gpt-4 -o output.html
 ```
 
 Produces this HTML table:

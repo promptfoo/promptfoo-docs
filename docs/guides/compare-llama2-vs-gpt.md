@@ -23,7 +23,7 @@ This guide assumes that you have promptfoo [installed](/docs/installation). It a
 Initialize a new directory `llama-gpt-comparison` that will contain our prompts and test cases:
 
 ```
-npx promptfoo init llama-gpt-comparison
+npx promptfoo@latest init llama-gpt-comparison
 ```
 
 Now let's start editing `promptfooconfig.yaml`. First, we'll add the list of models we'd like to compare:
@@ -205,19 +205,19 @@ REPLICATE_API_TOKEN=abc123
 Once your config file is set up, you can run the comparison using the `promptfoo eval` command:
 
 ```
-npx promptfoo eval
+npx promptfoo@latest eval
 ```
 
 This will run each of the test cases against each of the models and output the results.
 
-Then, to open the web viewer, run `npx promptfoo view`. Here's what we see:
+Then, to open the web viewer, run `npx promptfoo@latest view`. Here's what we see:
 
 ![llama2 and gpt comparison](/img/docs/llama-gpt-comparison.png)
 
 You can also output a CSV:
 
 ```
-npx promptfoo eval -o output.csv
+npx promptfoo@latest eval -o output.csv
 ```
 
 Which produces a simple spreadsheet containing the eval results (view on [Google Sheets](https://docs.google.com/spreadsheets/d/1JLZ4e_1-CF6T7F7ROGLsSIirVuxYlPaCErYLs8T0at4/edit?usp=sharing)).

@@ -30,7 +30,7 @@ ollama pull llama2-uncensored
 Initialize a new directory `llama-gpt-comparison` that will contain our prompts and test cases:
 
 ```
-npx promptfoo init llama-gpt-comparison
+npx promptfoo@latest init llama-gpt-comparison
 ```
 
 Now let's start editing `promptfooconfig.yaml`. First, we'll add the list of models we'd like to compare:
@@ -189,17 +189,17 @@ Learn more about various test assertions [here](/docs/configuration/expected-out
 Once your config file is set up, you can run the comparison using the `promptfoo eval` command:
 
 ```
-npx promptfoo eval
+npx promptfoo@latest eval
 ```
 
 This will run each of the test cases against each of the models and output the results.
 
-Then, to open the web viewer, run `npx promptfoo view`.
+Then, to open the web viewer, run `npx promptfoo@latest view`.
 
 You can also output a CSV:
 
 ```
-npx promptfoo eval -o output.csv
+npx promptfoo@latest eval -o output.csv
 ```
 
 Which produces a simple spreadsheet containing the eval results.

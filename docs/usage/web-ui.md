@@ -10,7 +10,7 @@ The web viewer is an experimental, work-in-progress UI for viewing prompt output
 To start it, run:
 
 ```
-npx promptfoo view
+npx promptfoo@latest view
 ```
 
 After you [run an eval](/docs/getting-started), the viewer will present the latest results in a view like this one:

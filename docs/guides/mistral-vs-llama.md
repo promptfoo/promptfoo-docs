@@ -23,7 +23,7 @@ This guide assumes that you have promptfoo [installed](/docs/installation). It a
 Initialize a new directory `mistral-llama-comparison` that will contain our prompts and test cases:
 
 ```
-npx promptfoo init mistral-llama-comparison
+npx promptfoo@latest init mistral-llama-comparison
 ```
 
 Now let's start editing `promptfooconfig.yaml`. Create a list of models we'd like to compare:
@@ -190,19 +190,19 @@ Learn more about setting up test assertions [here](/docs/configuration/expected-
 Once your config file is set up, you can run the comparison using the `promptfoo eval` command:
 
 ```
-npx promptfoo eval
+npx promptfoo@latest eval
 ```
 
 This will run each of the test cases against each of the models and output the results.
 
-Then, to open the web viewer, run `npx promptfoo view`. Here's what we see:
+Then, to open the web viewer, run `npx promptfoo@latest view`. Here's what we see:
 
 ![mistral and llama comparison](/img/docs/mistral-llama2-comparison.png)
 
 You can also output a JSON, YAML, or CSV by specifying an output file:
 
 ```
-npx promptfoo eval -o output.csv
+npx promptfoo@latest eval -o output.csv
 ```
 
 ## Conclusion
