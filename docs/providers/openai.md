@@ -216,6 +216,80 @@ In the prompt template, we construct the conversation history followed by a user
 ]
 ```
 
+### Using the `_conversation` variable
+
+A built-in `_conversation` variable contains the full prompt and previous turns of a conversation.  Use it to reference previous outputs and test an ongoing chat conversation.
+
+The `_conversation` variable has the following type signature:
+```ts
+type Completion = {
+  prompt: string | object;
+  input: string;
+  output: string;
+};
+
+type Conversation = Completion[];
+```
+
+In most cases, you'll loop through the `_conversation` variable and use each `Completion` object.
+
+Use `completion.prompt` to reference the previous conversation. For example,  to get the number of messages in a chat-formatted prompt:
+
+```
+{{ completion.prompt.length }}
+```
+
+Or to get the first message in the conversation:
+
+```
+{{ completion.prompt[0] }}
+```
+
+Use `completion.input` as a shortcut to get the last user message.  In a chat-formatted prompt, `input` is set to the last user message, equivalent to `completion.prompt[completion.prompt.length - 1].content`.
+
+Here's an example test config.  Note how each question assumes context from the previous output:
+```yaml
+tests:
+  - vars:
+      question: Who founded Facebook?
+  - vars:
+      question: Where does he live?
+  - vars:
+      question: Which state is that in?
+```
+
+Here is the corresponding prompt:
+```json
+[
+  // highlight-start
+  {% for completion in _conversation %}
+    {
+      "role": "user",
+      "content": "{{ completion.input }}"
+    },
+    {
+      "role": "assistant",
+      "content": "{{ completion.output }}"
+    },
+  {% endfor %}
+  // highlight-end
+  {
+    "role": "user",
+    "content": "{{ question }}"
+  }
+]
+```
+
+The prompt inserts the previous conversation into the test case, creating a full turn-by-turn conversation:
+
+![multiple turn conversation eval](https://github.com/promptfoo/promptfoo/assets/310310/70048ae5-34ce-46f0-bd28-42d3aa96f03e)
+
+Try it yourself by using the [full example config](https://github.com/promptfoo/promptfoo/tree/main/examples/multiple-turn-conversation).
+
+:::info
+When the `_conversation` variable is present, the eval is run single-threaded (concurrency of 1).
+:::
+
 ## Using functions
 
 OpenAI functions are supported. See [full example](https://github.com/typpo/promptfoo/tree/main/examples/openai-function-call).
