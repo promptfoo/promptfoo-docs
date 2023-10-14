@@ -158,6 +158,6 @@ promptfoo will pass the full constructed prompts to `chainProvider.js` and the P
 
 Using this approach, you can test your LLM chain end-to-end, view results in the [web view](/docs/usage/web-ui), set up [continuous testing](/docs/integrations/github-action), and so on.
 
-### Other tips
+## Other tips
 
 To reference the outputs of previous test cases, use the built-in [`_conversation` variable](/docs/providers/openai#using-the-_conversation-variable).
