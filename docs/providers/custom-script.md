@@ -14,13 +14,13 @@ To use a script provider, you need to create an executable that takes a prompt a
 Here is an example of how to use a script provider:
 
 ```yaml
-providers: ['script: python chain.py']
+providers: ['exec: python chain.py']
 ```
 
 Or in the CLI:
 
 ```bash
-promptfoo eval -p prompt1.txt prompt2.txt -o results.csv  -v vars.csv -r 'script: python chain.py'
+promptfoo eval -p prompt1.txt prompt2.txt -o results.csv  -v vars.csv -r 'exec: python chain.py'
 ```
 
 In the above example, `chain.py` is a Python script that takes a prompt as an argument, executes an LLM chain, and outputs the result.
