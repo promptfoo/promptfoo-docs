@@ -34,7 +34,7 @@ for doc in vectorstore.query(query):
   print(f'{doc.name}: {doc.content}')
 ```
 
-In practice, your retrieval logic is probably more complicated than the above.  Substitute `retrieval.py` with a script of your own that prepares the query and talks to your database.
+In practice, your retrieval logic is probably more complicated than the above (e.g. query transformations and fanout).  Substitute `retrieval.py` with a script of your own that prepares the query and talks to your database.
 
 ### Configuration
 
@@ -48,7 +48,7 @@ First, create `query_format.txt`.  We're just going to pass the `query` variable
 {{ query }}
 ```
 
-Next, create `promptfooconfig.yaml`. This file instructs promptfoo to run several test cases through the retrieval script:
+Next, create `promptfooconfig.yaml`. This file instructs promptfoo to run several test cases through the retrieval script.
 
 ```yaml
 prompts: [query_format.txt]
@@ -65,6 +65,8 @@ tests:
       - type: contains-all
         value: ["parental-leave.md", "hr-policies.html", "Maternity Leave"]
 ```
+
+In the above example, the `contains-all` assertion ensures that the output from `retrive.py` contains all the listed substrings.
 
 **You will get the most value out of this eval if you set up your own evaluation test cases.** View other [assertion types](/docs/configuration/expected-outputs) that you can use.
 
