@@ -396,6 +396,32 @@ assert:
     threshold: 0.8
 ```
 
+#### Overriding the provider
+
+By default `similar` will use OpenAI.  To specify the model that creates the embeddings, do one of the following:
+
+1. Use `test.options` or `defaultTest.options` to override the provider across the entire test suite:
+
+   ```yaml
+   defaultTest:
+     options:
+       provider: azureopenai:embedding:text-embedding-ada-002
+   tests:
+       assert:
+         - type: similar
+           value: Hello world
+   ```
+
+2. Set `assertion.provider` on a per-assertion basis:
+
+   ```yaml
+   tests:
+       assert:
+         - type: similar
+           value: Hello world
+           provider: huggingface:feature-extraction:sentence-transformers/all-MiniLM-L6-v2
+   ```
+
 ### Levenshtein distance
 
 The `levenshtein` assertion checks if the LLM output is within a given edit distance from an expected value.
@@ -475,7 +501,7 @@ By default, model-graded asserts use GPT-4 for grading. If you do not have acces
    ```yaml
    defaultTest:
      options:
-       provider: gpt-3.5-turbo
+       provider: openai:gpt-3.5-turbo
    tests:
      - description: Use LLM to evaluate output
        assert:
@@ -491,7 +517,7 @@ By default, model-graded asserts use GPT-4 for grading. If you do not have acces
        assert:
          - type: llm-rubric
            value: Is spoken like a pirate
-           provider: gpt-3.5-turbo
+           provider: openai:gpt-3.5-turbo
    ```
 
 Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
