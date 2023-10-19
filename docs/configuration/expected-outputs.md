@@ -520,7 +520,15 @@ By default, model-graded asserts use GPT-4 for grading. If you do not have acces
            provider: openai:gpt-3.5-turbo
    ```
 
-Note that [custom providers](/docs/providers/custom-api) are supported by the above as well.
+Use the `provider.config` field to set custom parameters:
+```yaml
+provider:
+  - id: openai:gpt-3.5-turbo
+    config:
+      temperature: 0
+```
+
+Also note that [custom providers](/docs/providers/custom-api) are supported as well.
 
 #### Overriding the rubric prompt
 
