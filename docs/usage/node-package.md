@@ -44,8 +44,8 @@ The evaluate function takes the following parameters:
     // Sets the default properties for each test case. Useful for setting an assertion, on all test cases, for example.
     defaultTest?: Omit<TestCase, 'description'>;
 
-    // Path to write output. Writes to console/web viewer if not set.
-    outputPath?: string;
+    // Paths to write output. Writes to console/web viewer if not set.
+    outputPath?: string | string[];
 
     // Determines whether or not sharing is enabled.
     sharing?: boolean;
