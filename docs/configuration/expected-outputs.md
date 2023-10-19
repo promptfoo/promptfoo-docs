@@ -330,6 +330,27 @@ assert:
     value: math.log10(len(output)) * 10
 ```
 
+#### Multiline functions
+
+Python assertions support multiline strings:
+
+```yaml
+assert:
+  - type: python
+    value: |
+      // Insert your scoring logic here...
+      if output == 'Expected output':
+          print(json.dumps({
+            'pass': True,
+            'score': 0.5,
+          }))
+      else:
+          print(json.dumps({
+            'pass': False,
+            'score': 0,
+          }))
+```
+
 ### Webhook
 
 The `webhook` assertion sends the LLM output to a specified webhook URL for custom validation. The webhook should return a JSON object with a `pass` property set to `true` or `false`.
