@@ -27,6 +27,17 @@ It works on the command line too.
 
 ![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
 
+## Why choose promptfoo?
+
+There are many different ways to evaluate prompts. Here are some reasons to consider promptfoo:
+
+- **Battle-tested**: promptfoo was built to eval & improve LLM apps serving over 10 million users in production. Our tooling is flexible and can be adapted to many setups.
+- **Simple, declarative test cases**: Define your evals without writing code or working with heavy notebooks.
+- **Language agnostic**: Use Python, Javascript, or whatever else you're working in.
+- **Share & collaborate**: Built-in share functionality & web viewer for working with teammates.
+- **Open-source**: LLM evals are a commodity and should be served by 100% open-source projects with no strings attached.
+- **Privacy**: This software runs completely locally. Your evals run on your machine and talk directly with the LLM.
+
 ## Workflow and philosophy
 
 Test-driven prompt engineering is much more effective than trial-and-error.
@@ -41,14 +52,3 @@ Test-driven prompt engineering is much more effective than trial-and-error.
 ![test-driven llm ops](https://user-images.githubusercontent.com/310310/241601160-cf0461a7-2832-4362-9fbb-4ebd911d06ff.png)
 
 As you gather more examples and user feedback, continue to expand your test cases.
-
-## Why choose promptfoo?
-
-There are many different ways to evaluate prompts. Here are some reasons to consider promptfoo:
-
-- **Battle-tested**: promptfoo was built to eval & improve LLM apps serving over 10 million users in production. Our tooling is flexible and can be adapted to many setups.
-- **Simple, declarative test cases**: Define your evals without writing code or working with heavy notebooks.
-- **Language agnostic**: Use Python, Javascript, or whatever else you're working in.
-- **Share & collaborate**: Built-in share functionality & web viewer for working with teammates.
-- **Open-source**: LLM evals are a commodity and should be served by 100% open-source projects with no strings attached.
-- **Privacy**: This software runs completely locally. Your evals run on your machine and talk directly with the LLM.
