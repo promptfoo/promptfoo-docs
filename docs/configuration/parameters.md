@@ -6,13 +6,16 @@ sidebar_position: 4
 
 ## Prompt Files
 
-Prompt files are plain text files that contain the prompts you want to test. If you have only one file, you can include multiple prompts in the file, separated by the delimiter `---`. If you have multiple files, each prompt should be in a separate file.
+Prompt files are plain text files that contain the prompts you want to test.
+If you have only one file, you can include multiple prompts in the file, separated by the delimiter `---`.
+Use of `---` means one `prompts.txt` will result in multiple one-prompt conversations.
+If you have multiple files, each prompt should be in a separate file.
 
 You can use [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax to include variables in your prompts, which will be replaced with actual values from your test cases during evaluation.
 
 Example of a single prompt file with multiple prompts (`prompts.txt`):
 
-```
+```text title=prompts.txt
 Translate the following text to French: "{{name}}: {{text}}"
 ---
 Translate the following text to German: "{{name}}: {{text}}"
