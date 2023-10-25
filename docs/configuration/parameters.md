@@ -118,6 +118,43 @@ To verify that your function is producing the correct prompt:
 1. Check that the table header contains your function code.
 1. Hover over a particular output that you want to investigate and click the Magnifying Glass (🔎) to view the final prompt in the details pane.
 
+### Nunjucks filters
+
+Nunjucks is a templating language with many [built-in filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters) that can be applied to variables.  For example: `{{ varName | capitalize }}`.
+
+Nunjucks [custom filters](https://mozilla.github.io/nunjucks/api.html#custom-filters) are Javascript functions that can be applied to variables in your templates.
+
+To define a Nunjucks filter, create a JavaScript file that exports a function. This function will be used as the filter and it should take the input value as an argument and return the transformed value.
+
+Here's an example of a custom Nunjucks filter that transforms a string to uppercase (`allcaps.js`):
+
+```js
+module.exports = function (str) {
+  return str.toUpperCase();
+};
+```
+
+To use a custom Nunjucks filter in PromptFoo, add it to your configuration file (`promptfooconfig.yaml`). The `nunjucksFilters` field should contain a mapping of filter names to the paths of the JavaScript files that define them:
+
+```yaml
+prompts: [prompts.txt]
+providers: [openai:gpt-3.5-turbo]
+// highlight-start
+nunjucksFilters:
+  allcaps: ./allcaps.js
+// highlight-end
+tests:
+  # ...
+```
+
+Then, use the filter in prompts by appending it to a variable or expression with the pipe (`|`) symbol:
+
+```txt
+Translate this to {{language}}: {{body | allcaps}}
+```
+
+In this example, the `body` variable is passed through the `allcaps` filter before it's used in the prompt. This means that the text will be transformed to uppercase.
+
 ## Tests File
 
 The tests file is an optional CSV file that can be used to define test cases
@@ -150,7 +187,7 @@ For example outputs, see the [examples/](https://github.com/typpo/promptfoo/tree
 
 The output file is specified by the `outputPath` key in the promptfoo configuration.
 
-## Permuting both inputs and assertions
+## Permuting inputs and assertions
 
 A vanilla `prompts.txt`/`promptfooconfig.yaml` pair supports
 each test combining one set of variables with one set of assertions.
