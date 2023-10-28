@@ -36,7 +36,7 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
    [&raquo; More information on setting up prompts](/docs/configuration/parameters)
 
-1. **Add test inputs**: Edit `promptfooconfig.yaml` and add some example inputs for your prompts. Optionally, add assertions to automatically ensure that outputs meet your requirements.
+1. **Add test inputs**: Edit `promptfooconfig.yaml` and add some example inputs for your prompts. Optionally, add [assertions](/docs/configuration/expected-outputs) to automatically ensure that outputs meet your requirements.
 
    For example:
 

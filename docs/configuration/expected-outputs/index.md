@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+sidebar_label: Overview
 ---
 
 # Test assertions
@@ -52,15 +53,15 @@ tests:
 | [icontains-all](#contains-all)                  | output contains all list of substrings, case insensitive                                          |
 | [is-json](#is-json)                            | output is valid json (optional json schema validation)                          |
 | [contains-json](#contains-json)                | output contains valid json (optional json schema validation)                    |
-| [javascript](#javascript)                      | provided Javascript function validates the output                               |
-| [python](#python)                              | provided Python function validates the output                                   |
+| [javascript](/docs/configuration/expected-outputs/javascript)                      | provided Javascript function validates the output                               |
+| [python](/docs/configuration/expected-outputs/python)                              | provided Python function validates the output                                   |
 | [webhook](#webhook)                            | provided webhook returns {pass: true}                                           |
-| [similar](#similarity)                         | embeddings and cosine similarity are above a threshold                          |
+| [similar](/docs/configuration/expected-outputs/similar)                         | embeddings and cosine similarity are above a threshold                          |
 | rouge-n                                        | Rouge-N score is above a given threshold                                        |
 | [levenshtein](#levenshtein-distance)           | Levenshtein distance is below a threshold                                       |
-| [llm-rubric](#model-graded-evals)              | LLM output matches a given rubric, using a Language Model to grade output       |
-| [model-graded-factuality](#model-graded-evals) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
-| [model-graded-closedqa](#model-graded-evals)   | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
+| [llm-rubric](/docs/configuration/expected-outputs/model-graded)              | LLM output matches a given rubric, using a Language Model to grade output       |
+| [model-graded-factuality](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
+| [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded)   | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
@@ -220,136 +221,11 @@ Just like `is-json` above, you may optionally set a `value` as a JSON schema in 
 
 ### Javascript
 
-The `javascript` assertion allows you to provide a custom JavaScript function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise. If the function returns a number, it will be treated as a score.
-
-You can use any valid JavaScript code in your function. The output of the LLM is provided as the `output` variable:
-
-```yaml
-assert:
-  - type: javascript
-    value: "output.includes('Hello, World!')"
-```
-
-In the example above, the `javascript` assertion checks if the output includes the string "Hello, World!". If it does, the assertion passes and a score of 1 is recorded. If it doesn't, the assertion fails and a score of 0 is returned.
-
-If you want to return a custom score, your function should return a number. For example:
-
-```yaml
-assert:
-  - type: javascript
-    value: Math.log(output.length) * 10
-```
-
-In the example above, the longer the output, the higher the score.
-
-If your function throws an error, the assertion will fail and the error message will be included in the reason for the failure. For example:
-
-```yaml
-assert:
-  - type: javascript
-    value: "throw new Error('This is an error')"
-```
-
-#### Multiline functions
-
-Javascript assertions support multiline strings:
-
-```yaml
-assert:
-  - type: javascript
-    value: |
-      // Insert your scoring logic here...
-      if (output === 'Expected output') {
-        return {
-          pass: true,
-          score: 0.5,
-        };
-      }
-      return {
-        pass: false,
-        score: 0,
-        reason: 'Assertion failed',
-      };
-```
-
-#### Using test context
-
-The `context` variable contains the prompt and test case variables:
-
-```ts
-interface AssertContext {
-  // Raw prompt sent to LLM
-  prompt: string;
-
-  // Test case variables
-  vars: Record<string, string | object>;
-}
-```
-
-For example, if your test case has a var `example`, you can access it in your JavaScript function like this:
-
-```yaml
-tests:
-  - description: 'Test with context'
-    vars:
-      example: 'Example text'
-    assert:
-      - type: javascript
-        value: 'output.includes(context.vars.example)'
-```
-
-You can also use the `context` variable to perform more complex checks. For example, you could check if the output is longer than a certain length defined in your test case variables:
-
-```yaml
-tests:
-  - description: 'Test with context'
-    vars:
-      min_length: 10
-    assert:
-      - type: javascript
-        value: 'output.length >= context.vars.min_length'
-```
+See [Javascript assertions](/docs/configuration/expected-outputs/javascript).
 
 ### Python
 
-The `python` assertion allows you to provide a custom Python function to validate the LLM output. The function should return `true` if the output passes the assertion, and `false` otherwise.
-
-Example:
-
-```yaml
-assert:
-  - type: python
-    value: output[5:10] == 'Hello'
-```
-
-You may also return a number, which will be treated as a score:
-
-```yaml
-assert:
-  - type: python
-    value: math.log10(len(output)) * 10
-```
-
-#### Multiline functions
-
-Python assertions support multiline strings:
-
-```yaml
-assert:
-  - type: python
-    value: |
-      // Insert your scoring logic here...
-      if output == 'Expected output':
-          print(json.dumps({
-            'pass': True,
-            'score': 0.5,
-          }))
-      else:
-          print(json.dumps({
-            'pass': False,
-            'score': 0,
-          }))
-```
+See [Python assertions](/docs/configuration/expected-outputs/python).
 
 ### Webhook
 
@@ -402,46 +278,7 @@ You may also return a score:
 
 ### Similarity
 
-The `similar` assertion checks if an embedding of the LLM's output
-is semantically similar to the expected value,
-using a cosine similarity threshold.
-
-By default, embeddings are computed via OpenAI's `text-embedding-ada-002` model.
-
-Example:
-
-```yaml
-assert:
-  - type: similar
-    value: 'The expected output'
-    threshold: 0.8
-```
-
-#### Overriding the provider
-
-By default `similar` will use OpenAI.  To specify the model that creates the embeddings, do one of the following:
-
-1. Use `test.options` or `defaultTest.options` to override the provider across the entire test suite:
-
-   ```yaml
-   defaultTest:
-     options:
-       provider: azureopenai:embedding:text-embedding-ada-002
-   tests:
-       assert:
-         - type: similar
-           value: Hello world
-   ```
-
-2. Set `assertion.provider` on a per-assertion basis:
-
-   ```yaml
-   tests:
-       assert:
-         - type: similar
-           value: Hello world
-           provider: huggingface:feature-extraction:sentence-transformers/all-MiniLM-L6-v2
-   ```
+See [Similarity assertions](/docs/configuration/expected-outputs/similar.
 
 ### Levenshtein distance
 
@@ -459,128 +296,7 @@ assert:
 
 ### Model-graded evals
 
-There are 3 types of model-graded assertions:
-
-- `llm-rubric` - checks if the LLM output matches given requirements, using a language model to grade the output based on the rubric.
-- `model-graded-closedqa` - similar to the above, a "criteria-checking" eval which specifies the evaluation prompt as checking a given criteria. Uses the prompt from OpenAI's public evals.
-- `model-graded-factuality` - a factual consistency eval which, given a completion `A` and reference answer `B` evaluates whether A is a subset of B, A is a superset of B, A and B are equivalent, A and B disagree, or A and B differ, but difference don't matter from the perspective of factuality. Uses the prompt from OpenAI's public evals.
-
-Example of `llm-rubric` and/or `model-graded-closedqa`:
-
-```yaml
-assert:
-  - type: model-graded-closedqa
-    # Make sure the LLM output adheres to this criteria:
-    value: Is not apologetic
-```
-
-Example of factuality check:
-
-```yaml
-assert:
-  - type: model-graded-factuality
-    # Make sure the LLM output is consistent with this statement:
-    value: Sacramento is the capital of California
-```
-
-For more information on factuality, see the [guide on LLM factuality](/docs/guides/factuality-eval).
-
-Here's an example output that indicates PASS/FAIL based on LLM assessment ([see example setup and outputs](https://github.com/typpo/promptfoo/tree/main/examples/self-grading)):
-
-[![LLM prompt quality evaluation with PASS/FAIL expectations](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)](https://user-images.githubusercontent.com/310310/236690475-b05205e8-483e-4a6d-bb84-41c2b06a1247.png)
-
-#### Using variables in the rubric
-
-You can use test `vars` in the LLM rubric. This example uses the `question` variable to help detect hallucinations:
-
-```yaml
-providers: [openai:gpt-3.5-turbo]
-prompts: [prompt1.txt, prompt2.txt]
-defaultTest:
-  assert:
-    - type: llm-rubric
-      value: 'Says that it is uncertain or unable to answer the question: "{{question}}"'
-tests:
-  - vars:
-      question: What's the weather in New York?
-  - vars:
-      question: Who won the latest football match between the Giants and 49ers?
-```
-
-#### Overriding the LLM grader
-
-By default, model-graded asserts use GPT-4 for grading. If you do not have access to GPT-4 or prefer not to use it, you can override the rubric grader. There are several ways to do this, depending on your preferred workflow:
-
-1. Using the `--grader` CLI option:
-
-   ```
-   promptfoo eval --grader openai:gpt-3.5-turbo
-   ```
-
-2. Using `test.options` or `defaultTest.options` on a per-test or testsuite basis:
-
-   ```yaml
-   defaultTest:
-     options:
-       provider: openai:gpt-3.5-turbo
-   tests:
-     - description: Use LLM to evaluate output
-       assert:
-         - type: llm-rubric
-           value: Is spoken like a pirate
-   ```
-
-3. Using `assertion.provider` on a per-assertion basis:
-
-   ```yaml
-   tests:
-     - description: Use LLM to evaluate output
-       assert:
-         - type: llm-rubric
-           value: Is spoken like a pirate
-           provider: openai:gpt-3.5-turbo
-   ```
-
-Use the `provider.config` field to set custom parameters:
-```yaml
-provider:
-  - id: openai:gpt-3.5-turbo
-    config:
-      temperature: 0
-```
-
-Also note that [custom providers](/docs/providers/custom-api) are supported as well.
-
-#### Overriding the rubric prompt
-
-For the greatest control over the output of `llm-rubric`, you may set a custom prompt using the `rubricPrompt` property of `TestCase` or `Assertion`.
-
-The rubric prompt has two built-in variables that you may use:
-- `{{output}}` - The output of the LLM (you probably want to use this)
-- `{{rubric}}` - The `value` of the llm-rubric `assert` object
-
-
-In this example, we set `rubricPrompt` under `defaultTest`, which applies it to every test in this test suite:
-
-```yaml
-defaultTest:
-  options:
-    rubricPrompt:
-      - role: system
-        content: >-
-          Grade the output by the following specifications, keeping track of the points scored:
-
-          Did the output mention {{x}}? +1 point
-          Did the output describe {{y}}? + 1 point
-          Did the output ask to clarify {{z}}? +1 point
-
-          Calculate the score but always pass the test. Output your response in the following JSON format:
-          {pass: true, score: number, reason: string}
-      - role: user
-        content: 'Output: {{ output }}'
-```
-
-See the [full example](https://github.com/promptfoo/promptfoo/blob/main/examples/custom-grading-prompt/promptfooconfig.yaml).
+See [Model-graded evals](/docs/configuration/expected-outputs/model-graded).
 
 ## Weighted assertions
 
