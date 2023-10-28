@@ -24,19 +24,19 @@ promptfoo init`}
   </TabItem>
 </Tabs>
 
-This will create some templates in your current directory: `prompts.txt` and `promptfooconfig.yaml`.
+This will create a `promptfooconfig.yaml` file in your current directory.
 
-1. **Set up your prompts**: Open `prompts.txt` and add 2 prompts that you want to compare. Use double curly braces as placeholders for variables: `{{variable_name}}`. For example:
+1. **Set up your prompts**: Open `promptfooconfig.yaml` and add 2 prompts that you want to compare. Use double curly braces as placeholders for variables: `{{variable_name}}`. For example:
 
-   ```
-   Convert this English to {{language}}: {{input}}
-   ---
-   Translate to {{language}}: {{input}}
+   ```yaml
+   prompts:
+     - Convert this English to {{language}}: {{input}}
+     - Translate to {{language}}: {{input}}
    ```
 
    [&raquo; More information on setting up prompts](/docs/configuration/parameters)
 
-1. **Add test inputs**: Edit `promptfooconfig.yaml` and add some example inputs for your prompts. Optionally, add [assertions](/docs/configuration/expected-outputs) to automatically ensure that outputs meet your requirements.
+1. **Add test inputs**: Add some example inputs for your prompts. Optionally, add [assertions](/docs/configuration/expected-outputs) to automatically ensure that outputs meet your requirements.
 
    For example:
 
@@ -54,7 +54,13 @@ This will create some templates in your current directory: `prompts.txt` and `pr
 
    [&raquo; More information on setting up tests](/docs/configuration/guide)
 
-1. In `promptfooconfig.yaml`, edit the models (["providers"](/docs/providers)) you wish to test.
+1. Edit the `providers` field to specify the models (["providers"](/docs/providers)) you wish to test:
+
+   ```yaml
+   providers:
+     - openai:gpt-3.5-turbo
+     - openai:gpt-4
+   ```
 
    Your preferred model may have configuration requirements.
    For example, if testing GPT with OpenAI's chat endpoint,
@@ -71,7 +77,7 @@ This will create some templates in your current directory: `prompts.txt` and `pr
    npx promptfoo@latest eval
    ```
 
-1. After the evaluation is complete, you may open the web viewer to review the outputs:
+1. After the evaluation is complete, open the web viewer to review the outputs:
 
    ```
    npx promptfoo@latest view

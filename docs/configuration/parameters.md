@@ -4,33 +4,60 @@ sidebar_position: 4
 
 # Input and output files
 
-## Prompt Files
+## Prompts
 
-Prompt files are plain text files that contain the prompts you want to test. If you have only one file, you can include multiple prompts in the file, separated by the delimiter `---`. If you have multiple files, each prompt should be in a separate file.
+### Prompts from raw text
 
-You can use [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax to include variables in your prompts, which will be replaced with actual values from your test cases during evaluation.
+By default, the config will accept raw text as prompts:
 
-Example of a single prompt file with multiple prompts (`prompts.txt`):
-
+```yaml
+prompts:
+  - 'Translate the following text to French: "{{name}}: {{text}}"'
+  - 'Translate the following text to German: "{{name}}: {{text}}"'
 ```
-Translate the following text to French: "{{name}}: {{text}}"
----
-Translate the following text to German: "{{name}}: {{text}}"
+
+YAML supports multiline strings too:
+
+```yaml
+prompts:
+  - |-
+    Hi there LLM,
+    Please translate the following text to French:
+    "{{name}}: {{text}}"
+  - |-
+    Translate the following text to German:
+    "{{name}}: {{text}}"
+```
+
+Use [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax to include variables in your prompts, which will be replaced with actual values from your test cases during evaluation.
+
+### Prompts from file
+
+Your prompts may be complicated enough that it's difficult to maintain them inline.  In that case, reference a file.  Filepaths are relative to the configuration file directory:
+
+```yaml
+prompts:
+  - file://path/to/prompt1.txt
+  - file://path/to/prompt2.txt
+  - file://path/to/prompt.json
+  - file://path/to/prompt.yaml
+  # Globs are supported
+  - file://prompts/*.txt
+  - file://path/**/*
+  # Prompt functions
+  - file:///root/path/to/prompt.js
+  - file://./path/to/prompt.py
 ```
 
 Example of multiple prompt files:
 
-- `prompt1.txt`:
+```txt title=prompt1.txt
+Translate the following text to French: "{{name}}: {{text}}"
+```
 
-  ```
-  Translate the following text to French: "{{name}}: {{text}}"
-  ```
-
-- `prompt2.txt`:
-
-  ```
-  Translate the following text to German: "{{name}}: {{text}}"
-  ```
+```txt title=prompt2.txt
+Translate the following text to German: "{{name}}: {{text}}"
+```
 
 Prompts can be JSON too. Use this to configure multi-shot prompt formats:
 
@@ -45,6 +72,18 @@ Prompts can be JSON too. Use this to configure multi-shot prompt formats:
     "content": "{{ text }}"
   }
 ]
+```
+
+#### Multiple prompts in a single file
+
+If you have only one file, you can include multiple prompts in the file, separated by the delimiter `---`. If you have multiple files, each prompt should be in a separate file.
+
+Example of a single prompt file with multiple prompts (`prompts.txt`):
+
+```
+Translate the following text to French: "{{name}}: {{text}}"
+---
+Translate the following text to German: "{{name}}: {{text}}"
 ```
 
 ### Prompt functions
