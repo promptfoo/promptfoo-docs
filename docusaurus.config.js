@@ -131,6 +131,10 @@ const config = {
                 to: '/docs/guides/factuality-eval',
               },
               {
+                label: 'Evaluating RAGs',
+                to: '/docs/guides/evaluate-rag',
+              },
+              {
                 label: 'Minimizing hallucinations',
                 to: '/docs/guides/prevent-llm-hallucations',
               },
