@@ -42,16 +42,10 @@ We will set up an eval that runs a live document retrieval against the vector da
 
 In the example below, we're evaluating a RAG chat bot used on a corporate intranet.  We add a couple tests to ensure that the expected substrings appear in the document results.
 
-First, create `query_format.txt`.  We're just going to pass the `query` variable directly through to `retrieve.py` (for more complicated query formats, see [prompt templates](/docs/configuration/parameters#prompt-files)):
-
-```
-{{ query }}
-```
-
-Next, create `promptfooconfig.yaml`. This file instructs promptfoo to run several test cases through the retrieval script.
+First, create `promptfooconfig.yaml`. We'll use a placeholder prompt with a single `{{ query }}` variable.  This file instructs promptfoo to run several test cases through the retrieval script.
 
 ```yaml
-prompts: [query_format.txt]
+prompts: ['{{ query }}']
 providers: ['exec: python retrieve.py']
 tests:
   - vars:
@@ -95,7 +89,7 @@ In this step, we are focused on evaluating whether the LLM output is correct giv
 
 Instead of using an external script provider, we'll use the built-in functionality for calling LLM APIs.  If your LLM output logic is complicated, you can use an `exec` provider as shown above.
 
-First, let's set up our prompt:
+First, let's set up our prompt by creating a `prompt1.txt` file:
 
 ```txt title=prompt1.txt
 You are a corporate intranet chat assistant.  The user has asked the following:
