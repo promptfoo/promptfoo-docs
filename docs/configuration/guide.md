@@ -91,7 +91,9 @@ To learn more about assertions, see docs on configuring [expected outputs](/docs
 
 #### Default test cases
 
-You can use `defaultTest` to set an assertion for all tests. In this case, we use a `model-graded-closedqa` assertion to ensure that the LLM does not refer to itself as an AI.
+Use `defaultTest` to set properties for all tests.
+
+In this example, we use a `model-graded-closedqa` assertion to ensure that the LLM does not refer to itself as an AI. This check applies to all test cases:
 
 ```yaml
 prompts: [prompt1.txt, prompt2.txt]
@@ -117,6 +119,14 @@ tests:
       - type: similar
         value: was geht
         threshold: 0.6
+```
+
+You can also use `defaultTest` to override the model used for each test. This can be useful for [model-graded evals](/docs/configuration/expected-outputs/model-graded):
+
+```yaml
+defaultTest:
+  options:
+    provider: openai:gpt-3.5-turbo-0613
 ```
 
 #### YAML references
