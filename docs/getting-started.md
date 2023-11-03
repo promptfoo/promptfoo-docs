@@ -148,7 +148,7 @@ Here is the configuration:
 prompts: [prompt1.txt, prompt2.txt]
 
 # Set an LLM
-providers: openai:gpt-4-0613
+providers: [openai:gpt-4-0613]
 
 # These test properties are applied to every test
 defaultTest:
@@ -212,8 +212,7 @@ npx promptfoo@latest eval -o output.html
 In [this next example](https://github.com/typpo/promptfoo/tree/main/examples/gpt-3.5-vs-4), we evaluate the difference between GPT 3 and GPT 4 outputs for a given prompt:
 
 ```yaml title=promptfooconfig.yaml
-# Load multiple prompts from a single file
-prompts: prompts.txt
+prompts: [prompt1.txt, prompt2.txt]
 
 # Set the LLMs we want to test
 providers:
