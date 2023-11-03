@@ -287,8 +287,52 @@ The prompt inserts the previous conversation into the test case, creating a full
 Try it yourself by using the [full example config](https://github.com/promptfoo/promptfoo/tree/main/examples/multiple-turn-conversation).
 
 :::info
-When the `_conversation` variable is present, the eval is run single-threaded (concurrency of 1).
+When the `_conversation` variable is present, the eval will run single-threaded (concurrency of 1).
 :::
+
+### Including JSON in prompt content
+
+In some cases, you may want to send JSON _within_ the OpenAI `content` field.  In order to do this, you must ensure that the JSON is properly escaped.
+
+Here's an example that prompts OpenAI with a JSON object of the structure `{query: string, history: {reply: string}[]}`.  It first constructs this JSON object as the `input` variable.  Then, it includes `input` in the prompt with proper JSON escaping:
+
+```json
+{% set input %}
+{
+    "query": "{{ query }}",
+    "history": [
+      {% for completion in _conversation %}
+        {"reply": "{{ completion.output }}"} {% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+}
+{% endset %}
+
+[{
+  "role": "user",
+  "content": {{ input | trim | dump }}
+}]
+```
+
+Here's the associated config:
+```yaml
+prompts: [prompt.json]
+providers: [openai:gpt-3.5-turbo-0613]
+tests:
+  - vars:
+      query: how you doing
+  - vars:
+      query: need help with my passport
+```
+
+This has the effect of including the conversation history _within_ the prompt content.  Here's what's sent to OpenAI for the second test case:
+
+```json
+[{
+  "role": "user",
+  "content": "{\n    \"query\": \"how you doing\",\n    \"history\": [\n      \n    ]\n}"
+}]
+```
 
 ## Using functions
 
