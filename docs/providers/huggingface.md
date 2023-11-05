@@ -10,15 +10,14 @@ To run a model, specify the task type and model name.  Supported models include:
 
 - `huggingface:text-generation:<model name>`
 - `huggingface:feature-extraction:<model name>`
+- `huggingface:text-classification:<model name>`
 
-For example:
-
+For example, autocomplete with GPT-2:
 ```
 huggingface:text-generation:gpt2
 ```
 
-or
-
+Generate text with Mistral:
 ```
 huggingface:text-generation:mistralai/Mistral-7B-v0.1
 ```

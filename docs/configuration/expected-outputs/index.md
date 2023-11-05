@@ -62,6 +62,7 @@ tests:
 | [llm-rubric](/docs/configuration/expected-outputs/model-graded)              | LLM output matches a given rubric, using a Language Model to grade output       |
 | [model-graded-factuality](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
 | [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded)   | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
+| [classifier](/docs/configuration/expected-outputs/classifier)   | Run LLM output through a classifier |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
@@ -297,6 +298,10 @@ assert:
 ### Model-graded evals
 
 See [Model-graded evals](/docs/configuration/expected-outputs/model-graded).
+
+### Classifier
+
+See [classifier](/docs/configuration/expected-outputs/classifier) grading documentation.
 
 ## Weighted assertions
 
