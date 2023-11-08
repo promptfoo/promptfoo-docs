@@ -37,6 +37,24 @@ assert:
     value: "throw new Error('This is an error')"
 ```
 
+## Return type
+
+The return value of your Javascript function can be a boolean, number, or a `GradingResult`:
+
+```typescript
+type JavascriptAssertionResult = boolean | number | GradingResult;
+
+// Used for more complex results
+interface GradingResult {
+  pass: boolean;
+  score: number;
+  reason: string;
+  componentResults?: GradingResult[];
+}
+```
+
+If `componentResults` is set, a table of assertion details will be shown in the test output modal in the Eval view.
+
 ## Multiline functions
 
 Javascript assertions support multiline strings:
