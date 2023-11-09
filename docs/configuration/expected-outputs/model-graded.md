@@ -7,7 +7,7 @@ sidebar_position: 100
 promptfoo supports several types of model-graded assertions:
 
 - `llm-rubric` - checks if the LLM output matches given requirements, using a language model to grade the output based on the rubric.
-- `model-graded-closedqa` - similar to the above, a "criteria-checking" eval which specifies the evaluation prompt as checking a given criteria. Uses the prompt from OpenAI's public evals.
+- `model-graded-closedqa` - similar to the above, a "criteria-checking" eval that ensures the answer meets a specific requirement. Uses an OpenAI-authored prompt from their public evals.
 - `model-graded-factuality` - a factual consistency eval which, given a completion `A` and reference answer `B` evaluates whether A is a subset of B, A is a superset of B, A and B are equivalent, A and B disagree, or A and B differ, but difference don't matter from the perspective of factuality. Uses the prompt from OpenAI's public evals.
 - `classifier` - see [classifier grading docs](/docs/configuration/expected-outputs/classifier).
 
