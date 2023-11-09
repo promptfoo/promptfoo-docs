@@ -207,6 +207,14 @@ assert:
       }
 ```
 
+If your JSON schema is large, import it from a file:
+
+```yaml
+assert:
+  - type: is-json
+    value: file://./path/to/schema.json
+```
+
 ### Contains-JSON
 
 The `contains-json` assertion checks if the LLM output contains a valid JSON structure.
