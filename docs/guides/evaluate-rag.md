@@ -13,8 +13,8 @@ When designing an evaluation strategy for RAG applications, you should evaluate 
 It's important to evaluate these steps separately, because breaking your RAG into multiple steps makes it easier to pinpoint issues.
 
 There are several criteria used to evaluate RAG applications:
-- **Factuality** (also called Faithfulness): How correct are the LLM outputs
-- **Relevancy**: Measures how directly the answer addresses the question, typically calculated by embeddings similarity.
+- **Factuality** (also called Faithfulness, Grounding, or Correctness): Measures whether the LLM outputs are based on the provided context.
+- **Relevancy** (also called Helpfulness): Measures how directly the answer addresses the question, typically calculated by embeddings similarity.
 - **Custom metrics**: You know your application better than anyone else.  Create test cases that focus on things that matter to you (examples include: whether a certain document is cited, whether the response is too long, etc.)
 
 This guide shows how to use promptfoo to evaluate your RAG app.  If you're new to promptfoo, head to [Getting Started](/docs/getting-started).
