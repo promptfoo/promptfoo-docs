@@ -157,6 +157,12 @@ To verify that your function is producing the correct prompt:
 1. Check that the table header contains your function code.
 1. Hover over a particular output that you want to investigate and click the Magnifying Glass (🔎) to view the final prompt in the details pane.
 
+:::info
+By default, promptfoo runs the `python` executable in your shell.
+
+To override the Python executable, set the `PROMPTFOO_PYTHON` environment variable to an executable (e.g. `/usr/bin/python3.11` or `python3.11`).
+:::
+
 ### Nunjucks filters
 
 Nunjucks is a templating language with many [built-in filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters) that can be applied to variables.  For example: `{{ varName | capitalize }}`.

@@ -99,6 +99,12 @@ def main():
 print(main())
 ```
 
+## Overriding the Python binary
+
+By default, promptfoo will run `python` in your shell.  Make sure `python` points to the appropriate executable.
+
+To override the Python binary, set the `PROMPTFOO_PYTHON` environment variable.  You may set it to a path (such as `/path/to/python3.11`) or just an executable in your PATH (such as `python3.11`).
+
 ## Other assertion types
 
 For more info on assertions, see [Test assertions](/docs/configuration/expected-outputs).
