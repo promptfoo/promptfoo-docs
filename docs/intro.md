@@ -8,7 +8,7 @@ sidebar_position: 1
 
 With promptfoo, you can:
 
-- **Systematically test prompts** against predefined [test cases](/docs/configuration/expected-outputs)
+- **Systematically test prompts, models, and RAGs** with predefined [test cases](/docs/configuration/expected-outputs)
 - **Evaluate quality and catch regressions** by comparing LLM outputs [side-by-side](/docs/usage/web-ui)
 - **Speed up evaluations** with [caching](/docs/configuration/caching) and concurrent tests
 - **Score outputs automatically** by defining [expectations](/docs/configuration/expected-outputs)
