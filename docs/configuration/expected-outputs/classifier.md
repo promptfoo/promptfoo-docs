@@ -28,7 +28,7 @@ For a full list of supported models, see [HuggingFace text classification models
 Examples of use cases supported by the HuggingFace ecosystem include:
 - **Sentiment** classifiers like [DistilBERT-base-uncased](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english), [roberta-base-go\_emotions](https://huggingface.co/SamLowe/roberta-base-go_emotions), etc.
 - **Tone and emotion** via [finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone), [emotion\_text\_classification](https://huggingface.co/michellejieli/emotion_text_classifier), etc.
-- **Toxicity** via [DistilBERT-toxic-comment-model](https://huggingface.co/martin-ha/toxic-comment-model), [twitter-roberta-base-offensive](https://huggingface.co/cardiffnlp/twitter-roberta-base-offensive), etc.
+- **Toxicity** via [DistilBERT-toxic-comment-model](https://huggingface.co/martin-ha/toxic-comment-model), [twitter-roberta-base-offensive](https://huggingface.co/cardiffnlp/twitter-roberta-base-offensive), [bertweet-large-sexism-detector](https://huggingface.co/NLP-LTU/bertweet-large-sexism-detector), etc.
 - **Grounding, factuality, and evidence-type** classification via [MiniLM-evidence-types](https://huggingface.co/marieke93/MiniLM-evidence-types) and similar
 - **Helpfulness** via [quora\_helpful\_answers\_classifier](https://huggingface.co/Radella/quora_helpful_answers_classifier), [distilbert-base-uncased-helpful-amazon](https://huggingface.co/banjtheman/distilbert-base-uncased-helpful-amazon), etc.
 
