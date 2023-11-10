@@ -2,5 +2,17 @@
   padding: 4rem 0 0 0;
   text-align: center;
 }
+
+.logoContainer {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoContainer img {
+  max-width: 150px;
+}
+
 .blurb {
 }

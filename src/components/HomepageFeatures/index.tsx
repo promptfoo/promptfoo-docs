@@ -10,7 +10,7 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Create a list of test cases',
+    title: 'Create a test dataset',
     Svg: require('@site/static/img/svgrepo_science2.svg').default,
     description: (
       <>Use a representative sample of user inputs to reduce subjectivity when tuning prompts.</>
