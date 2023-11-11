@@ -85,6 +85,9 @@ Supported parameters include:
 | `functions`         | Allows you to define custom functions. Each function should be an object with a `name`, optional `description`, and `parameters`.                               |
 | `function_call`     | Controls whether the AI should call functions. Can be either 'none', 'auto', or an object with a `name` that specifies the function to call.                    |
 | `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
+| `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
+| `response_format`              | Response format restrictions. |
+| `seed`              | Seed used for deterministic output. Defaults to 0 |
 | `apiKey`            | Your OpenAI API key.                                                                                                                                            |
 | `apiHost`           | The hostname of the OpenAI API, please also read `OPENAI_API_HOST` below.                                                                                       |
 | `apiBaseUrl`        | The base URL of the OpenAI API, please also read `OPENAI_API_BASE_URL` below.                                                                                   |
@@ -107,6 +110,8 @@ functions?: {
 }[];
 function_call?: 'none' | 'auto' | { name: string; };
 stop?: string[];
+response_format?: { type: string; };
+seed?: number;
 
 // General OpenAI parameters
 apiKey?: string;
