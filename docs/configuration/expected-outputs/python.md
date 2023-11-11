@@ -48,7 +48,7 @@ assert:
 
 ## Using test context
 
-A `context` object is also available in the context.  Here is its type definition:
+A `context` object is available in the Python function.  Here is its type definition:
 
 ```py
 class AssertContext:
