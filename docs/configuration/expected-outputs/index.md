@@ -62,8 +62,9 @@ Deterministic eval metrics
 | [levenshtein](#levenshtein-distance)                          | Levenshtein distance is below a threshold                      |
 
 Model-assisted eval metrics
-| ------------------------------------------------------------- | -------------------------------------------------------------- |
+
 | Assertion Type | Method |
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
 | [similar](/docs/configuration/expected-outputs/similar) | embeddings and cosine similarity are above a threshold |
 | [classifier](/docs/configuration/expected-outputs/classifier) | Run LLM output through a classifier |
 | [llm-rubric](/docs/configuration/expected-outputs/model-graded) | LLM output matches a given rubric, using a Language Model to grade output |
