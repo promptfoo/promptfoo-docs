@@ -61,12 +61,13 @@ assert:
   # Ensure the answer agrees with the provided facts
   - type: model-graded-factuality
     value: The capital of California is Sacramento
-    grading:
-      subset: 0.8
-      superset: 0
-      agree: 1
-      disagree: 0
-      differButFactual: 0
+    options:
+      factuality:
+        subset: 0.8
+        superset: 0
+        agree: 1
+        disagree: 0
+        differButFactual: 0
 ```
 
 The above configuration marks the eval as failed if the LLM output is a superset of the ideal answer, or if it differs from the ideal answer even if it is still factual. It sets a preference for an exact agreement, but a partial answer still gets a score of 0.8.
