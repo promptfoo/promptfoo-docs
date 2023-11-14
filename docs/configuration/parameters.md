@@ -33,7 +33,7 @@ Use [Nunjucks](https://mozilla.github.io/nunjucks/) templating syntax to include
 
 ### Prompts from file
 
-Your prompts may be complicated enough that it's difficult to maintain them inline.  In that case, reference a file.  Filepaths are relative to the configuration file directory:
+Your prompts may be complicated enough that it's difficult to maintain them inline. In that case, reference a file. Filepaths are relative to the configuration file directory:
 
 ```yaml
 prompts:
@@ -90,7 +90,7 @@ Translate the following text to German: "{{name}}: {{text}}"
 
 Prompt functions allow you to incorporate custom logic in your prompts. These functions are written in JavaScript or Python and are included in the prompt files with `.js` or `.py` extensions.
 
-To specify a prompt function in `promptfooconfig.yaml`, reference the file directly.  For example:
+To specify a prompt function in `promptfooconfig.yaml`, reference the file directly. For example:
 
 ```yaml
 prompts: ['prompt.js', 'prompt.py']
@@ -122,7 +122,7 @@ To reference a specific function in your prompt file, use the following syntax: 
 ```javascript title=prompt.js:prompt1
 // highlight-start
 module.exports.prompt1 = async function ({ vars }) {
-// highlight-end
+  // highlight-end
   return [
     {
       role: 'system',
@@ -153,6 +153,7 @@ if __name__ == "__main__":
 ```
 
 To verify that your function is producing the correct prompt:
+
 1. Run `promptfoo view`
 1. Check that the table header contains your function code.
 1. Hover over a particular output that you want to investigate and click the Magnifying Glass (🔎) to view the final prompt in the details pane.
@@ -165,7 +166,7 @@ To override the Python executable, set the `PROMPTFOO_PYTHON` environment variab
 
 ### Nunjucks filters
 
-Nunjucks is a templating language with many [built-in filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters) that can be applied to variables.  For example: `{{ varName | capitalize }}`.
+Nunjucks is a templating language with many [built-in filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters) that can be applied to variables. For example: `{{ varName | capitalize }}`.
 
 Nunjucks [custom filters](https://mozilla.github.io/nunjucks/api.html#custom-filters) are Javascript functions that can be applied to variables in your templates.
 

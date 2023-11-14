@@ -75,7 +75,7 @@ providers:
 Supported parameters include:
 
 | Parameter           | Description                                                                                                                                                     |
-| ------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `temperature`       | Controls the randomness of the AI's output. Higher values (close to 1) make the output more random, while lower values (close to 0) make it more deterministic. |
 | `max_tokens`        | Controls the maximum length of the output in tokens.                                                                                                            |
 | `top_p`             | Controls the nucleus sampling, a method that helps control the randomness of the AI's output.                                                                   |
@@ -86,8 +86,8 @@ Supported parameters include:
 | `function_call`     | Controls whether the AI should call functions. Can be either 'none', 'auto', or an object with a `name` that specifies the function to call.                    |
 | `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
 | `stop`              | Defines a list of tokens that signal the end of the output.                                                                                                     |
-| `response_format`              | Response format restrictions. |
-| `seed`              | Seed used for deterministic output. Defaults to 0 |
+| `response_format`   | Response format restrictions.                                                                                                                                   |
+| `seed`              | Seed used for deterministic output. Defaults to 0                                                                                                               |
 | `apiKey`            | Your OpenAI API key.                                                                                                                                            |
 | `apiHost`           | The hostname of the OpenAI API, please also read `OPENAI_API_HOST` below.                                                                                       |
 | `apiBaseUrl`        | The base URL of the OpenAI API, please also read `OPENAI_API_BASE_URL` below.                                                                                   |
@@ -224,9 +224,10 @@ In the prompt template, we construct the conversation history followed by a user
 
 ### Using the `_conversation` variable
 
-A built-in `_conversation` variable contains the full prompt and previous turns of a conversation.  Use it to reference previous outputs and test an ongoing chat conversation.
+A built-in `_conversation` variable contains the full prompt and previous turns of a conversation. Use it to reference previous outputs and test an ongoing chat conversation.
 
 The `_conversation` variable has the following type signature:
+
 ```ts
 type Completion = {
   prompt: string | object;
@@ -239,7 +240,7 @@ type Conversation = Completion[];
 
 In most cases, you'll loop through the `_conversation` variable and use each `Completion` object.
 
-Use `completion.prompt` to reference the previous conversation. For example,  to get the number of messages in a chat-formatted prompt:
+Use `completion.prompt` to reference the previous conversation. For example, to get the number of messages in a chat-formatted prompt:
 
 ```
 {{ completion.prompt.length }}
@@ -251,9 +252,10 @@ Or to get the first message in the conversation:
 {{ completion.prompt[0] }}
 ```
 
-Use `completion.input` as a shortcut to get the last user message.  In a chat-formatted prompt, `input` is set to the last user message, equivalent to `completion.prompt[completion.prompt.length - 1].content`.
+Use `completion.input` as a shortcut to get the last user message. In a chat-formatted prompt, `input` is set to the last user message, equivalent to `completion.prompt[completion.prompt.length - 1].content`.
 
-Here's an example test config.  Note how each question assumes context from the previous output:
+Here's an example test config. Note how each question assumes context from the previous output:
+
 ```yaml
 tests:
   - vars:
@@ -265,6 +267,7 @@ tests:
 ```
 
 Here is the corresponding prompt:
+
 ```json
 [
   // highlight-start
@@ -298,9 +301,9 @@ When the `_conversation` variable is present, the eval will run single-threaded 
 
 ### Including JSON in prompt content
 
-In some cases, you may want to send JSON _within_ the OpenAI `content` field.  In order to do this, you must ensure that the JSON is properly escaped.
+In some cases, you may want to send JSON _within_ the OpenAI `content` field. In order to do this, you must ensure that the JSON is properly escaped.
 
-Here's an example that prompts OpenAI with a JSON object of the structure `{query: string, history: {reply: string}[]}`.  It first constructs this JSON object as the `input` variable.  Then, it includes `input` in the prompt with proper JSON escaping:
+Here's an example that prompts OpenAI with a JSON object of the structure `{query: string, history: {reply: string}[]}`. It first constructs this JSON object as the `input` variable. Then, it includes `input` in the prompt with proper JSON escaping:
 
 ```json
 {% set input %}
@@ -321,6 +324,7 @@ Here's an example that prompts OpenAI with a JSON object of the structure `{quer
 ```
 
 Here's the associated config:
+
 ```yaml
 prompts: [prompt.json]
 providers: [openai:gpt-3.5-turbo-0613]
@@ -331,13 +335,15 @@ tests:
       query: need help with my passport
 ```
 
-This has the effect of including the conversation history _within_ the prompt content.  Here's what's sent to OpenAI for the second test case:
+This has the effect of including the conversation history _within_ the prompt content. Here's what's sent to OpenAI for the second test case:
 
 ```json
-[{
-  "role": "user",
-  "content": "{\n    \"query\": \"how you doing\",\n    \"history\": [\n      \n    ]\n}"
-}]
+[
+  {
+    "role": "user",
+    "content": "{\n    \"query\": \"how you doing\",\n    \"history\": [\n      \n    ]\n}"
+  }
+]
 ```
 
 ## Using functions
@@ -385,7 +391,7 @@ tests:
 These OpenAI-related environment variables are supported:
 
 | Variable                         | Description                                                                                                                                      |
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `OPENAI_TEMPERATURE`             | Temperature model parameter, defaults to 0.                                                                                                      |
 | `OPENAI_MAX_TOKENS`              | Max_tokens model parameter, defaults to 1024.                                                                                                    |
 | `OPENAI_API_HOST`                | The hostname to use (useful if you're using an API proxy). Takes priority over `OPENAI_API_BASE_URL`.                                            |

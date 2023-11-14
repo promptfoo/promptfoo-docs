@@ -6,18 +6,20 @@ sidebar_position: 99
 
 promptfoo includes support for the [HuggingFace Inference API](https://huggingface.co/inference-api), specifically **text generation** and **feature extraction** tasks.
 
-To run a model, specify the task type and model name.  Supported models include:
+To run a model, specify the task type and model name. Supported models include:
 
 - `huggingface:text-generation:<model name>`
 - `huggingface:feature-extraction:<model name>`
 - `huggingface:text-classification:<model name>`
 
 For example, autocomplete with GPT-2:
+
 ```
 huggingface:text-generation:gpt2
 ```
 
 Generate text with Mistral:
+
 ```
 huggingface:text-generation:mistralai/Mistral-7B-v0.1
 ```
@@ -26,7 +28,7 @@ Supported environment variables:
 
 - `HF_API_TOKEN` - your HuggingFace API key
 
-The provider can pass through configuration parameters to the API.  See [text generation parameters](https://huggingface.co/docs/api-inference/detailed_parameters#text-generation-task) and [feature extraction parameters](https://huggingface.co/docs/api-inference/detailed_parameters#feature-extraction-task).
+The provider can pass through configuration parameters to the API. See [text generation parameters](https://huggingface.co/docs/api-inference/detailed_parameters#text-generation-task) and [feature extraction parameters](https://huggingface.co/docs/api-inference/detailed_parameters#feature-extraction-task).
 
 Here's an example of how this provider might appear in your promptfoo config:
 

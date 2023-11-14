@@ -49,5 +49,5 @@ To investigate and fix this issue, there's a few possible solutions:
    Note this IPv6 support requires Ollama version `0.0.20` or newer.
 2. Change promptfoo to directly use an IPv4 address by configuring
    `export OLLAMA_BASE_URL="http://127.0.0.1:11434"`.
-3. Update your OS's [`hosts`](https://en.wikipedia.org/wiki/Hosts_(file)) file
+3. Update your OS's [`hosts`](<https://en.wikipedia.org/wiki/Hosts_(file)>) file
    to bind `localhost` to IPv4.

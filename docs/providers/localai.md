@@ -19,11 +19,11 @@ Once you have LocalAI up and running, specify one of the following based on the 
 - `localai:embeddings:<model name>`, which invokes models using the
   [LocalAI embeddings endpoint](https://localai.io/features/embeddings/)
 
-The model name is typically the filename of the `.bin` file that you downloaded to set up the model in LocalAI. For example, `ggml-vic13b-uncensored-q5_1.bin`.  LocalAI also has a `/models` endpoint to list models, which can be queried with `curl http://localhost:8080/v1/models`.
+The model name is typically the filename of the `.bin` file that you downloaded to set up the model in LocalAI. For example, `ggml-vic13b-uncensored-q5_1.bin`. LocalAI also has a `/models` endpoint to list models, which can be queried with `curl http://localhost:8080/v1/models`.
 
 ## Configuring parameters
 
-You can set parameters like `temperature` and `apiBaseUrl` ([full list here](https://github.com/promptfoo/promptfoo/blob/main/src/providers/localai.ts#L7)).  For example, using [LocalAI's lunademo](https://localai.io/howtos/easy-request-curl/):
+You can set parameters like `temperature` and `apiBaseUrl` ([full list here](https://github.com/promptfoo/promptfoo/blob/main/src/providers/localai.ts#L7)). For example, using [LocalAI's lunademo](https://localai.io/howtos/easy-request-curl/):
 
 ```yaml title=promptfooconfig.yaml
 providers:

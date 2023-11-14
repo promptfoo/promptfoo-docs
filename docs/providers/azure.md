@@ -31,7 +31,7 @@ If you have a custom host with a custom engine, here's how you can configure it:
 providers:
   - id: azureopenai:chat:engineNameGoesHere
     config:
-      apiHost: "xxxxxxxx.openai.azure.com"
+      apiHost: 'xxxxxxxx.openai.azure.com'
 ```
 
 You may also specify `deployment_id` and `dataSources`, which are used for integration with the [Azure Cognitive Search API](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data#conversation-history-for-better-results).
@@ -40,8 +40,8 @@ You may also specify `deployment_id` and `dataSources`, which are used for integ
 providers:
   - id: azureopenai:chat:engineNameGoesHere
     config:
-      apiHost: "xxxxxxxx.openai.azure.com"
-      deployment_id: "abc123"
+      apiHost: 'xxxxxxxx.openai.azure.com'
+      deployment_id: 'abc123'
       dataSources:
         - type: AzureCognitiveSearch
           parameters:

@@ -22,13 +22,13 @@ The `promptfoo` command line utility supports the following subcommands:
 
 ## `promptfoo eval`
 
-By default the `eval` command will read the `promptfooconfig.yaml` configuration file in your current directory.  But, if you're looking to override certain parameters you can supply optional arguments:
+By default the `eval` command will read the `promptfooconfig.yaml` configuration file in your current directory. But, if you're looking to override certain parameters you can supply optional arguments:
 
 | Option                              | Description                                                                                                                                                                                        |
-| ----------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-p, --prompts <paths...>`          | Paths to [prompt files](/docs/configuration/parameters#prompt-files), directory, or glob                                                                                                           |
 | `-r, --providers <name or path...>` | [`openai:chat`][1], [`openai:completion`][1], [`localai:chat:<model-name>`][2], [`localai:completion:<model-name>`][2], or one of the many other permutations per [API providers](/docs/providers) |
-| `-o, --output <paths...>`               | Path to [output file](/docs/configuration/parameters#output-file) (csv, json, yaml, html)                                                                                                          |
+| `-o, --output <paths...>`           | Path to [output file](/docs/configuration/parameters#output-file) (csv, json, yaml, html)                                                                                                          |
 | `-t, --tests <path>`                | Path to [external test file](/docs/configuration/expected-outputs#load-an-external-tests-file)                                                                                                     |
 | `-c, --config <path>`               | Path to [configuration file](/docs/configuration/guide). `promptfooconfig.js/json/yaml` is automatically loaded if present                                                                         |
 | `--grader`                          | [Provider](/docs/providers) that will conduct the evaluation, if you are [using LLM to grade your output](/docs/configuration/expected-outputs#llm-evaluation)                                     |
@@ -53,60 +53,59 @@ By default the `eval` command will read the `promptfooconfig.yaml` configuration
 
 Initialize a new project with dummy files.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `directory`  | Directory to create files in |
+| Option      | Description                  |
+| ----------- | ---------------------------- |
+| `directory` | Directory to create files in |
 
 ## `promptfoo view`
 
 Start a browser UI for visualization of results.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `-p, --port <number>`  | Port number for the local server |
-| `-y, --yes`  | Skip confirmation and auto-open the URL |
+| Option                | Description                             |
+| --------------------- | --------------------------------------- |
+| `-p, --port <number>` | Port number for the local server        |
+| `-y, --yes`           | Skip confirmation and auto-open the URL |
 
 ## `promptfoo share`
 
 Create a URL that can be shared online.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `-y, --yes`  | Skip confirmation before creating shareable URL |
+| Option      | Description                                     |
+| ----------- | ----------------------------------------------- |
+| `-y, --yes` | Skip confirmation before creating shareable URL |
 
 ## `promptfoo cache`
 
 Manage cache.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `clear`  | Clear the cache |
+| Option  | Description     |
+| ------- | --------------- |
+| `clear` | Clear the cache |
 
 ## `promptfoo feedback [message]`
 
 Send feedback to the Promptfoo developers.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `message`  | Feedback message |
+| Option    | Description      |
+| --------- | ---------------- |
+| `message` | Feedback message |
 
 ## `promptfoo list`
 
 List various resources like evaluations, prompts, and datasets.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `evals`  | List evaluations |
-| `prompts`  | List prompts |
-| `datasets`  | List datasets |
+| Option     | Description      |
+| ---------- | ---------------- |
+| `evals`    | List evaluations |
+| `prompts`  | List prompts     |
+| `datasets` | List datasets    |
 
 ## `promptfoo show <id>`
 
 Show details of a specific resource.
 
-| Option       | Description                  |
-| ------------ | ---------------------------- |
-| `eval <id>`  | Show details of a specific evaluation |
-| `prompt <id>`  | Show details of a specific prompt |
-| `dataset <id>`  | Show details of a specific dataset |
-
+| Option         | Description                           |
+| -------------- | ------------------------------------- |
+| `eval <id>`    | Show details of a specific evaluation |
+| `prompt <id>`  | Show details of a specific prompt     |
+| `dataset <id>` | Show details of a specific dataset    |

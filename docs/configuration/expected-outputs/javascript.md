@@ -120,12 +120,12 @@ tests:
 To reference an external file, use the `file://` prefix:
 
 ```yaml
-    assert:
-      - type: javascript
-        value: file://relative/path/to/script.js
+assert:
+  - type: javascript
+    value: file://relative/path/to/script.js
 ```
 
-The Javascript file must export an assertion function.  Here's an example:
+The Javascript file must export an assertion function. Here's an example:
 
 ```js
 module.exports = (output, context) => {
@@ -136,30 +136,30 @@ module.exports = (output, context) => {
 Here's a more complex example that uses an async function to hit an external validation service:
 
 ```js
-const VALIDATION_ENDPOINT = "https://example.com/api/validate";
+const VALIDATION_ENDPOINT = 'https://example.com/api/validate';
 
 async function evaluate(modelResponse) {
-    try {
-        const response = await fetch(VALIDATION_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain'
-          },
-          body: modelResponse
-        });
+  try {
+    const response = await fetch(VALIDATION_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      body: modelResponse,
+    });
 
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        throw error;
-    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 }
 
-async function main (output, context) {
-    const success = await evaluate(output);
-    console.log(`success: ${testResult}`);
-    return success;
-  }
+async function main(output, context) {
+  const success = await evaluate(output);
+  console.log(`success: ${testResult}`);
+  return success;
+}
 
 module.exports = main;
 ```

@@ -4,9 +4,9 @@ sidebar_label: Mistral vs Llama2
 
 # Mistral vs Llama 2: benchmark on your own data
 
-Mistral was recently launched as the "best 7B model to date".  This claim is made on the basis of a [number of evals](https://mistral.ai/news/announcing-mistral-7b/) performed by the researchers.
+Mistral was recently launched as the "best 7B model to date". This claim is made on the basis of a [number of evals](https://mistral.ai/news/announcing-mistral-7b/) performed by the researchers.
 
-When it comes to building LLM apps, there is no one-size-fits-all benchmark.  To maximize the quality of your LLM application, consider building your own benchmark to supplement public benchmarks.  This guide describes how to compare Mistral-7B-v0.1 vs Llama 7B using the `promptfoo` CLI.
+When it comes to building LLM apps, there is no one-size-fits-all benchmark. To maximize the quality of your LLM application, consider building your own benchmark to supplement public benchmarks. This guide describes how to compare Mistral-7B-v0.1 vs Llama 7B using the `promptfoo` CLI.
 
 The end result is a view that compares the performance of Mistral and Llama side-by-side:
 
@@ -35,7 +35,6 @@ providers:
 ```
 
 The first [provider](/docs/providers) references the model [Mistral-7B-Instruct-v0.1 on HuggingFace](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1). The second provider references the hosted [Replicate](https://replicate.com/replicate/llama7b-v2-chat) version of chat-tuned Llama v2, which isn't available on the HuggingFace Inference API.
-
 
 :::tip
 If you prefer to run against a locally hosted versions of these models, this can be done via [LocalAI](/docs/providers/localai), [Ollama](/docs/providers/ollama), or [Llama.cpp](/docs/providers/llama.cpp) (using the [quantized Mistral](https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF)).
@@ -207,6 +206,6 @@ npx promptfoo@latest eval -o output.csv
 
 ## Conclusion
 
-On this limited dataset, Mistral scores 87.50% and Llama2 scores 50%.  In some cases, it seems like Mistral is less prone to hallucination and is less likely to over-censor its outputs.  But these are just a handful of use cases - far from conclusive.
+On this limited dataset, Mistral scores 87.50% and Llama2 scores 50%. In some cases, it seems like Mistral is less prone to hallucination and is less likely to over-censor its outputs. But these are just a handful of use cases - far from conclusive.
 
-Ultimately, if you are considering these LLMs for a specific use case, you should eval them for exactly that use case.  Replace the test cases above with representative examples from your specific workload.  This will create a much for specific and useful benchmark.
+Ultimately, if you are considering these LLMs for a specific use case, you should eval them for exactly that use case. Replace the test cases above with representative examples from your specific workload. This will create a much for specific and useful benchmark.

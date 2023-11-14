@@ -205,7 +205,7 @@ tests:
   - vars: path/to/vars*.yaml
 ```
 
-You can also load individual variables from file by using the `file://` prefix.  For example:
+You can also load individual variables from file by using the `file://` prefix. For example:
 
 ```yaml
 tests:

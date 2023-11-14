@@ -30,8 +30,8 @@ This will create a `promptfooconfig.yaml` file in your current directory.
 
    ```yaml
    prompts:
-     - "Convert this English to {{language}}: {{input}}"
-     - "Translate to {{language}}: {{input}}"
+     - 'Convert this English to {{language}}: {{input}}'
+     - 'Translate to {{language}}: {{input}}'
    ```
 
    [&raquo; More information on setting up prompts](/docs/configuration/parameters)

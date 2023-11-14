@@ -40,29 +40,39 @@ tests:
 
 ## Assertion types
 
-| Assertion Type                                 | Returns true if...                                                              |
-| ---------------------------------------------- | ------------------------------------------------------------------------------- |
-| [equals](#equality)                            | output matches exactly                                                          |
-| [contains](#contains)                          | output contains substring                                                       |
-| [icontains](#contains)                         | output contains substring, case insensitive                                     |
-| [regex](#regex)                                | output matches regex                                                            |
-| [starts-with](#starts-with)                    | output starts with string                                                       |
-| [contains-any](#contains-any)                  | output contains any of the listed substrings                                    |
-| [contains-all](#contains-all)                  | output contains all list of substrings                                          |
-| [icontains-any](#contains-any)                  | output contains any of the listed substrings, case insensitive                                    |
-| [icontains-all](#contains-all)                  | output contains all list of substrings, case insensitive                                          |
-| [is-json](#is-json)                            | output is valid json (optional json schema validation)                          |
-| [contains-json](#contains-json)                | output contains valid json (optional json schema validation)                    |
-| [javascript](/docs/configuration/expected-outputs/javascript)                      | provided Javascript function validates the output                               |
-| [python](/docs/configuration/expected-outputs/python)                              | provided Python function validates the output                                   |
-| [webhook](#webhook)                            | provided webhook returns {pass: true}                                           |
-| [similar](/docs/configuration/expected-outputs/similar)                         | embeddings and cosine similarity are above a threshold                          |
-| rouge-n                                        | Rouge-N score is above a given threshold                                        |
-| [levenshtein](#levenshtein-distance)           | Levenshtein distance is below a threshold                                       |
-| [llm-rubric](/docs/configuration/expected-outputs/model-graded)              | LLM output matches a given rubric, using a Language Model to grade output       |
-| [model-graded-factuality](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
-| [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded)   | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
-| [classifier](/docs/configuration/expected-outputs/classifier)   | Run LLM output through a classifier |
+Deterministic eval metrics
+
+| Assertion Type                                                | Returns true if...                                             |
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| [equals](#equality)                                           | output matches exactly                                         |
+| [contains](#contains)                                         | output contains substring                                      |
+| [icontains](#contains)                                        | output contains substring, case insensitive                    |
+| [regex](#regex)                                               | output matches regex                                           |
+| [starts-with](#starts-with)                                   | output starts with string                                      |
+| [contains-any](#contains-any)                                 | output contains any of the listed substrings                   |
+| [contains-all](#contains-all)                                 | output contains all list of substrings                         |
+| [icontains-any](#contains-any)                                | output contains any of the listed substrings, case insensitive |
+| [icontains-all](#contains-all)                                | output contains all list of substrings, case insensitive       |
+| [is-json](#is-json)                                           | output is valid json (optional json schema validation)         |
+| [contains-json](#contains-json)                               | output contains valid json (optional json schema validation)   |
+| [javascript](/docs/configuration/expected-outputs/javascript) | provided Javascript function validates the output              |
+| [python](/docs/configuration/expected-outputs/python)         | provided Python function validates the output                  |
+| [webhook](#webhook)                                           | provided webhook returns {pass: true}                          |
+| rouge-n                                                       | Rouge-N score is above a given threshold                       |
+| [levenshtein](#levenshtein-distance)                          | Levenshtein distance is below a threshold                      |
+
+Model-assisted eval metrics
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| Assertion Type | Method |
+| [similar](/docs/configuration/expected-outputs/similar) | embeddings and cosine similarity are above a threshold |
+| [classifier](/docs/configuration/expected-outputs/classifier) | Run LLM output through a classifier |
+| [llm-rubric](/docs/configuration/expected-outputs/model-graded) | LLM output matches a given rubric, using a Language Model to grade output |
+| [factuality](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
+| [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to given criteria, using Closed QA method from OpenAI eval |
+| [answer-relevance](/docs/configuration/expected-outputs/model-graded) | Ensure that LLM output is related to original query |
+| [context-recall](/docs/configuration/expected-outputs/model-graded) | Ensure that ground truth appears in context |
+| [context-relevance](/docs/configuration/expected-outputs/model-graded) | Ensure that context is relevant to original query |
+| [context-faithfulness](/docs/configuration/expected-outputs/model-graded) | Ensure that LLM output uses the context |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.
@@ -398,7 +408,7 @@ module.exports = (output, { vars }) => {
 };
 ```
 
-You can also use Javascript files in non-`javascript`-type asserts.  For example, using a Javascript file in a `contains` assertion will check that the output contains the string returned by Javascript.
+You can also use Javascript files in non-`javascript`-type asserts. For example, using a Javascript file in a `contains` assertion will check that the output contains the string returned by Javascript.
 
 #### Python
 

@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Evaluating factuality
 
-promptfoo implements OpenAI's evaluation methodology for factuality, using the [`model-graded-factuality`](/docs/configuration/expected-outputs#model-graded-evals) assertion type.
+promptfoo implements OpenAI's evaluation methodology for factuality, using the [`factuality`](/docs/configuration/expected-outputs#model-graded-evals) assertion type.
 
 The model-graded factuality check takes the following three inputs:
 
@@ -24,7 +24,7 @@ tests:
       location: Sacramento
     assert:
       # Ensure that the answer agrees with the provided facts
-      - type: model-graded-factuality
+      - type: factuality
         value: The capital of California is Sacramento
 ```
 
@@ -38,7 +38,7 @@ tests:
       location: Sacramento
     assert:
       # Ensure that the answer agrees with the provided facts
-      - type: model-graded-factuality
+      - type: factuality
         value: The capital of California is Sacramento
 ```
 
@@ -59,7 +59,7 @@ The evaluation returns a score and a pass/fail status. The score is determined b
 ```yaml
 assert:
   # Ensure the answer agrees with the provided facts
-  - type: model-graded-factuality
+  - type: factuality
     value: The capital of California is Sacramento
     options:
       factuality:

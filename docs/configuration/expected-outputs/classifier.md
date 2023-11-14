@@ -13,26 +13,27 @@ The assertion looks like this:
 assert:
   - type: classifier
     provider: huggingface:text-classification:path/to/model
-    value: "class name"
-    threshold: 0.0  # score for <class name> must be greater than or equal to this value
+    value: 'class name'
+    threshold: 0.0 # score for <class name> must be greater than or equal to this value
 ```
 
 ## Setup
 
-HuggingFace allows unauthenticated usage, but you may have to set the `HF_API_TOKEN` environment variable to avoid rate limits on larger evals.  For more detail, see [HuggingFace provider docs](/docs/providers/huggingface).
+HuggingFace allows unauthenticated usage, but you may have to set the `HF_API_TOKEN` environment variable to avoid rate limits on larger evals. For more detail, see [HuggingFace provider docs](/docs/providers/huggingface).
 
 ## Use cases
 
 For a full list of supported models, see [HuggingFace text classification models](https://huggingface.co/models?pipeline_tag=text-classification).
 
 Examples of use cases supported by the HuggingFace ecosystem include:
-- **Sentiment** classifiers like [DistilBERT-base-uncased](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english), [roberta-base-go\_emotions](https://huggingface.co/SamLowe/roberta-base-go_emotions), etc.
-- **Tone and emotion** via [finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone), [emotion\_text\_classification](https://huggingface.co/michellejieli/emotion_text_classifier), etc.
+
+- **Sentiment** classifiers like [DistilBERT-base-uncased](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english), [roberta-base-go_emotions](https://huggingface.co/SamLowe/roberta-base-go_emotions), etc.
+- **Tone and emotion** via [finbert-tone](https://huggingface.co/yiyanghkust/finbert-tone), [emotion_text_classification](https://huggingface.co/michellejieli/emotion_text_classifier), etc.
 - **Toxicity** via [DistilBERT-toxic-comment-model](https://huggingface.co/martin-ha/toxic-comment-model), [twitter-roberta-base-offensive](https://huggingface.co/cardiffnlp/twitter-roberta-base-offensive), [bertweet-large-sexism-detector](https://huggingface.co/NLP-LTU/bertweet-large-sexism-detector), etc.
 - **Grounding, factuality, and evidence-type** classification via [MiniLM-evidence-types](https://huggingface.co/marieke93/MiniLM-evidence-types) and similar
-- **Helpfulness** via [quora\_helpful\_answers\_classifier](https://huggingface.co/Radella/quora_helpful_answers_classifier), [distilbert-base-uncased-helpful-amazon](https://huggingface.co/banjtheman/distilbert-base-uncased-helpful-amazon), etc.
+- **Helpfulness** via [quora_helpful_answers_classifier](https://huggingface.co/Radella/quora_helpful_answers_classifier), [distilbert-base-uncased-helpful-amazon](https://huggingface.co/banjtheman/distilbert-base-uncased-helpful-amazon), etc.
 
-There are many models out there to choose from!  In general, it's best to select a model that is fine-tuned for your use case.
+There are many models out there to choose from! In general, it's best to select a model that is fine-tuned for your use case.
 
 Note that [model-graded evals](/docs/configuration/expected-outputs/model-graded) are also a good choice for some of these evaluations, especially if you want to quickly tune the eval to your use case.
 
