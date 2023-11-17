@@ -6,39 +6,38 @@ sidebar_position: 20
 
 The `azureopenai` provider is an interface to OpenAI through Azure. It behaves the same as the [OpenAI provider](/docs/providers/openai).
 
-It requires the `AZURE_OPENAI_API_KEY` environment variable to be set. All `OPENAI_*` environment variables are supported.
+It requires the `AZURE_OPENAI_API_KEY` environment variable to be set. All other `OPENAI_*` environment variables are supported.
 
-- `azureopenai:chat` - defaults to gpt-3.5-turbo
-- `azureopenai:completion` - defaults to `text-davinci-003`
-- `azureopenai:<model name>` - uses a specific model name (mapped automatically to chat or completion endpoint)
-- `azureopenai:chat:<model name>` - uses any model name against the chat endpoint
-- `azureopenai:completion:<model name>` - uses any model name against the completion endpoint
+- `azureopenai:chat:<deployment name>` - uses the given deployment (for chat endpoints such as gpt-35-turbo, gpt-4)
+- `azureopenai:completion:<deployment name>` - uses the given deployment (for completion endpoints such as gpt-35-instruct)
 
-Config parameters may also be passed like so:
+Set the `apiHost` value to point to your endpoint:
 
 ```yaml
 providers:
-  - id: azureopenai:chat:gpt-3.5-turbo
-    prompts: chat_prompt
-    config:
-      temperature: 0.5
-      max_tokens: 1024
-```
-
-If you have a custom host with a custom engine, here's how you can configure it:
-
-```yaml
-providers:
-  - id: azureopenai:chat:engineNameGoesHere
+  - id: azureopenai:chat:deploymentNameHere
     config:
       apiHost: 'xxxxxxxx.openai.azure.com'
 ```
 
-You may also specify `deployment_id` and `dataSources`, which are used for integration with the [Azure Cognitive Search API](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data#conversation-history-for-better-results).
+Additional config parameters are passed like this:
 
 ```yaml
 providers:
-  - id: azureopenai:chat:engineNameGoesHere
+  - id: azureopenai:chat:deploymentNameHere
+    config:
+      apiHost: 'xxxxxxxx.openai.azure.com'
+      // highlight-start
+      temperature: 0.5
+      max_tokens: 1024
+      // highlight-end
+```
+
+You may also specify `deployment_id` and `dataSources`, used to integrate with the [Azure Cognitive Search API](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data#conversation-history-for-better-results).
+
+```yaml
+providers:
+  - id: azureopenai:chat:deploymentNameHere
     config:
       apiHost: 'xxxxxxxx.openai.azure.com'
       deployment_id: 'abc123'
@@ -49,3 +48,5 @@ providers:
             key: '...'
             indexName: '...'
 ```
+
+(The inconsistency in naming convention between `deployment_id` and `dataSources` reflects the actual naming in the Azure API.)
