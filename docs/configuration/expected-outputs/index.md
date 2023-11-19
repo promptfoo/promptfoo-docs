@@ -63,17 +63,17 @@ Deterministic eval metrics
 
 Model-assisted eval metrics
 
-| Assertion Type | Method |
-| ------------------------------------------------------------- | -------------------------------------------------------------- |
-| [similar](/docs/configuration/expected-outputs/similar) | embeddings and cosine similarity are above a threshold |
-| [classifier](/docs/configuration/expected-outputs/classifier) | Run LLM output through a classifier |
-| [llm-rubric](/docs/configuration/expected-outputs/model-graded) | LLM output matches a given rubric, using a Language Model to grade output |
-| [factuality](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
-| [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to given criteria, using Closed QA method from OpenAI eval |
-| [answer-relevance](/docs/configuration/expected-outputs/model-graded) | Ensure that LLM output is related to original query |
-| [context-recall](/docs/configuration/expected-outputs/model-graded) | Ensure that ground truth appears in context |
-| [context-relevance](/docs/configuration/expected-outputs/model-graded) | Ensure that context is relevant to original query |
-| [context-faithfulness](/docs/configuration/expected-outputs/model-graded) | Ensure that LLM output uses the context |
+| Assertion Type                                                             | Method                                                                          |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [similar](/docs/configuration/expected-outputs/similar)                    | embeddings and cosine similarity are above a threshold                          |
+| [classifier](/docs/configuration/expected-outputs/classifier)              | Run LLM output through a classifier                                             |
+| [llm-rubric](/docs/configuration/expected-outputs/model-graded)            | LLM output matches a given rubric, using a Language Model to grade output       |
+| [factuality](/docs/configuration/expected-outputs/model-graded)            | LLM output adheres to the given facts, using Factuality method from OpenAI eval |
+| [model-graded-closedqa](/docs/configuration/expected-outputs/model-graded) | LLM output adheres to given criteria, using Closed QA method from OpenAI eval   |
+| [answer-relevance](/docs/configuration/expected-outputs/model-graded)      | Ensure that LLM output is related to original query                             |
+| [context-recall](/docs/configuration/expected-outputs/model-graded)        | Ensure that ground truth appears in context                                     |
+| [context-relevance](/docs/configuration/expected-outputs/model-graded)     | Ensure that context is relevant to original query                               |
+| [context-faithfulness](/docs/configuration/expected-outputs/model-graded)  | Ensure that LLM output uses the context                                         |
 
 :::tip
 Every test type can be negated by prepending `not-`. For example, `not-equals` or `not-regex`.

@@ -425,10 +425,11 @@ tests:
 Code interpreter, function calls, and retrievals will be included in the output alongside chat messages. Note that the evaluator creates a new thread for each eval.
 
 The following properties can be overwritten in provider config:
-  - `model` - OpenAI model to use
-  - `instructions` - System prompt
-  - `tools` - Enabled [tools](https://platform.openai.com/docs/api-reference/runs/createRun)
-  - `thread.messages` - A list of message objects that the thread is created with.
+
+- `model` - OpenAI model to use
+- `instructions` - System prompt
+- `tools` - Enabled [tools](https://platform.openai.com/docs/api-reference/runs/createRun)
+- `thread.messages` - A list of message objects that the thread is created with.
 
 Here's an example of a more detailed config:
 

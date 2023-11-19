@@ -7,16 +7,18 @@ sidebar_position: 100
 promptfoo supports several types of model-graded assertions:
 
 Output-based:
-  - `llm-rubric` - checks if the LLM output matches given requirements, using a language model to grade the output based on the rubric.
-  - `model-graded-closedqa` - similar to the above, a "criteria-checking" eval that ensures the answer meets a specific requirement. Uses an OpenAI-authored prompt from their public evals.
-  - `factuality` - a factual consistency eval which, given a completion `A` and reference answer `B` evaluates whether A is a subset of B, A is a superset of B, A and B are equivalent, A and B disagree, or A and B differ, but difference don't matter from the perspective of factuality. Uses the prompt from OpenAI's public evals.
-  - `answer-relevance` - ensure that LLM output is related to original query
-  - `classifier` - see [classifier grading docs](/docs/configuration/expected-outputs/classifier).
+
+- `llm-rubric` - checks if the LLM output matches given requirements, using a language model to grade the output based on the rubric.
+- `model-graded-closedqa` - similar to the above, a "criteria-checking" eval that ensures the answer meets a specific requirement. Uses an OpenAI-authored prompt from their public evals.
+- `factuality` - a factual consistency eval which, given a completion `A` and reference answer `B` evaluates whether A is a subset of B, A is a superset of B, A and B are equivalent, A and B disagree, or A and B differ, but difference don't matter from the perspective of factuality. Uses the prompt from OpenAI's public evals.
+- `answer-relevance` - ensure that LLM output is related to original query
+- `classifier` - see [classifier grading docs](/docs/configuration/expected-outputs/classifier).
 
 RAG-based (requires `query` and/or `context` vars):
-  - `context-recall` - ensure that ground truth appears in context
-  - `context-relevance` - ensure that context is relevant to original query
-  - `context-faithfulness` - ensure that LLM output uses the context
+
+- `context-recall` - ensure that ground truth appears in context
+- `context-relevance` - ensure that context is relevant to original query
+- `context-faithfulness` - ensure that LLM output uses the context
 
 ## Examples (output-based)
 
@@ -64,7 +66,7 @@ tests:
 
 ## Examples (RAG-based)
 
-RAG metrics require variables named `context` and `query`.  You must also set the `threshold` property on your test (all scores are normalized between 0 and 1).
+RAG metrics require variables named `context` and `query`. You must also set the `threshold` property on your test (all scores are normalized between 0 and 1).
 
 Here's an example config of a RAG-based knowledge bot that evaluates RAG context metrics:
 
@@ -188,7 +190,7 @@ See the [full example](https://github.com/promptfoo/promptfoo/blob/main/examples
 
 ## Classifers
 
-Classifiers can be used to detect tone, bias, toxicity, helpfulness, and much more.  See [classifier documentation](/docs/configuration/expected-outputs/classifier).
+Classifiers can be used to detect tone, bias, toxicity, helpfulness, and much more. See [classifier documentation](/docs/configuration/expected-outputs/classifier).
 
 ## Other assertion types
 
