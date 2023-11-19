@@ -23,6 +23,7 @@ The OpenAI provider supports the following model formats:
 - `openai:chat:ft:gpt-3.5-turbo-0613:company-name:ID` - example of a fine-tuned chat completion model
 - `openai:completion:<model name>` - uses any model name against the `/v1/completions` endpoint
 - `openai:embeddings:<model name>` - uses any model name against the `/v1/embeddings` endpoint
+- `openai:assistant:<assistant id>` - use an assistant
 
 The `openai:<endpoint>:<model name>` construction is useful if OpenAI releases a new model,
 or if you have a custom model.
@@ -401,6 +402,60 @@ These OpenAI-related environment variables are supported:
 | `PROMPTFOO_REQUIRE_JSON_PROMPTS` | By default the chat completion provider will wrap non-JSON messages in a single user message. Setting this envar to true disables that behavior. |
 | `PROMPTFOO_DELAY_MS`             | Number of milliseconds to delay between API calls. Useful if you are hitting OpenAI rate limits (defaults to 0).                                 |
 | `PROMPTFOO_REQUEST_BACKOFF_MS`   | Base number of milliseconds to backoff and retry if a request fails (defaults to 5000).                                                          |
+
+## Evaluating assistants
+
+To test out an Assistant via OpenAI's Assistants API, first create an Assistant in the [API playground](https://platform.openai.com/playground).
+
+Set functions, code interpreter, and files for retrieval as necessary.
+
+Then, include the assistant in your config:
+
+```yaml
+prompts:
+  - 'Write a tweet about {{topic}}'
+providers:
+  - openai:assistant:asst_fEhNN3MClMamLfKLkIaoIpgZ
+tests:
+  - vars:
+      topic: bananas
+  # ...
+```
+
+Code interpreter, function calls, and retrievals will be included in the output alongside chat messages. Note that the evaluator creates a new thread for each eval.
+
+The following properties can be overwritten in provider config:
+  - `model` - OpenAI model to use
+  - `instructions` - System prompt
+  - `tools` - Enabled [tools](https://platform.openai.com/docs/api-reference/runs/createRun)
+  - `thread.messages` - A list of message objects that the thread is created with.
+
+Here's an example of a more detailed config:
+
+```yaml
+prompts:
+  - 'Write a tweet about {{topic}}'
+providers:
+  // highlight-start
+  - id: openai:assistant:asst_fEhNN3MClMamLfKLkIaoIpgZ
+    config:
+      model: gpt-4-1106-preview
+      instructions: "You always speak like a pirate"
+      tools:
+        - type: code_interpreter
+        - type: retrieval
+      thread:
+        messages:
+          - role: user
+            content: "Hello world"
+          - role: assistant
+            content: "Greetings from the high seas"
+  // highlight-end
+tests:
+  - vars:
+      topic: bananas
+  # ...
+```
 
 ## Troubleshooting
 
