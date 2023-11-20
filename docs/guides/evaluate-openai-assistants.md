@@ -1,3 +1,7 @@
+---
+sidebar_label: Evaluate OpenAI Assistants
+---
+
 # How to evaluate OpenAI Assistants
 
 OpenAI recently released an [Assistants API](https://platform.openai.com/docs/assistants/overview) that offers simplified handling for message state and tool usage.  It also enables code interpreter and knowledge retrieval features, abstracting away some of the dirty work for implementing RAG architecture.
