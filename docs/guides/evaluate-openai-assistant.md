@@ -40,6 +40,44 @@ tests:
 
 ### Comparing providers
 
+To compare different providers, you can add multiple providers in the `providers` section of your `promptfooconfig.yaml`. For example:
+
+```yaml
+providers:
+  - openai:assistant:asst_fEhNN3MClMamLfKLkIaoIpgB
+  - openai:assistant:asst_2ndAssistantID
+```
+
+This will run the same tests on both assistants and allow you to compare their performance.
+
 ### Overriding the assistant config
 
+If you want to override the configuration of an assistant for a specific test, you can do so in the `options` section of a test. For example:
+
+```yaml
+tests:
+  - vars:
+      message: write a tweet about bananas
+    options:
+      provider: openai:assistant:asst_OverrideAssistantID
+```
+
+In this example, the test will use the assistant specified in the `provider` option instead of the assistants listed in the `providers` section.
+
 ### Adding metrics and assertions
+
+Metrics and assertions allow you to automatically evaluate the performance of your assistants. You can add them in the `assert` section of a test. For example:
+
+```yaml
+tests:
+  - vars:
+      message: write a tweet about bananas
+    assert:
+      - type: contains
+        value: 'banana'
+      - type: similar
+        value: 'I love bananas!'
+        threshold: 0.6
+```
+
+In this example, the `contains` assertion checks if the assistant's response contains the word 'banana'. The `similar` assertion checks if the assistant's response is semantically similar to 'I love bananas!' with a cosine similarity threshold of 0.6.
