@@ -2,7 +2,7 @@
 sidebar_label: Evaluating Replicate Lifeboat
 ---
 
-# How to Evaluate Models with Replicate Lifeboat
+# How to evaluate GPT 3.5 vs Llama2-70b with Replicate Lifeboat
 
 Replicate put together a ["Lifeboat" OpenAI proxy](https://lifeboat.replicate.dev/) that allows you to swap to their hosted Llama2-70b instances.  They are generously providing this API for free for a week.
 
@@ -116,7 +116,7 @@ npx promptfoo@latest eval -o results.csv
 
 ## What's next
 
-In the very basic example above, GPT 3.5 outperformed Llama2-70b by 75% to 62.5%.  For example, Llama2 hallucinated the weather in New York.
+In the very basic example above, GPT 3.5 outperformed Llama2-70b by 75% to 62.5%, and was also a bit faster on average.  For example, Llama2 hallucinated the weather in New York.
 
 After customizing your own evaluation, review the results to determine which model performs best for your specific use cases. Benchmarks are highly contextual, so using your _own_ dataset is important.
 
