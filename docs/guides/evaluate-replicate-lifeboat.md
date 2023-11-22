@@ -104,13 +104,15 @@ Then view the results in the web interface:
 npx promptfoo@latest view
 ```
 
+Which produces a nice browser side-by-side view like this:
+
+![llama2 vs gpt using replicate lifeboat](/img/docs/replicate-lifeboat-comparison.png)
+
 Or export them to a file:
 
 ```bash
 npx promptfoo@latest eval -o results.csv
 ```
-
-![llama2 vs gpt using replicate lifeboat](/img/docs/replicate-lifeboat-comparison.png)
 
 ## What's next
 
