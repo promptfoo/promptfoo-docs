@@ -1,5 +1,5 @@
 ---
-sidebar_label: Evaluate OpenAI Assistants
+sidebar_label: Evaluating OpenAI Assistants
 ---
 
 # How to evaluate OpenAI Assistants
