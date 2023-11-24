@@ -39,3 +39,14 @@ providers:
       temperature: 0.1
       max_length: 1024
 ```
+
+## Local inference
+
+If you're running the [Huggingface Text Generation Inference](https://github.com/huggingface/text-generation-inference) server locally, override the `apiEndpoint`:
+
+```yaml
+providers:
+  - id: huggingface:text-generation:my-local-model
+    config:
+      apiEndpoint: http://127.0.0.1:8080/generate
+```
