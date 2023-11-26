@@ -33,7 +33,55 @@ providers:
       // highlight-end
 ```
 
-You may also specify `deployment_id` and `dataSources`, used to integrate with the [Azure Cognitive Search API](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data#conversation-history-for-better-results).
+## Model-graded providers
+
+[Model-graded assertions](/docs/configuration/expected-outputs/model-graded/) such as `factuality` or `llm-rubric`, use OpenAI by default.  If you are using Azure, you must override the grader to point to your Azure deployment.
+
+The easiest way to do this for _all_ your test cases is to add the [`defaultTest`](/docs/configuration/guide/#default-test-cases) property to your config:
+
+```yaml title=promptfooconfig.yaml
+defaultTest:
+  options:
+    provider:
+      id: azureopenai:chat:gpt-4-deployment-name
+      config:
+        apiHost: 'xxxxxxx.openai.azure.com'
+```
+
+However, you can also do this for individual assertions:
+
+```yaml
+  # ...
+  assert:
+    - type: llm-rubric
+      value: Do not mention that you are an AI or chat assistant
+      provider:
+        id: azureopenai:chat:xxxx
+        config:
+          apiHost: 'xxxxxxx.openai.azure.com'
+```
+
+Or individual tests:
+
+```yaml
+  # ...
+tests:
+  - vars:
+      # ...
+    options:
+      provider:
+        id: azureopenai:chat:xxxx
+        config:
+          apiHost: 'xxxxxxx.openai.azure.com'
+    assert:
+      - type: llm-rubric
+        value: Do not mention that you are an AI or chat assistant
+```
+
+
+## AI Services
+
+You may also specify `deployment_id` and `dataSources`, used to integrate with the [Azure AI Search API](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data#conversation-history-for-better-results).
 
 ```yaml
 providers:
