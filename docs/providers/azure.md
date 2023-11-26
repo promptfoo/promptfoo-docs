@@ -6,12 +6,16 @@ sidebar_position: 20
 
 The `azureopenai` provider is an interface to OpenAI through Azure. It behaves the same as the [OpenAI provider](/docs/providers/openai).
 
-It requires the `AZURE_OPENAI_API_KEY` environment variable to be set. All other `OPENAI_*` environment variables are supported.
+## Setup
+
+First, set the `AZURE_OPENAI_API_KEY` environment variable.
+
+Next, edit the promptfoo configuration file to point to the Azure provider.
 
 - `azureopenai:chat:<deployment name>` - uses the given deployment (for chat endpoints such as gpt-35-turbo, gpt-4)
 - `azureopenai:completion:<deployment name>` - uses the given deployment (for completion endpoints such as gpt-35-instruct)
 
-Set the `apiHost` value to point to your endpoint:
+Also set the `apiHost` value to point to your endpoint:
 
 ```yaml
 providers:
@@ -20,7 +24,7 @@ providers:
       apiHost: 'xxxxxxxx.openai.azure.com'
 ```
 
-Additional config parameters are passed like this:
+Additional config parameters are passed like so:
 
 ```yaml
 providers:
@@ -32,6 +36,10 @@ providers:
       max_tokens: 1024
       // highlight-end
 ```
+
+:::tip
+All other [OpenAI provider](/docs/providers/openai) environment variables and configuration properties are supported.
+:::
 
 ## Model-graded tests
 
