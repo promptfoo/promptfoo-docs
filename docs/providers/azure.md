@@ -33,7 +33,7 @@ providers:
       // highlight-end
 ```
 
-## Model-graded providers
+## Model-graded tests
 
 [Model-graded assertions](/docs/configuration/expected-outputs/model-graded/) such as `factuality` or `llm-rubric`, use OpenAI by default.  If you are using Azure, you must override the grader to point to your Azure deployment.
 
