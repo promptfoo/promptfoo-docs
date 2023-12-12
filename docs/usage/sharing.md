@@ -6,7 +6,9 @@ sidebar_position: 40
 
 The CLI provides a `share` command to share your most recent evaluation results from `promptfoo eval`.
 
-The command creates a URL which can be used to view the results. The URL is valid for 2 weeks. This is useful, for example, if you're working on a team that is tuning a prompt together.
+The command creates a URL which can be used to view the results.
+The URL is valid for 2 weeks, and data is stored in Cloudflare Workers KV.
+This is useful, for example, if you're working on a team that is tuning a prompt together.
 
 Here's how to use it:
 
@@ -44,6 +46,13 @@ sharing: false
 
 ## Privacy
 
-Please be aware that the `share` command creates a publicly accessible URL, which means anyone who knows the URL can view your results. If you don't want anyone to see your results, you should keep your URL secret.
+Please be aware that the `share` command creates a publicly accessible URL,
+which means anyone who knows the URL can view your results.
+If you don't want anyone to see your results, you should keep your URL secret.
+Note that [`noindex` metadata][1] is in the results page,
+so it should not be web scraped.
 
-After 2 weeks, all data associated with the URL is permanently deleted.
+After two weeks, all data associated with the URL is permanently deleted.
+This two week lifetime is not configurable.
+
+[1]: https://developers.google.com/search/docs/crawling-indexing/block-indexing
